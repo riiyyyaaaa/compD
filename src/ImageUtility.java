@@ -43,12 +43,11 @@ public class ImageUtility {
     }
 
     /**
-     * 画像の縮小, scaleX, Yには、元画像の何倍かを入れる
+     * resizeX, resizeY に画像サイズを変更
      */
-    public static BufferedImage scaleImage(BufferedImage org, double scaleX, double scaleY) throws IOException {
+    public static BufferedImage scaleImage(BufferedImage org, int resizeX, int resizeY) throws IOException {
         // System.out.println("scale is " + scale);
-        ImageFilter filter = new AreaAveragingScaleFilter((int) (org.getWidth() * scaleX),
-                (int) (org.getHeight() * scaleY));
+        ImageFilter filter = new AreaAveragingScaleFilter(resizeX, resizeY);
         // JFileChooser filechooser = new JFileChooser();
         ImageProducer p = new FilteredImageSource(org.getSource(), filter);
         java.awt.Image dstImage = Toolkit.getDefaultToolkit().createImage(p);
@@ -169,5 +168,6 @@ public class ImageUtility {
     public static void main(String[] args) {
 
     }
+
 
 }

@@ -49,7 +49,7 @@ public class testcv {
                 System.out.println("not exist");
             }
             BufferedImage bf = Block.outputNumB("C:\\detectEdge\\resizeImage\\img (" + String.valueOf(i) + ").jpg", String.valueOf(i));
-            File outfile = new File(cd + "\\output\\image" + String.valueOf(i) + ".jpg");
+            File outfile = new File(cd + "\\src\\output\\image" + String.valueOf(i) + ".jpg");
             ImageIO.write(bf, "jpg", outfile);
             //Mat input = Imgcodecs.imread("C:\\detectEdge\\resizeImage\\img (" + String.valueOf(i)+ ").jpg");
 
@@ -57,8 +57,8 @@ public class testcv {
 //            Mat output = binarize(input, 255);
 //            Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i) +"noraml.jpg", output);
 
-            Mat output2 = adbinarize(input, 255);
-            Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i)+ "adaptive.jpg", output2);
+            Mat output2 = adbinarize(input, 50);
+            Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i)+ "adaptive2.jpg", output2);
             i++;
         }
     }

@@ -8,8 +8,9 @@ import javax.imageio.ImageIO;
  */
 public class Block {
     public static final ImageUtility iu = new ImageUtility();
-    public static final int num = 10; // 分割するブロックの数(1辺)
-    public static final int bSize = 20;// 1つのブロックの一辺の長さ
+    public static final int numOfBlock = 10; // 分割するブロックの数(1辺)
+    public static final int lengthOfASide = 200; //画像の一片の長さ
+    public static final int bSize = lengthOfASide/numOfBlock;// 1つのブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {
         // String dir = "C:\\detectEdge\\fl.jpg";
@@ -25,11 +26,11 @@ public class Block {
         // ファイルの中の画像で回す
         int numI = 35;
         int count = 0;
-        BufferedImage write = new BufferedImage(num * 20, num * 20, BufferedImage.TYPE_INT_RGB);
+        BufferedImage write = new BufferedImage(numOfBlock * 20, numOfBlock * 20, BufferedImage.TYPE_INT_RGB);
         // File file1 = new File("C:\\detectEdge\\searched2\\img (" +
         // String.valueOf(count + 1) + ").jpg");
-        double width = 200;
-        double hight = 200;
+        double width = lengthOfASide;
+        double hight = lengthOfASide;
 
         while (count < numI) {
             File file1 = new File("C:\\detectEdge\\searched2\\img (" + String.valueOf(count + 1) + ").jpg");
@@ -60,34 +61,36 @@ public class Block {
     }
 
     /**
-     * 指定の画像からnum*numの平均化したBufferedImageを返却
+     * 指定の画像からnumOfVBlock*numOfBlockの平均化したBufferedImageを返却
      */
     public static BufferedImage outputNumB(String filename, String outputname) throws IOException {
         File file = new File(filename);
         BufferedImage read = ImageIO.read(iu.Mono(file));
-        int[][] block = extrColorF(intoBlock(read));
-        block = mvaveFileter(block);
+        int[][] blockColor = extrColorF(intoBlock(read));    //ブロックごとの平均のRGB値を返却
+        blockColor = mvaveFileter(blockColor);    //平均化したブロックをさらに移動平均フィルタをかける
 //        File output = new File("./output/image" + outputname + ".jpg");
 //        ImageIO.write(outputNumb(block), "jpg", output);
 
-        int numB = 0;
+//
+//        int numB = 0;
+//        //int color;
+//
+//        BufferedImage bf = outputNumblock(blockColor);
+//        for (int i = 0; i < numOfBlock; i++) {
+//            for (int j = 0; j < numOfBlock; j++) {
+//                // System.out.println("(i,j) = (" + i + "," + j + ")");
+//                //numB = (int) (i / (bSize)) * numOfBlock + (int) (j / (bSize));
+//                // System.out.print((int) (i / (bsize)) * 4 + (int) (j / (bsize)) + " ");
+//
+//                System.out.println("map: " + j + ", " + i);
+//                bf.setRGB(j, i, iu.argb(0, blockColor[numB][0], blockColor[numB][1], blockColor[numB][2]));
+//
+//                numB++;
+//            }
+//            // System.out.println();
+//        }
 
-        BufferedImage bf = outputNumblock(block);
-        for (int i = 0; i < num * bSize; i++) {
-            for (int j = 0; j < num * bSize; j++) {
-                // System.out.println("(i,j) = (" + i + "," + j + ")");
-                numB = (int) (i / (bSize)) * num + (int) (j / (bSize));
-                // System.out.print((int) (i / (bsize)) * 4 + (int) (j / (bsize)) + " ");
-
-                System.out.println("size: " + j + ", " + i);
-                bf.setRGB(j, i, iu.argb(0, block[numB][0], block[numB][1], block[numB][2]));
-
-                numB++;
-            }
-            // System.out.println();
-        }
-
-        return outputNumblock(block);
+        return outputNumblock(blockColor);
     }
 
     /**
@@ -96,19 +99,22 @@ public class Block {
     public static BufferedImage[] intoBlock(BufferedImage origin) {
         int w = origin.getWidth();
         int h = origin.getHeight();
-        int intw = w / num;
-        int inth = h / num;
-        BufferedImage[] block = new BufferedImage[num * num];
+        int intw = w / numOfBlock;
+        int inth = h / numOfBlock;
+        BufferedImage[] block = new BufferedImage[numOfBlock * numOfBlock];
         int count = 0;
 
         System.out.println("w:" + intw + ", h:" + inth);
 
-        for (int i = 0; i < num; i++) {
-            for (int j = 0; j < num; j++) {
+        for (int i = 0; i < numOfBlock; i++) {
+            for (int j = 0; j < numOfBlock; j++) {
                 block[count] = origin.getSubimage(j * intw, i * inth, intw, inth);
                 count++;
             }
         }
+        //TODO delete it
+        System.out.println("The number of block is " + count);
+
         return block;
     }
 
@@ -116,10 +122,10 @@ public class Block {
      * ブロックごとの色特徴ベクトルとなるRGB値を返却
      */
     public static int[][] extrColorF(BufferedImage[] read) {
-        int[][] colorF = new int[num * num][3];
+        int[][] colorF = new int[numOfBlock * numOfBlock][3];
 
         int count = 0;
-        while (count < num * num) {
+        while (count < numOfBlock * numOfBlock) {
             int valr = 0; // とりあえず今は平均値
             int valg = 0;
             int valb = 0;
@@ -146,12 +152,12 @@ public class Block {
     public static BufferedImage outputBlock(int[][] block) throws IOException {
         int bsize = 20;
         int numB = 0;
-        BufferedImage output = new BufferedImage(num * bsize, num * bsize, BufferedImage.TYPE_INT_RGB);
+        BufferedImage output = new BufferedImage(numOfBlock * bsize, numOfBlock * bsize, BufferedImage.TYPE_INT_RGB);
 
-        for (int i = 0; i < num * bsize; i++) {
-            for (int j = 0; j < num * bsize; j++) {
+        for (int i = 0; i < numOfBlock * bsize; i++) {
+            for (int j = 0; j < numOfBlock * bsize; j++) {
                 // System.out.println("(i,j) = (" + i + "," + j + ")");
-                numB = (int) (i / (bsize)) * num + (int) (j / (bsize));
+                numB = (int) (i / (bsize)) * numOfBlock + (int) (j / (bsize));
                 // System.out.print((int) (i / (bsize)) * 4 + (int) (j / (bsize)) + " ");
 
                 output.setRGB(j, i, iu.argb(0, block[numB][0], block[numB][1], block[numB][2]));
@@ -168,12 +174,12 @@ public class Block {
     /**
      * 分割し、平均にしたブロックをnum*numの画像, BufferedImageとして出力
      */
-    public static BufferedImage outputNumblock(int[][] block) throws IOException{
-        BufferedImage output = new BufferedImage(num, num, BufferedImage.TYPE_INT_RGB);
+    public static BufferedImage outputNumblock(int[][] blockColor) throws IOException{
+        BufferedImage output = new BufferedImage(numOfBlock, numOfBlock, BufferedImage.TYPE_INT_RGB);
         int numB = 0;
-        for (int i = 0; i < num ; i++) {
-            for (int j = 0; j < num ; j++) {
-                output.setRGB(j, i, iu.argb(0, block[numB][0], block[numB][1], block[numB][2]));
+        for (int i = 0; i < numOfBlock ; i++) {
+            for (int j = 0; j < numOfBlock ; j++) {
+                output.setRGB(j, i, iu.argb(0, blockColor[numB][0], blockColor[numB][1], blockColor[numB][2]));
                 numB++;
             }
         }
@@ -190,13 +196,13 @@ public class Block {
      */
     public static int[] aveBlock(int[][] block) {
         int ave = 0;
-        int[] resultBlock = new int[num * num];
+        int[] resultBlock = new int[numOfBlock * numOfBlock];
 
         for (int i = 0; i < block.length; i++) {
             // モノクロ画像であればRGBのうち一つでいい
             ave += block[i][0];
         }
-        ave /= num * num;
+        ave /= numOfBlock * numOfBlock;
 
         for (int i = 0; i < block.length; i++) {
             if (block[i][0] > ave) {
@@ -217,11 +223,11 @@ public class Block {
         int[] resultBlock = aveBlock(block);
         int bsize = 20;
         int numB = 0;
-        BufferedImage output = new BufferedImage(num * bsize, num * bsize, BufferedImage.TYPE_INT_RGB);
+        BufferedImage output = new BufferedImage(numOfBlock * bsize, numOfBlock * bsize, BufferedImage.TYPE_INT_RGB);
 
-        for (int i = 0; i < num * bsize; i++) {
-            for (int j = 0; j < num * bsize; j++) {
-                numB = (int) (i / (bsize)) * num + (int) (j / (bsize));
+        for (int i = 0; i < numOfBlock * bsize; i++) {
+            for (int j = 0; j < numOfBlock * bsize; j++) {
+                numB = (int) (i / (bsize)) * numOfBlock + (int) (j / (bsize));
                 if (resultBlock[numB] == 1) {
                     output.setRGB(j, i, iu.argb(0, 0, 0, 0));
                     // System.out.print("k" + numB);
@@ -243,22 +249,22 @@ public class Block {
      */
     public static int[][] mvaveFileter(int[][] block) {
         int ave = 0;
-        int[][] result = new int[num * num][3];
-        for (int i = 0; i < num; i++) {
-            for (int j = 0; j < num; j++) {
-                if (i == 0 || i == num - 1 || j == 0 || j == num - 1) {
-                    result[i * num + j][0] = block[i * num + j][0];
-                    result[i * num + j][1] = block[i * num + j][1];
-                    result[i * num + j][2] = block[i * num + j][2];
+        int[][] result = new int[numOfBlock * numOfBlock][3];
+        for (int i = 0; i < numOfBlock; i++) {
+            for (int j = 0; j < numOfBlock; j++) {
+                if (i == 0 || i == numOfBlock - 1 || j == 0 || j == numOfBlock - 1) {
+                    result[i * numOfBlock + j][0] = block[i * numOfBlock + j][0];
+                    result[i * numOfBlock + j][1] = block[i * numOfBlock + j][1];
+                    result[i * numOfBlock + j][2] = block[i * numOfBlock + j][2];
                 } else {
-                    ave = block[(i - 1) * num + j - 1][0] + block[(i - 1) * num + j][0]
-                            + block[(i - 1) * num + j + 1][0] + block[i * num + j - 1][0] + block[i * num + j][0]
-                            + block[i * num + j + 1][0] + block[(i + 1) * num + j - 1][0] + block[(i + 1) * num + j][0]
-                            + block[(i + 1) * num + j + 1][0];
+                    ave = block[(i - 1) * numOfBlock + j - 1][0] + block[(i - 1) * numOfBlock + j][0]
+                            + block[(i - 1) * numOfBlock + j + 1][0] + block[i * numOfBlock + j - 1][0] + block[i * numOfBlock + j][0]
+                            + block[i * numOfBlock + j + 1][0] + block[(i + 1) * numOfBlock + j - 1][0] + block[(i + 1) * numOfBlock + j][0]
+                            + block[(i + 1) * numOfBlock + j + 1][0];
 
-                    result[i * num + j][0] = ave / 9;
-                    result[i * num + j][1] = ave / 9;
-                    result[i * num + j][2] = ave / 9;
+                    result[i * numOfBlock + j][0] = ave / 9;
+                    result[i * numOfBlock + j][1] = ave / 9;
+                    result[i * numOfBlock + j][2] = ave / 9;
                 }
             }
         }
