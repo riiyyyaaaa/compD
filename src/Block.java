@@ -1,20 +1,15 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
-import java.security.interfaces.RSAMultiPrimePrivateCrtKey;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import java.util.*;
-import javax.swing.JFileChooser;
-
 /**
  * 画像を縦横num個のブロックに分割。 それらを基に2値で大まかな物体の配置を把握する
  */
 public class Block {
     public static final ImageUtility iu = new ImageUtility();
-    public static final int num = 12; // 分割するブロックの数(1辺)
+    public static final int num = 10; // 分割するブロックの数(1辺)
+    public static final int bSize = 20;// 1つのブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {
         // String dir = "C:\\detectEdge\\fl.jpg";
@@ -46,7 +41,7 @@ public class Block {
             File outputfile = new File(
                     "C:\\detectEdge\\blockresult\\imgPre" + String.valueOf(count + 1) + "_2" + ".jpg");
 
-            outputNumb(block);
+            outputNumblock(block);
             write = outputBlock(block);
             // ImageIO.write(write, "jpg", outputfile);
 
@@ -68,14 +63,31 @@ public class Block {
      * 指定の画像からnum*numの平均化したBufferedImageを返却
      */
     public static BufferedImage outputNumB(String filename, String outputname) throws IOException {
-        File file = new File("filename");
+        File file = new File(filename);
         BufferedImage read = ImageIO.read(iu.Mono(file));
         int[][] block = extrColorF(intoBlock(read));
         block = mvaveFileter(block);
-        File output = new File("./output/image" + outputname + ".jpg");
-        ImageIO.write(outputNumb(block), "jpg", output);
+//        File output = new File("./output/image" + outputname + ".jpg");
+//        ImageIO.write(outputNumb(block), "jpg", output);
 
-        return outputNumb(block);
+        int numB = 0;
+
+        BufferedImage bf = outputNumblock(block);
+        for (int i = 0; i < num * bSize; i++) {
+            for (int j = 0; j < num * bSize; j++) {
+                // System.out.println("(i,j) = (" + i + "," + j + ")");
+                numB = (int) (i / (bSize)) * num + (int) (j / (bSize));
+                // System.out.print((int) (i / (bsize)) * 4 + (int) (j / (bsize)) + " ");
+
+                System.out.println("size: " + j + ", " + i);
+                bf.setRGB(j, i, iu.argb(0, block[numB][0], block[numB][1], block[numB][2]));
+
+                numB++;
+            }
+            // System.out.println();
+        }
+
+        return outputNumblock(block);
     }
 
     /**
@@ -156,7 +168,7 @@ public class Block {
     /**
      * 分割し、平均にしたブロックをnum*numの画像, BufferedImageとして出力
      */
-    public static BufferedImage outputNumb(int[][] block) throws IOException{
+    public static BufferedImage outputNumblock(int[][] block) throws IOException{
         BufferedImage output = new BufferedImage(num, num, BufferedImage.TYPE_INT_RGB);
         int numB = 0;
         for (int i = 0; i < num ; i++) {

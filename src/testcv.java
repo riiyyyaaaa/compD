@@ -4,8 +4,10 @@ import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.File;
+import javax.imageio.ImageIO;
 
 
 public class testcv {
@@ -34,6 +36,8 @@ public class testcv {
         //System.load("C:\\opencv\\build\\bin");
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        String cd = new File(".").getAbsoluteFile().getParent();
+        System.out.println(cd);
 
         int num = 35;
         int i = 2;
@@ -44,11 +48,15 @@ public class testcv {
             }else{
                 System.out.println("not exist");
             }
-            Block.outputNumB("C:\\detectEdge\\resizeImage\\img (" + String.valueOf(i) + ").jpg", String.valueOf(i));
-//            Mat input = Imgcodecs.imread("C:\\detectEdge\\resizeImage\\img (" + String.valueOf(i)+ ").jpg");
-            Mat input = Imgcodecs.imread(("./output/image" + String.valueOf(i) + ".jpg"));
-            Mat output = binarize(input, 255);
-            Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i) +"noraml.jpg", output);
+            BufferedImage bf = Block.outputNumB("C:\\detectEdge\\resizeImage\\img (" + String.valueOf(i) + ").jpg", String.valueOf(i));
+            File outfile = new File(cd + "\\output\\image" + String.valueOf(i) + ".jpg");
+            ImageIO.write(bf, "jpg", outfile);
+            //Mat input = Imgcodecs.imread("C:\\detectEdge\\resizeImage\\img (" + String.valueOf(i)+ ").jpg");
+
+            Mat input = Imgcodecs.imread(cd + "\\output\\image" + String.valueOf(i) + ".jpg");
+//            Mat output = binarize(input, 255);
+//            Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i) +"noraml.jpg", output);
+
             Mat output2 = adbinarize(input, 255);
             Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i)+ "adaptive.jpg", output2);
             i++;
