@@ -54,11 +54,11 @@ public class texGLCM {
 
 
         List<List<List<List<Integer>>>> results = new ArrayList<>();
-        for(int blockNum=0; blockNum<biarr.length; blockNum++) {    //block
+        for(int blockNum=0; blockNum<1/*biarr.length*/; blockNum++) {    //block
             System.out.println("---------------BLOCK: " + blockNum + " -------------------");
             List<List<List<Integer>>> rads = new ArrayList<>();
 
-            for(int rad=0;rad<4;rad++) {   //rad
+            for(int rad=0;rad<1;rad++) {   //rad
 
                 System.out.println("-----------rad: "+ rad + " ------------");
                 List<List<Integer>> lists = new ArrayList<>();
@@ -66,10 +66,8 @@ public class texGLCM {
 
                 for(int i=0; i<concNum+1; i++) {
                     List<Integer> list = new ArrayList<>();
-
-                    if(!hashConc.get(i).isEmpty()) {
-                        List<Point> points = hashConc.get(i); //濃度iである座標を見つける
-
+                    List<Point> points = hashConc.get(i); //濃度iである座標を見つける
+                    if(points.get(0) != null) {
                         for (int j = 0; j < concNum + 1; j++) {
                             int sum = calProbability(rad, biarr[blockNum], points, j);
                             list.add(sum);
@@ -191,21 +189,30 @@ public class texGLCM {
         int color = 0;
         System.out.println("w,h " + w + ", " + h);
 
-
-
+        // Initialize
+        for(int x=0; x<concNum+1; x++) {
+            lists.add(null);
+        }
+        System.out.println("lists size: " + lists.size());
 
         for(int i=0; i<w; i++) {
-            List<Point> list = new ArrayList<>();
-            for(int x=0; x<concNum+1; x++) {
-                list.add(null);
-            }
+
+
             for(int j=0; j<h; j++) {
+                List<Point> list = new ArrayList<>();
                 color = iu.r(block.getRGB(j,i));
+                if(lists.get((color)) != null) {
+                    list = (lists.get(color));
+                }
                 System.out.println("i, j: " + j + ", " + i + " = " + color);
                 point = new Point(j, i);
-                list.add(color, point);
+                list.add(point);
+                lists.add(color, list);
             }
-            lists.add(list);
+
+//            for(int x=0; x<lists.size(); x++) {
+//                System.out.println(x + ": " + lists.get(x));
+//            }
         }
 
         return lists;
