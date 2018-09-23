@@ -58,7 +58,7 @@ public class texGLCM {
             System.out.println("---------------BLOCK: " + blockNum + " -------------------");
             List<List<List<Integer>>> rads = new ArrayList<>();
 
-            for(int rad=0;rad<1;rad++) {   //rad
+            for(int rad=0;rad<4;rad++) {   //rad
 
                 System.out.println("-----------rad: "+ rad + " ------------");
                 List<List<Integer>> lists = new ArrayList<>();
@@ -67,7 +67,8 @@ public class texGLCM {
                 for(int i=0; i<concNum+1; i++) {
                     List<Integer> list = new ArrayList<>();
                     List<Point> points = hashConc.get(i); //濃度iである座標を見つける
-                    if(points.get(0) != null) {
+
+                    if(points != null) {
                         for (int j = 0; j < concNum + 1; j++) {
                             int sum = calProbability(rad, biarr[blockNum], points, j);
                             list.add(sum);
@@ -77,7 +78,6 @@ public class texGLCM {
                     } else {
                         for (int j=0; j<concNum+1; j++) {
                             list.add(0);
-
                             System.out.print(" 0");
                         }
                     }
@@ -97,14 +97,12 @@ public class texGLCM {
      */
     public static int calProbability(int rad, BufferedImage block, List<Point> points, int expectedVal) {
 
-        List<Integer> probability = new ArrayList<>();
         int sum = 0;
 
         // TODO check oneSideVlockLength == block.length();
 
         if(rad == 0){
             for (Point point : points) {
-                // TODO null check
                 int x = point.x;
                 int y = point.y;
                 if (x != 0 && x != oneSideBlockLength - 1) {
@@ -128,14 +126,12 @@ public class texGLCM {
                     sum += checkVal(x, y+1, block, expectedVal);
                     sum += checkVal(x, y-1, block, expectedVal);
                 }else if(y == 0) {
-                    sum += checkVal(x, y-1, block, expectedVal);
-                }else{
                     sum += checkVal(x, y+1, block, expectedVal);
+                }else{
+                    sum += checkVal(x, y-1, block, expectedVal);
                 }
             }
-//                points.stream().forEach(point -> {
-//                    checkVal(point.x, point.y, point.x+1, point.y, block);
-//                });
+
         }else if(rad == 2) {
             for (Point point : points) {
                 int x = point.x;
@@ -144,33 +140,25 @@ public class texGLCM {
                     //TODO　場合分けチェック
                     sum += checkVal(x - 1, y-1, block, expectedVal);
                     sum += checkVal(x + 1, y+1, block, expectedVal);
-                }else if(x == 0 || y == 0) {
+                } else if((x == 0 && y != oneSideBlockLength-1) || x !=  oneSideBlockLength-1 && y == 0) {
                     sum += checkVal(x + 1, y+1, block, expectedVal);
-                }else{
+                } else if((x == oneSideBlockLength-1 && y != 0) || (x != 0 && y == oneSideBlockLength-1)) {
                     sum += checkVal(x - 1, y-1, block, expectedVal);
                 }
             }
-//                points.stream().forEach(point -> {
-//                    checkVal(point.x, point.y, point.x+1, point.y, block);
-//                });
-
         }else{
-
             for (Point point : points) {
                 int x = point.x;
                 int y = point.y;
                 if(x != 0 && y != 0 && x != oneSideBlockLength-1 && y != oneSideBlockLength-1) {
                     //TODO　場合分けチェック
-                    sum += checkVal(x + 1, y-1, block,expectedVal);
-                    sum += checkVal(x - 1, y+1, block, expectedVal);
-                }else if(x == 0 || y == 0) {
-                    sum += checkVal(x + 1, y-1, block, expectedVal);
-                }else{
-                    sum += checkVal(x - 1, y+1, block, expectedVal);
+                    sum += checkVal(x - 1, y + 1, block, expectedVal);
+                    sum += checkVal(x + 1, y - 1, block, expectedVal);
+                } else if((x != 0 && y == 0) || (x == oneSideBlockLength-1 && y != oneSideBlockLength-1)) {
+                    sum += checkVal(x - 1, y + 1, block, expectedVal);
+                } else if((x == 0 && y != 0) || x !=  oneSideBlockLength-1 && y == oneSideBlockLength-1) {
+                    sum += checkVal(x + 1, y - 1, block, expectedVal);
                 }
-//                points.stream().forEach(point -> {
-//                    checkVal(point.x, point.y, point.x+1, point.y, block);
-//                });
             }
         }
         return sum;
@@ -187,42 +175,43 @@ public class texGLCM {
         int h = block.getHeight();
         Point point;
         int color = 0;
-        System.out.println("w,h " + w + ", " + h);
+        //System.out.println("w,h " + w + ", " + h);
 
         // Initialize
         for(int x=0; x<concNum+1; x++) {
-            lists.add(null);
+            lists.add(x, null);
         }
         System.out.println("lists size: " + lists.size());
 
         for(int i=0; i<w; i++) {
-
-
             for(int j=0; j<h; j++) {
-                List<Point> list = new ArrayList<>();
+
                 color = iu.r(block.getRGB(j,i));
-                if(lists.get((color)) != null) {
-                    list = (lists.get(color));
-                }
-                System.out.println("i, j: " + j + ", " + i + " = " + color);
                 point = new Point(j, i);
-                list.add(point);
-                lists.add(color, list);
+                if(lists.get(color) != null) {
+                    ArrayList<Point> list = new ArrayList<Point>(lists.get(color));
+                    list.add(point);
+                    lists.remove(color);
+                    lists.add(color, list);
+                }else{
+                    ArrayList<Point> list = new ArrayList<>();
+                    list.add(point);
+                    lists.add(color, list);
+                }
+                //System.out.println("i, j: " + j + ", " + i + " = " + color);
             }
-
-//            for(int x=0; x<lists.size(); x++) {
-//                System.out.println(x + ": " + lists.get(x));
-//            }
         }
-
+        for(int x=0; x<concNum+1; x++) {
+            System.out.println(x + ": " + lists.get(x));
+        }
         return lists;
     }
 
 
     public static int checkVal(int i, int j, BufferedImage oneOfBlock, int expectedVal){
-        int color = oneOfBlock.getRGB(i, j);
+        int color = iu.r(oneOfBlock.getRGB(i, j));
 
-        if((int)color == expectedVal){
+        if(color == expectedVal){
             return 1;
         }else{
             return 0;
