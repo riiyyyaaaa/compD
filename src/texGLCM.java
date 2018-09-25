@@ -6,7 +6,6 @@ import java.util.*;
 import java.util.List;
 import javax.imageio.ImageIO;
 
-import static jdk.nashorn.internal.objects.NativeDebug.map;
 
 /**
  * 二次統計量を用いてテクスチャ解析
@@ -54,7 +53,7 @@ public class texGLCM {
 
 
         List<List<List<List<Integer>>>> results = new ArrayList<>();
-        for(int blockNum=0; blockNum<1/*biarr.length*/; blockNum++) {    //block
+        for(int blockNum=0; blockNum<biarr.length; blockNum++) {    //block
             System.out.println("---------------BLOCK: " + blockNum + " -------------------");
             List<List<List<Integer>>> rads = new ArrayList<>();
 
@@ -73,15 +72,15 @@ public class texGLCM {
                             int sum = calProbability(rad, biarr[blockNum], points, j);
                             list.add(sum);
 
-                            System.out.print(" " + sum);
+                            //System.out.printf("%3d",sum);
                         }
                     } else {
-                        for (int j=0; j<concNum+1; j++) {
+                        for (int j = 0; j < concNum+1; j++) {
                             list.add(0);
-                            System.out.print(" 0");
+                            //System.out.print("  0");
                         }
                     }
-                    System.out.println();
+                    //System.out.println();
                     lists.add(list);
                 }
                 rads.add(lists);
@@ -137,7 +136,6 @@ public class texGLCM {
                 int x = point.x;
                 int y = point.y;
                 if(x != 0 && y != 0 && x != oneSideBlockLength-1 && y != oneSideBlockLength-1) {
-                    //TODO　場合分けチェック
                     sum += checkVal(x - 1, y-1, block, expectedVal);
                     sum += checkVal(x + 1, y+1, block, expectedVal);
                 } else if((x == 0 && y != oneSideBlockLength-1) || x !=  oneSideBlockLength-1 && y == 0) {
@@ -151,7 +149,6 @@ public class texGLCM {
                 int x = point.x;
                 int y = point.y;
                 if(x != 0 && y != 0 && x != oneSideBlockLength-1 && y != oneSideBlockLength-1) {
-                    //TODO　場合分けチェック
                     sum += checkVal(x - 1, y + 1, block, expectedVal);
                     sum += checkVal(x + 1, y - 1, block, expectedVal);
                 } else if((x != 0 && y == 0) || (x == oneSideBlockLength-1 && y != oneSideBlockLength-1)) {
@@ -170,7 +167,8 @@ public class texGLCM {
      * @return
      */
     public static List<List<Point>> get32Hash(BufferedImage block) {
-        List<List<Point>> lists = new ArrayList<>();
+        List<List<Point>> lists = new ArrayList<>(400);
+        Point[][] points = new Point[32][];
         int w = block.getWidth();
         int h = block.getHeight();
         Point point;
@@ -181,29 +179,81 @@ public class texGLCM {
         for(int x=0; x<concNum+1; x++) {
             lists.add(x, null);
         }
+
         System.out.println("lists size: " + lists.size());
+        int sumsum = 0;
+        int ire = 0;
 
         for(int i=0; i<w; i++) {
             for(int j=0; j<h; j++) {
 
                 color = iu.r(block.getRGB(j,i));
                 point = new Point(j, i);
+
+                //points[color][points[color].length] = point;
+
                 if(lists.get(color) != null) {
-                    ArrayList<Point> list = new ArrayList<Point>(lists.get(color));
+//                    ArrayList<Point> list = new ArrayList<Point>(lists.get(color).size());
+                    List<Point> list = new ArrayList<>();
+                    for(Point po : lists.get(color)){
+                        list.add(po);
+                    }
                     list.add(point);
-                    lists.remove(color);
-                    lists.add(color, list);
-                }else{
+                    lists.set(color, list);
+
+                    sumsum ++;
+                } else {
                     ArrayList<Point> list = new ArrayList<>();
                     list.add(point);
                     lists.add(color, list);
+                   // if(list.size() != lists.get(color).size()){
+                       // System.out.println("!!!!!!!!!!!!!!!!");
+                   // }
+                    sumsum ++;
                 }
                 //System.out.println("i, j: " + j + ", " + i + " = " + color);
             }
         }
-        for(int x=0; x<concNum+1; x++) {
-            System.out.println(x + ": " + lists.get(x));
+
+
+//        for(int i = 0; i<points.length; i++){
+//            lists.add(i, Arrays.asList(points[i]));
+//        }
+
+
+        //System.out.println("------output the number of point ------");
+        //System.out.println(sumsum);
+
+
+        System.out.println("------output ireg -------");
+        System.out.println(ire);
+//        for(int x=0; x<concNum+1; x++) {
+//            System.out.println(x + ": " + lists.get(x));
+//        }
+
+        System.out.println();
+        System.out.println("------ output size ------");
+        int sum = 0;
+        for(int x = 0; x<lists.size(); x++ ) {
+            if (lists.get(x) != null) {
+                sum += lists.get(x).size();
+                System.out.print(x + ": " + sum + " ");
+            }
         }
+        for(int x = 0; x<lists.size(); x++ ) {
+            if (lists.get(x) != null) {
+                System.out.println(x + ": " + lists.get(x));
+            }
+        }
+        if(lists.size() == 66){
+            System.out.println(lists.get(46));
+        }
+
+        System.out.println();
+        System.out.println("--------- output lists size ---------");
+        System.out.println(lists.size());
+        System.out.println(lists.get(lists.size()-1));
+
         return lists;
     }
 
@@ -234,6 +284,9 @@ public class texGLCM {
             for (int j = 0; j < w; j++) {
                 c = iu.r(bImage.getRGB(j, i)) / num;
                 // System.out.println(" " + iu.r(bImage.getRGB(j, i)) + " , " + c);
+                if(c>concNum || c<0){
+                    System.out.println("not Color");
+                }
                 rgb = iu.rgb(c, c, c);
                 bImage.setRGB(j, i, rgb);
             }
