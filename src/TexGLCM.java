@@ -10,7 +10,8 @@ import javax.imageio.ImageIO;
 /**
  * 二次統計量を用いてテクスチャ解析
  */
-public class texGLCM {
+public class TexGLCM {
+
     final static ImageUtility iu = new ImageUtility();
     final static Block di = new Block();
     final static int concNum = 32; // 濃度数の最大値
@@ -35,7 +36,7 @@ public class texGLCM {
     /**
      * グレースケール画像から 0, 45, 90, 135, 180°の濃度共起行列を求める
      */
-    public static List<List<List<List<Integer>>>> calGCLM(File file) throws IOException {
+    public static void calGCLM(File file) throws IOException {
         // 正規化
         file = iu.Mono(file);
         BufferedImage read = ImageIO.read(file);
@@ -51,43 +52,93 @@ public class texGLCM {
 
         BufferedImage[] biarr = di.intoBlock(read);
 
-
-        List<List<List<List<Integer>>>> results = new ArrayList<>();
-        for(int blockNum=0; blockNum<biarr.length; blockNum++) {    //block
-            System.out.println("---------------BLOCK: " + blockNum + " -------------------");
-            List<List<List<Integer>>> rads = new ArrayList<>();
-
-            for(int rad=0;rad<4;rad++) {   //rad
-
-                System.out.println("-----------rad: "+ rad + " ------------");
-                List<List<Integer>> lists = new ArrayList<>();
-                List<List<Point>> hashConc = get32Hash(biarr[blockNum]);
-
-                for(int i=0; i<concNum+1; i++) {
-                    List<Integer> list = new ArrayList<>();
-                    List<Point> points = hashConc.get(i); //濃度iである座標を見つける
-
-                    if(points != null) {
-                        for (int j = 0; j < concNum + 1; j++) {
-                            int sum = calProbability(rad, biarr[blockNum], points, j);
-                            list.add(sum);
-
-                            //System.out.printf("%3d",sum);
-                        }
-                    } else {
-                        for (int j = 0; j < concNum+1; j++) {
-                            list.add(0);
-                            //System.out.print("  0");
-                        }
-                    }
-                    //System.out.println();
-                    lists.add(list);
+        for(int i=0; i<biarr.length; i++) {
+            System.out.println("\n---------- " + i + ": Mat ----------");
+            int[][] matArr = calMat(0, biarr[i]);
+            for(int y = 0; y<matArr.length; y++) {
+                for(int x = 0; x<matArr.length; x++) {
+                    System.out.printf("%3d", matArr[y][x]);
                 }
-                rads.add(lists);
+                System.out.println();
             }
-            results.add(rads);
         }
-        return results;
+
+//        List<List<List<List<Integer>>>> results = new ArrayList<>();
+//        for(int blockNum=0; blockNum<1 /*biarr.length*/; blockNum++) {    //block
+//            System.out.println("---------------BLOCK: " + blockNum + " -------------------");
+//            List<List<List<Integer>>> rads = new ArrayList<>();
+//
+//            for(int rad=0;rad<4;rad++) {   //rad
+//
+//                System.out.println("-----------rad: "+ rad + " ------------");
+//                List<List<Integer>> lists = new ArrayList<>();
+//                List<List<Point>> hashConc = get32Hash(biarr[blockNum]);
+//
+//                System.out.println("----------- matrix -----------");
+//                for(int i=0; i<concNum+1; i++) {
+//                    List<Integer> list = new ArrayList<>();
+//                    List<Point> points = hashConc.get(i); //濃度iである座標を見つける
+//
+//                    if(points != null) {
+//                        for (int j = 0; j < concNum + 1; j++) {
+//                            int sum = calProbability(rad, biarr[blockNum], points, j);
+//                            list.add(sum);
+//
+//                            //System.out.printf("%3d",sum);
+//                        }
+//                    } else {
+//                        for (int j = 0; j < concNum+1; j++) {
+//                            list.add(0);
+//                            //System.out.print("  0");
+//                        }
+//                    }
+//                    //System.out.println();
+//                    lists.add(list);
+//                }
+//                rads.add(lists);
+//            }
+//            results.add(rads);
+//        }
+        //return results;
+    }
+
+    /**
+     * 33*33の確率を示す濃度共起行列を返却
+     * @param rad
+     * @param block
+     * @return
+     */
+    public static int[][] calMat(int rad, BufferedImage block) {
+        List<List<Integer>> mat = new ArrayList<>(33);
+        List<Integer> ele = new ArrayList<>(33);
+
+        int[][] matArr = new int[33][33];
+        //Arrays.fill(matArr, 0);
+        int colorC;
+        int colorP;
+        int w = block.getWidth();
+        int h = block.getHeight();
+
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                colorC = iu.r(block.getRGB(j, i));
+                if(rad == 0) {
+                    if (j != 0 && j != oneSideBlockLength - 1) {
+                        colorP = iu.r(block.getRGB(j+1, i));
+                        matArr[colorC][colorP] ++;
+                        colorP = iu.r(block.getRGB(j-1, i));
+                        matArr[colorC][colorP] ++;
+                    } else if (j == 0) {
+                        colorP = iu.r(block.getRGB(j+1, i));
+                        matArr[colorC][colorP] ++;
+                    } else {
+                        colorP = iu.r(block.getRGB(j-1, i));
+                        matArr[colorC][colorP] ++;
+                    }
+                }
+            }
+        }
+        return matArr;
     }
 
     /**
@@ -167,43 +218,46 @@ public class texGLCM {
      * @return
      */
     public static List<List<Point>> get32Hash(BufferedImage block) {
-        List<List<Point>> lists = new ArrayList<>(400);
-        Point[][] points = new Point[32][];
+        List<List<Point>> lists = new LinkedList<>();
+        List<Point> listPoints = new LinkedList<>();
+
+        //Point[][] points = new Point[32][];
         int w = block.getWidth();
         int h = block.getHeight();
         Point point;
         int color = 0;
-        //System.out.println("w,h " + w + ", " + h);
 
         // Initialize
+        lists.clear();
         for(int x=0; x<concNum+1; x++) {
             lists.add(x, null);
         }
 
-        System.out.println("lists size: " + lists.size());
+        System.out.println("initial lists size: " + lists.size());
         int sumsum = 0;
-        int ire = 0;
 
         for(int i=0; i<w; i++) {
             for(int j=0; j<h; j++) {
 
                 color = iu.r(block.getRGB(j,i));
                 point = new Point(j, i);
-
-                //points[color][points[color].length] = point;
+                System.out.println("(" + j + ", " + i + ") = " + color + " :" + point);
 
                 if(lists.get(color) != null) {
 //                    ArrayList<Point> list = new ArrayList<Point>(lists.get(color).size());
-                    List<Point> list = new ArrayList<>();
-                    for(Point po : lists.get(color)){
-                        list.add(po);
-                    }
-                    list.add(point);
-                    lists.set(color, list);
+                    //List<Point> list = new ArrayList<>();
+                    lists.get(color).add(point);
+//                    for(Point po : lists.get(color)){
+//                        list.add(po);
+//                    }
+//                    list.add(point);
+//                    lists.set(color, list);//list　のめそっどにコピー
+
+                    System.out.println("num: " + sumsum + ",color: " + color + "\n"+ lists.get(color));
 
                     sumsum ++;
                 } else {
-                    ArrayList<Point> list = new ArrayList<>();
+                    LinkedList<Point> list = new LinkedList<>();
                     list.add(point);
                     lists.add(color, list);
                    // if(list.size() != lists.get(color).size()){
@@ -216,20 +270,21 @@ public class texGLCM {
         }
 
 
-//        for(int i = 0; i<points.length; i++){
-//            lists.add(i, Arrays.asList(points[i]));
-//        }
-
 
         //System.out.println("------output the number of point ------");
         //System.out.println(sumsum);
 
 
-        System.out.println("------output ireg -------");
-        System.out.println(ire);
-//        for(int x=0; x<concNum+1; x++) {
-//            System.out.println(x + ": " + lists.get(x));
-//        }
+//        System.out.println("------output ireg -------");
+//        System.out.println(ire);
+        int sumpoint=0;
+        for(int x=0; x<concNum+1; x++) {
+            System.out.println(x + ": " + lists.get(x));
+            if(lists.get(x) != null) {
+                sumpoint += lists.get(x).size();
+            }
+        }
+        System.out.println("this sum = " + sumpoint);
 
         System.out.println();
         System.out.println("------ output size ------");
@@ -240,11 +295,11 @@ public class texGLCM {
                 System.out.print(x + ": " + sum + " ");
             }
         }
-        for(int x = 0; x<lists.size(); x++ ) {
-            if (lists.get(x) != null) {
-                System.out.println(x + ": " + lists.get(x));
-            }
-        }
+//        for(int x = 0; x<lists.size(); x++ ) {
+//            if (lists.get(x) != null) {
+//                System.out.println(x + ": " + lists.get(x));
+//            }
+//        }
         if(lists.size() == 66){
             System.out.println(lists.get(46));
         }
