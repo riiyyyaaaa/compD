@@ -53,13 +53,18 @@ public class TexGLCM {
         BufferedImage[] biarr = di.intoBlock(read);
 
         for(int i=0; i<biarr.length; i++) {
-            System.out.println("\n---------- " + i + ": Mat ----------");
-            int[][] matArr = calMat(0, biarr[i]);
-            for(int y = 0; y<matArr.length; y++) {
-                for(int x = 0; x<matArr.length; x++) {
-                    System.out.printf("%3d", matArr[y][x]);
+            for(int rad = 0; rad<4; rad++) {
+                System.out.println("\n---------- num:" + i + ", rad:" + rad + ": Mat ----------");
+                int[][] matArr = calMat(rad, biarr[i]);
+                int sum = 0;
+                for (int y = 0; y < matArr.length; y++) {
+                    for (int x = 0; x < matArr.length; x++) {
+                        System.out.printf("%3d", matArr[y][x]);
+                        sum += matArr[y][x];
+                    }
+                    System.out.println();
                 }
-                System.out.println();
+                System.out.println("\n sum mat = " + sum);
             }
         }
 
@@ -133,6 +138,44 @@ public class TexGLCM {
                         matArr[colorC][colorP] ++;
                     } else {
                         colorP = iu.r(block.getRGB(j-1, i));
+                        matArr[colorC][colorP] ++;
+                    }
+                } else if(rad == 1) {
+                    if (i != 0 && i != oneSideBlockLength - 1) {
+                        colorP = iu.r(block.getRGB(j, i+1));
+                        matArr[colorC][colorP] ++;
+                        colorP = iu.r(block.getRGB(j, i-1));
+                        matArr[colorC][colorP] ++;
+                    } else if (i == 0) {
+                        colorP = iu.r(block.getRGB(j, i+1));
+                        matArr[colorC][colorP] ++;
+                    } else {
+                        colorP = iu.r(block.getRGB(j, i-1));
+                        matArr[colorC][colorP] ++;
+                    }
+                } else if (rad == 2) {
+                    if(j != 0 && i != 0 && j != oneSideBlockLength-1 && i != oneSideBlockLength-1) {
+                        colorP = iu.r(block.getRGB(j-1, i-1));
+                        matArr[colorC][colorP] ++;
+                        colorP = iu.r(block.getRGB(j+1, i+1));
+                        matArr[colorC][colorP] ++;
+                    } else if((j == 0 && i != oneSideBlockLength-1) || j !=  oneSideBlockLength-1 && i == 0) {
+                        colorP = iu.r(block.getRGB(j+1, i+1));
+                        matArr[colorC][colorP] ++;
+                    } else if((j == oneSideBlockLength-1 && i != 0) || (j != 0 && i == oneSideBlockLength-1)) {
+                        colorP = iu.r(block.getRGB(j-1, i-1));
+                        matArr[colorC][colorP] ++;}
+                } else {
+                    if(j != 0 && i != 0 && j != oneSideBlockLength-1 && i != oneSideBlockLength-1) {
+                        colorP = iu.r(block.getRGB(j-1, i+1));
+                        matArr[colorC][colorP] ++;
+                        colorP = iu.r(block.getRGB(j+1, i-1));
+                        matArr[colorC][colorP] ++;
+                    } else if((j != 0 && i == 0) || (j == oneSideBlockLength-1 && i != oneSideBlockLength-1)) {
+                        colorP = iu.r(block.getRGB(j-1, i+1));
+                        matArr[colorC][colorP] ++;
+                    } else if((j == 0 && i != 0) ||  j!=  oneSideBlockLength-1 && i == oneSideBlockLength-1) {
+                        colorP = iu.r(block.getRGB(j+1, i-1));
                         matArr[colorC][colorP] ++;
                     }
                 }
