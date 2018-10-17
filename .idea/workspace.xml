@@ -3,8 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="change method of Matrix's calculation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (2).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/adaptive1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/adaptive2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/normal1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/normal2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/convertImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/convertImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/result.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/result2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/testcv.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/testcv.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/3.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TexGLCM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TexGLCM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/adaptive1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/adaptive1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/adaptive2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/adaptive2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/normal1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/normal1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/normal2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/normal2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/output/convertImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/convertImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/result.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/result.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/result2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/result2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testcv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testcv.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,14 +38,17 @@
     <session id="-16869263">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.open.time.14" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.14" value="2" />
+          <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.22" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1327" />
+          <entry key="JAVA" value="3776" />
           <entry key="PLAIN_TEXT" value="84" />
         </counts>
       </usages-collector>
@@ -33,17 +57,21 @@
       <usages-collector id="statistics.spring.boot.run.usages" />
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="Image" value="2" />
+          <entry key="JAVA" value="1" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="java" value="1" />
+          <entry key="jpg" value="2" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1327" />
+          <entry key="java" value="3776" />
           <entry key="txt" value="84" />
         </counts>
       </usages-collector>
@@ -78,8 +106,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="339">
-                  <caret line="174" column="62" lean-forward="true" selection-start-line="174" selection-start-column="62" selection-end-line="174" selection-end-column="62" />
+                <state relative-caret-position="326">
+                  <caret line="56" column="64" selection-start-line="56" selection-start-column="64" selection-end-line="56" selection-end-column="64" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -99,8 +127,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Block.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="16">
-                  <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+                <state relative-caret-position="240">
+                  <caret line="24" selection-start-line="24" selection-end-line="24" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -120,8 +148,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1360">
-                  <caret line="85" selection-start-line="85" selection-end-line="85" />
+                <state relative-caret-position="1984">
+                  <caret line="165" selection-start-line="165" selection-end-line="165" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -201,9 +229,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="331" />
-    <option name="width" value="1589" />
-    <option name="height" value="1089" />
+    <option name="x" value="-5" />
+    <option name="width" value="1699" />
+    <option name="height" value="1090" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -240,12 +268,6 @@
               <item name="compD" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="compD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compD" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -256,7 +278,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539079060578" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539788981237" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -266,6 +288,9 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\riya\Documents\compD\src\output" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -446,7 +471,10 @@
       <workItem from="1538701987315" duration="8169000" />
       <workItem from="1538975221535" duration="329000" />
       <workItem from="1538975827452" duration="6748000" />
-      <workItem from="1539088540582" duration="2698000" />
+      <workItem from="1539088540582" duration="3877000" />
+      <workItem from="1539222521635" duration="2038000" />
+      <workItem from="1539761564288" duration="5450000" />
+      <workItem from="1539789450342" duration="1519000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -459,7 +487,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147927000" />
+    <option name="totallyTimeSpent" value="158113000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -471,10 +499,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="265" y="0" width="1271" height="871" extended-state="0" />
+    <frame x="-4" y="0" width="1359" height="872" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12221305" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11855273" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -482,16 +510,16 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32833788" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49853945" visible="true" weight="0.28184283" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49884528" visible="true" weight="0.32746956" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49853945" visible="true" weight="0.5101488" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.13378379" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32882273" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.27334234" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50146055" side_tool="true" weight="0.23815967" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.27198917" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5011547" side_tool="true" weight="0.32746956" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32882273" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -547,16 +575,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/adaptive.jpg" />
     <entry file="file://$PROJECT_DIR$/src/normal.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/normal2.jpg">
+    <entry file="file://$PROJECT_DIR$/src/output/normal2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/adaptive2.jpg">
+    <entry file="file://$PROJECT_DIR$/src/output/adaptive2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/result2.jpg">
+    <entry file="file://$PROJECT_DIR$/src/output/result2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/adaptive1.jpg">
+    <entry file="file://$PROJECT_DIR$/src/output/adaptive1.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="jar://C:/opencv/build/java/opencv-330.jar!/org/opencv/imgproc/Imgproc.java">
@@ -566,16 +594,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="868">
-          <caret line="62" column="2" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/blockImageMono.jpg" />
     <entry file="file://$PROJECT_DIR$/image3.jpg" />
-    <entry file="file://$PROJECT_DIR$/image2.jpg" />
     <entry file="file://$PROJECT_DIR$/image20.jpg" />
     <entry file="file://$PROJECT_DIR$/image16.jpg" />
     <entry file="file://$PROJECT_DIR$/image12.jpg" />
@@ -586,10 +606,10 @@
     <entry file="file://$PROJECT_DIR$/img (26).jpg" />
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/convertImage.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/normal1.jpg">
+    <entry file="file://$PROJECT_DIR$/src/output/normal1.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/result.jpg">
+    <entry file="file://$PROJECT_DIR$/src/output/result.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/output/image2.jpg">
@@ -605,10 +625,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/2.jpg">
+    <entry file="file://$PROJECT_DIR$/src/output/2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/3.jpg">
+    <entry file="file://$PROJECT_DIR$/src/output/3.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/1.jpg">
@@ -631,13 +651,51 @@
     <entry file="file://$PROJECT_DIR$/.idea/uiDesigner.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImageUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img (2).jpg" />
+    <entry file="file://$PROJECT_DIR$/image2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testcv.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dividImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="656">
+          <caret line="49" column="2" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/output/1.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Block.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        <state relative-caret-position="240">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -651,37 +709,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dividImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="49" column="2" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImageUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/testcv.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="174" column="62" lean-forward="true" selection-start-line="174" selection-start-column="62" selection-end-line="174" selection-end-column="62" />
+        <state relative-caret-position="326">
+          <caret line="56" column="64" selection-start-line="56" selection-start-column="64" selection-end-line="56" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

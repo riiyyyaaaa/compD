@@ -14,53 +14,133 @@ public class TexGLCM {
 
     final static ImageUtility iu = new ImageUtility();
     final static Block di = new Block();
-    final static int concNum = 32; // 濃度数の最大値
+    final static int concNum = 15; // 濃度数の最大値
     final static int imagesize = 200; // リサイズ後の画像サイズ
     final static int oneSideBlockLength = 20; // ブロックの一辺の長さ
     final static int numOfBlock = 10; //分割するブロックの数
 
     public static void main(String[] args) throws IOException {
-//        File file = new File(
-//                "c:\\Users\\riya\\Documents\\compdetection\\src\\main\\java\\com\\compDetection\\lena.jpg");
-//
-//        BufferedImage bi = ImageIO.read(iu.Mono(file));
-//        bi = iu.scaleImage(bi, (double) imagesize / bi.getWidth(), (double) imagesize / bi.getHeight());
-//        File outputfile = new File("c:\\Users\\riya\\Documents\\compdetection\\output\\output2.jpg");
-//        ImageIO.write(bi, "jpg", outputfile);
-//        bi = convConc(bi);
         String cd = new File(".").getAbsoluteFile().getParent();
         File f = new File(cd + "\\src\\output\\1.jpg");
-        calGCLM(f);
+        int[][][][] mat = calGCLM(f);
+        calFeature(mat);
     }
 
     /**
-     * グレースケール画像から 0, 45, 90, 135, 180°の濃度共起行列を求める
+     * 濃度共起行列からテクスチャ特徴(エネルギー、慣性、エントロピー、相関)を抽出する
+     * @param mat
+     * @return テクスチャ特徴となる各ブロック4つの値
      */
-    public static void calGCLM(File file) throws IOException {
-        // 正規化
+    public static double[][][] calFeature(int[][][][] mat) {
+        double[][][] feature = new double[100][4][4];
+
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+            for(int rad = 0; rad<4; rad++) {
+                double[] sigma = calSigma(mat[i][rad]);
+                for (int y = 0; y < concNum + 1; y++) {
+                    for (int x = 0; x < concNum + 1; x++) {
+                        // エネルギー
+                        feature[i][rad][0] += mat[i][rad][y][x]*mat[i][rad][y][x];
+                        // 慣性
+                        feature[i][rad][1] += (x-y)*(x-y)*mat[i][rad][y][x];
+                        // エントロピー
+                        feature[i][rad][2] += mat[i][rad][y][x] * (Math.log(mat[i][rad][y][x]))/Math.log(2);
+                        // 相関
+                        feature[i][rad][3] += (x*y*mat[i][rad][y][x]-sigma[2]*sigma[3])/(sigma[0]*sigma[1]);
+                    }
+                }
+                feature[i][rad][2] = -feature[i][rad][2];
+                System.out.println("num is " + i);
+                System.out.println("エネルギー: " + feature[i][rad][0]);
+                System.out.println("慣性: " + feature[i][rad][1]);
+                System.out.println("エントロピー: " + feature[i][rad][2]);
+                System.out.println("相関: " + feature[i][rad][3]);
+            }
+        }
+
+        return feature;
+    }
+
+    /**
+     * 相関に用いるシグマ、ミューを求める
+     * @param mat　あるブロックの1つの濃度共起行列
+     * @return σx, σy, μx, μy　の順に入れた配列
+     */
+    public static double[] calSigma(int[][] mat) {
+        double[] sigmaAndMu = {0,0,0,0};
+        double preSigmaX, preSigmaY;
+        double preMuX, preMuY;
+
+        // μを求める
+        for(int x=0; x<concNum+1; x++) {
+            preMuX = 0;
+            for(int y=0; y<concNum+1; y++) {
+                preMuX += mat[y][x];
+            }
+            sigmaAndMu[2] += x*preMuX;
+        }
+        for(int y=0; y<concNum+1; y++) {
+            preMuY = 0;
+            for(int x=0; x<concNum+1; x++) {
+                preMuY += mat[y][x];
+            }
+            sigmaAndMu[3]+= y*preMuY;
+        }
+
+        for(int x=0; x<concNum+1; x++) {
+            preSigmaX = 0;
+            for (int y = 0; y < concNum + 1; y++) {
+                preSigmaX += mat[y][x];
+            }
+            sigmaAndMu[0] += (x - sigmaAndMu[2])*(x - sigmaAndMu[2])*preSigmaX;
+        }
+        sigmaAndMu[0] *= 1/(concNum+1);
+        sigmaAndMu[0] = Math.sqrt(sigmaAndMu[0]);
+
+        for(int y=0; y<concNum+1; y++) {
+            preSigmaY = 0;
+            for (int x = 0; x < concNum + 1; x++) {
+                preSigmaY += mat[y][x];
+            }
+            sigmaAndMu[1] += (y - sigmaAndMu[3])*(y - sigmaAndMu[3])*preSigmaY;
+        }
+        sigmaAndMu[1] *= 1/(concNum+1);
+        sigmaAndMu[1] = Math.sqrt(sigmaAndMu[1]);
+
+        return sigmaAndMu;
+    }
+
+    /**
+     * 各ブロックにおける各角度の濃度共起行列を求める
+     * @param file 濃度共起行列を求める対象の画像(File)
+     * @return 全ブロック、全角度の濃度共起行列　nullは入らない
+     * @throws IOException
+     */
+    public static int[][][][] calGCLM(File file) throws IOException {
+
         file = iu.Mono(file);
         BufferedImage read = ImageIO.read(file);
         read = convertConc(read); //濃度値を圧縮
-
-
 
         //System.out.println("width: "  + read.getWidth());
         read = iu.scaleImage(read, imagesize, imagesize);
         String cd = new File(".").getAbsoluteFile().getParent();
         File testFile = new File(cd + "\\src\\output\\convertImage.jpg");
         ImageIO.write(read, "jpg", testFile);
+        int[][][][] mat = new int[numOfBlock*numOfBlock][4][concNum+1][concNum+1];
 
         BufferedImage[] biarr = di.intoBlock(read);
 
         for(int i=0; i<biarr.length; i++) {
             for(int rad = 0; rad<4; rad++) {
                 System.out.println("\n---------- num:" + i + ", rad:" + rad + ": Mat ----------");
-                int[][] matArr = calMat(rad, biarr[i]);
+                //int[][] matArr = calMat(rad, biarr[i]);
+                mat[i][rad] = calMat(rad, biarr[i]);
                 int sum = 0;
-                for (int y = 0; y < matArr.length; y++) {
-                    for (int x = 0; x < matArr.length; x++) {
-                        System.out.printf("%3d", matArr[y][x]);
-                        sum += matArr[y][x];
+                for (int y = 0; y < mat[i][rad].length; y++) {
+                    for (int x = 0; x < mat[i][rad].length; x++) {
+                        System.out.printf("%3d", mat[i][rad][y][x]);
+                        sum += mat[i][rad][y][x];
                     }
                     System.out.println();
                 }
@@ -105,6 +185,7 @@ public class TexGLCM {
 //            results.add(rads);
 //        }
         //return results;
+        return mat;
     }
 
     /**
@@ -192,8 +273,6 @@ public class TexGLCM {
 
         int sum = 0;
 
-        // TODO check oneSideVlockLength == block.length();
-
         if(rad == 0){
             for (Point point : points) {
                 int x = point.x;
@@ -256,9 +335,9 @@ public class TexGLCM {
     }
 
     /**
-     * 0~最大濃度値まででハッシュを作成
-     * @param block
-     * @return
+     * 0~最大濃度値まででハッシュを作成(ある濃度値である座標をその濃度値のindexに入れる), Listのコピー？上手くいかない
+     * @param block 対象のブロック(BufferedImage)
+     * @return ある濃度値である座標のList
      */
     public static List<List<Point>> get32Hash(BufferedImage block) {
         List<List<Point>> lists = new LinkedList<>();
@@ -393,105 +472,3 @@ public class TexGLCM {
         return bImage;
     }
 }
-//
-//    /**
-//     * 濃度iである着目点から角度rad方向に濃度jがある確率をListで返却
-//     * @param rad
-//     */
-//    public static List<Integer> calProbability(int rad, BufferedImage block, List<List<Point>> lists, int expectedVal) {
-//        List<Point> points = new ArrayList<>();
-//        List<Integer> probability = new ArrayList<>();
-//        int rem = 0;
-//
-//        // TODO check oneSideVlockLength == block.length();
-//
-//        if(rad == 0){
-//            for(int conc = 0; conc<concNum+1; conc++) {
-//                points = lists.get(conc);
-//                int sum = 0;
-//                for (Point point : points) {
-//                    int x = point.x;
-//                    int y = point.y;
-//                    if (x != 0 && x != oneSideBlockLength - 1) {
-//                        sum += checkVal(x + 1, y, block, expectedVal);
-//                        sum += checkVal(x - 1, y, block, expectedVal);
-//                    } else if (x == 0) {
-//                        sum += checkVal(x + 1, y, block, expectedVal);
-//                    } else {
-//                        sum += checkVal(x - 1, y, block, expectedVal);
-//                    }
-//                    probability.add(conc, sum);
-//                }
-////                points.stream().forEach(point -> {
-////                    checkVal(point.x, point.y, point.x+1, point.y, block);
-////                });
-//            }
-//        }
-//        else if(rad == 1) {
-//            for(int conc = 0; conc<concNum+1; conc++) {
-//                points = lists.get(conc);
-//                int sum = 0;
-//                for (Point point : points) {
-//                    int x = point.x;
-//                    int y = point.y;
-//                    if(y != 0 && y != oneSideBlockLength-1) {
-//                        sum += checkVal(x, y+1, block, expectedVal);
-//                        sum += checkVal(x, y-1, block, expectedVal);
-//                    }else if(y == 0) {
-//                        sum += checkVal(x, y-1, block, expectedVal);
-//                    }else{
-//                        sum += checkVal(x, y+1, block, expectedVal);
-//                    }
-//                }
-//                probability.add(conc, sum);
-////                points.stream().forEach(point -> {
-////                    checkVal(point.x, point.y, point.x+1, point.y, block);
-////                });
-//            }
-//        }else if(rad == 2) {
-//            for(int conc = 0; conc<concNum+1; conc++) {
-//                points = lists.get(conc);
-//                int sum = 0;
-//                for (Point point : points) {
-//                    int x = point.x;
-//                    int y = point.y;
-//                    if(x != 0 && y != 0 && x != oneSideBlockLength-1 && y != oneSideBlockLength-1) {
-//                        //TODO　場合分けチェック
-//                        sum += checkVal(x - 1, y-1, block, expectedVal);
-//                        sum += checkVal(x + 1, y+1, block, expectedVal);
-//                    }else if(x == 0 || y == 0) {
-//                        sum += checkVal(x + 1, y+1, block, expectedVal);
-//                    }else{
-//                        sum += checkVal(x - 1, y-1, block, expectedVal);
-//                    }
-//                    probability.add(conc, sum);
-//                }
-////                points.stream().forEach(point -> {
-////                    checkVal(point.x, point.y, point.x+1, point.y, block);
-////                });
-//            }
-//        }else{
-//            for(int conc = 0; conc<concNum+1; conc++) {
-//                points = lists.get(conc);
-//                int sum = 0;
-//                for (Point point : points) {
-//                    int x = point.x;
-//                    int y = point.y;
-//                    if(x != 0 && y != 0 && x != oneSideBlockLength-1 && y != oneSideBlockLength-1) {
-//                        //TODO　場合分けチェック
-//                        sum += checkVal(x + 1, y-1, block,expectedVal);
-//                        sum += checkVal(x - 1, y+1, block, expectedVal);
-//                    }else if(x == 0 || y == 0) {
-//                        sum += checkVal(x + 1, y-1, block, expectedVal);
-//                    }else{
-//                        sum += checkVal(x - 1, y+1, block, expectedVal);
-//                    }
-//                }
-//                probability.add(conc, sum);
-////                points.stream().forEach(point -> {
-////                    checkVal(point.x, point.y, point.x+1, point.y, block);
-////                });
-//            }
-//        }
-//        return probability;
-//    }

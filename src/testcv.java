@@ -58,7 +58,7 @@ public class testcv {
 //            Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i) +"noraml.jpg", output);
 
             Mat output2 = adbinarize(input, 50);
-            Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i)+ "adaptive2.jpg", output2);
+            Imgcodecs.imwrite("C:\\detectEdge\\binary\\" + String.valueOf(i)+ "output/adaptive2.jpg", output2);
             i++;
         }
     }
