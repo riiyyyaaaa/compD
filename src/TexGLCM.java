@@ -37,19 +37,24 @@ public class TexGLCM {
         for(int i=0; i<numOfBlock*numOfBlock; i++) {
             for(int rad = 0; rad<4; rad++) {
                 double[] sigma = calSigma(mat[i][rad]);
+                for(int z = 0; z<4; z++) {
+                    feature[i][rad][z] = 0;
+                }
                 for (int y = 0; y < concNum + 1; y++) {
                     for (int x = 0; x < concNum + 1; x++) {
                         // エネルギー
                         feature[i][rad][0] += mat[i][rad][y][x]*mat[i][rad][y][x];
-                        // 慣性
+                        // 慣性、分散、コントラスト
                         feature[i][rad][1] += (x-y)*(x-y)*mat[i][rad][y][x];
                         // エントロピー
-                        feature[i][rad][2] += mat[i][rad][y][x] * (Math.log(mat[i][rad][y][x]))/Math.log(2);
+                        if(mat[i][rad][y][x] != 0) {
+                            feature[i][rad][2] += mat[i][rad][y][x] * (Math.log(mat[i][rad][y][x])) / Math.log(2);
+                        }
                         // 相関
                         feature[i][rad][3] += (x*y*mat[i][rad][y][x]-sigma[2]*sigma[3])/(sigma[0]*sigma[1]);
                     }
                 }
-                feature[i][rad][2] = -feature[i][rad][2];
+                //feature[i][rad][2] = -feature[i][rad][2];
                 System.out.println("num is " + i);
                 System.out.println("エネルギー: " + feature[i][rad][0]);
                 System.out.println("慣性: " + feature[i][rad][1]);
@@ -91,10 +96,13 @@ public class TexGLCM {
             preSigmaX = 0;
             for (int y = 0; y < concNum + 1; y++) {
                 preSigmaX += mat[y][x];
+                //System.out.println(mat[y][x]);
             }
             sigmaAndMu[0] += (x - sigmaAndMu[2])*(x - sigmaAndMu[2])*preSigmaX;
+            //System.out.println( "sigmasndmu"+(x - sigmaAndMu[2]));
+            //System.out.println(preSigmaX);
         }
-        sigmaAndMu[0] *= 1/(concNum+1);
+        sigmaAndMu[0] *= 1/(double)(concNum+1);
         sigmaAndMu[0] = Math.sqrt(sigmaAndMu[0]);
 
         for(int y=0; y<concNum+1; y++) {
@@ -103,9 +111,14 @@ public class TexGLCM {
                 preSigmaY += mat[y][x];
             }
             sigmaAndMu[1] += (y - sigmaAndMu[3])*(y - sigmaAndMu[3])*preSigmaY;
+            //System.out.println( "preSig" + preSigmaY + ", PRESIG-: " + (y-sigmaAndMu[3]) + ", res:" + sigmaAndMu[1]);
         }
-        sigmaAndMu[1] *= 1/(concNum+1);
+        sigmaAndMu[1] *= 1/(double)(concNum+1);
+        //System.out.print("/con: " + sigmaAndMu[1]);
         sigmaAndMu[1] = Math.sqrt(sigmaAndMu[1]);
+        //System.out.println(", result: " + sigmaAndMu[1]);
+
+        //System.out.println(" mu1: " + sigmaAndMu[2] + " mu2: " + sigmaAndMu[3] + " sig1: " + sigmaAndMu[0] + " sig2: " + sigmaAndMu[1]);
 
         return sigmaAndMu;
     }
@@ -139,7 +152,7 @@ public class TexGLCM {
                 int sum = 0;
                 for (int y = 0; y < mat[i][rad].length; y++) {
                     for (int x = 0; x < mat[i][rad].length; x++) {
-                        System.out.printf("%3d", mat[i][rad][y][x]);
+                        //System.out.printf("%3d", mat[i][rad][y][x]);
                         sum += mat[i][rad][y][x];
                     }
                     System.out.println();
