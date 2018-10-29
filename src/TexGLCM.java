@@ -14,7 +14,7 @@ public class TexGLCM {
 
     final static ImageUtility iu = new ImageUtility();
     final static Block di = new Block();
-    final static int concNum = 15; // 濃度数の最大値
+    final static int concNum = 32; // 濃度数の最大値
     final static int imagesize = 200; // リサイズ後の画像サイズ
     final static int oneSideBlockLength = 20; // ブロックの一辺の長さ
     final static int numOfBlock = 10; //分割するブロックの数
@@ -28,7 +28,7 @@ public class TexGLCM {
 
     /**
      * 濃度共起行列からテクスチャ特徴(エネルギー、慣性、エントロピー、相関)を抽出する
-     * @param mat
+     * @param mat 対象の濃度共起行列
      * @return テクスチャ特徴となる各ブロック4つの値
      */
     public static double[][][] calFeature(int[][][][] mat) {
@@ -92,6 +92,7 @@ public class TexGLCM {
             sigmaAndMu[3]+= y*preMuY;
         }
 
+        // σを求める
         for(int x=0; x<concNum+1; x++) {
             preSigmaX = 0;
             for (int y = 0; y < concNum + 1; y++) {
@@ -152,7 +153,7 @@ public class TexGLCM {
                 int sum = 0;
                 for (int y = 0; y < mat[i][rad].length; y++) {
                     for (int x = 0; x < mat[i][rad].length; x++) {
-                        //System.out.printf("%3d", mat[i][rad][y][x]);
+                        System.out.printf("%3d", mat[i][rad][y][x]);
                         sum += mat[i][rad][y][x];
                     }
                     System.out.println();
@@ -208,10 +209,10 @@ public class TexGLCM {
      * @return
      */
     public static int[][] calMat(int rad, BufferedImage block) {
-        List<List<Integer>> mat = new ArrayList<>(33);
-        List<Integer> ele = new ArrayList<>(33);
+        List<List<Integer>> mat = new ArrayList<>(concNum+1);
+        List<Integer> ele = new ArrayList<>(concNum+1);
 
-        int[][] matArr = new int[33][33];
+        int[][] matArr = new int[concNum+1][concNum+1];
         //Arrays.fill(matArr, 0);
         int colorC;
         int colorP;
