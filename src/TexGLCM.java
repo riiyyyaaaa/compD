@@ -23,7 +23,8 @@ public class TexGLCM {
         String cd = new File(".").getAbsoluteFile().getParent();
         File f = new File(cd + "\\src\\output\\1.jpg");
         int[][][][] mat = calGCLM(f);
-        calFeature(mat);
+        //calFeature(mat);
+        showFeatureValue((calFeature(mat)));
     }
 
     /**
@@ -485,4 +486,21 @@ public class TexGLCM {
 
         return bImage;
     }
+
+    /**
+     * ブロックごとの特徴量を表示する
+     */
+    public static void showFeatureValue(double[][][] featureMat) {
+        for(int i=0; i<featureMat.length; i++) {
+            System.out.println("num is " + i);
+            for(int rad=0; rad<4; rad++) {
+
+                for(int numF=0; numF<4; numF++) {
+                    System.out.printf("%7.1f", featureMat[i][rad][numF]);
+                }
+                System.out.println();
+            }
+        }
+    }
+
 }
