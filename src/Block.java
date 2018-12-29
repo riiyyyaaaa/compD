@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
  */
 public class Block {
     public static final ImageUtility iu = new ImageUtility();
-    public static final int numOfBlock = 10; // 分割するブロックの数(1辺)
+    public static final int numOfBlock = 5; // 分割するブロックの数(1辺)
     public static final int lengthOfASide = 200; //画像の一片の長さ
     public static final int bSize = lengthOfASide/numOfBlock;// 1つのブロックの一辺の長さ
 

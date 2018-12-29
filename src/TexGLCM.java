@@ -16,15 +16,16 @@ public class TexGLCM {
     final static Block di = new Block();
     final static int concNum = 32; // 濃度数の最大値
     final static int imagesize = 200; // リサイズ後の画像サイズ
-    final static int oneSideBlockLength = 20; // ブロックの一辺の長さ
-    final static int numOfBlock = 10; //分割するブロックの数
+    final static int numOfBlock = 5; //分割するブロックの数
+    final static int oneSideBlockLength = imagesize/numOfBlock; // ブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {
         String cd = new File(".").getAbsoluteFile().getParent();
         File f = new File(cd + "\\src\\output\\1.jpg");
         int[][][][] mat = calGCLM(f);
         //calFeature(mat);
-        showFeatureValue((calFeature(mat)));
+        //showFeatureValue(calFeature(mat));
+        showFeatureValueImage(calFeature(mat), f);
     }
 
     /**
@@ -489,6 +490,7 @@ public class TexGLCM {
 
     /**
      * ブロックごとの特徴量を表示する
+     * @param featureMat
      */
     public static void showFeatureValue(double[][][] featureMat) {
         for(int i=0; i<featureMat.length; i++) {
@@ -501,6 +503,43 @@ public class TexGLCM {
                 System.out.println();
             }
         }
+    }
+
+    /**
+     * 特徴量の各値、画像を一枚の画像として出力
+     * @param featureMat
+     * @param file
+     */
+    public static void showFeatureValueImage(double[][][] featureMat, File file) throws IOException {
+        int scale = 8;
+        String cd = new File(".").getAbsoluteFile().getParent();
+        File outputFile = new File(cd + "\\src\\output\\featureResult.jpg");
+
+        BufferedImage output = new BufferedImage(imagesize*scale, imagesize*scale, BufferedImage.TYPE_INT_RGB);
+        Graphics graphics = output.createGraphics();
+        file = iu.Mono(file);
+        BufferedImage read = ImageIO.read(file);
+        read = iu.scaleImage(read, imagesize, imagesize);
+        //read = convertConc(read);
+        BufferedImage[] biarr = di.intoBlock(read);
+        int biarrLength = biarr.length;
+
+        graphics.setColor(Color.WHITE);
+        graphics.fillRect(0,0, imagesize*scale, imagesize*scale);
+        graphics.setColor(Color.BLACK);
+        for(int i=0; i<biarrLength; i++) {
+            // 画像のブロックを並べる
+            graphics.drawImage(biarr[i], (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength, null);
+            // ブロックの特徴量を並べる
+            graphics.drawString("エネルギー、慣性、エントロピー、相関", 50, 10);
+            for(int rad=0; rad<4; rad++) {
+                for(int j=0; j<featureMat[i][rad].length; j++) {
+                    graphics.drawString(String.valueOf(featureMat[i][rad][j]), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*50 + j*10 + 20);
+                }
+            }
+        }
+        graphics.dispose();
+        ImageIO.write(output, "jpg", outputFile);
     }
 
 }
