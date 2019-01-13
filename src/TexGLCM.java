@@ -16,7 +16,7 @@ public class TexGLCM {
     final static Block di = new Block();
     final static int concNum = 32; // 濃度数の最大値
     final static int imagesize = 200; // リサイズ後の画像サイズ
-    final static int numOfBlock = 5; //分割するブロックの数
+    final static int numOfBlock = 4; //分割するブロックの数
     final static int oneSideBlockLength = imagesize/numOfBlock; // ブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {
@@ -25,7 +25,12 @@ public class TexGLCM {
         int[][][][] mat = calGCLM(f);
         //calFeature(mat);
         //showFeatureValue(calFeature(mat));
-        showFeatureValueImage(calFeature(mat), f);
+        File dir = new File(cd + "\\src\\input\\");
+        File[] list = dir.listFiles();
+        for(int i=0; i<list.length; i++) {
+            showFeatureValueImage(calFeature(mat), list[i]);
+        }
+
     }
 
     /**
@@ -513,9 +518,10 @@ public class TexGLCM {
     public static void showFeatureValueImage(double[][][] featureMat, File file) throws IOException {
         int scale = 8;
         String cd = new File(".").getAbsoluteFile().getParent();
-        File outputFile = new File(cd + "\\src\\output\\featureResult.jpg");
+        String fileName = file.getName();
+        File outputFile = new File(cd + "\\src\\output\\result" + fileName);
 
-        BufferedImage output = new BufferedImage(imagesize*scale, imagesize*scale, BufferedImage.TYPE_INT_RGB);
+        BufferedImage output = new BufferedImage(imagesize*scale + imagesize, imagesize*scale, BufferedImage.TYPE_INT_RGB);
         Graphics graphics = output.createGraphics();
         file = iu.Mono(file);
         BufferedImage read = ImageIO.read(file);
@@ -525,8 +531,9 @@ public class TexGLCM {
         int biarrLength = biarr.length;
 
         graphics.setColor(Color.WHITE);
-        graphics.fillRect(0,0, imagesize*scale, imagesize*scale);
+        graphics.fillRect(0,0, output.getWidth(), output.getHeight());
         graphics.setColor(Color.BLACK);
+        graphics.drawImage(read, imagesize*scale, imagesize, null);
         for(int i=0; i<biarrLength; i++) {
             // 画像のブロックを並べる
             graphics.drawImage(biarr[i], (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength, null);

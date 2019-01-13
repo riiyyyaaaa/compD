@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="change method of Matrix's calculation">
+    <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="change method of Matrix's calculation&#10;add showFeatureValueImage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/Block.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/Block.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" afterDir="false" />
@@ -32,8 +32,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="540" column="12" lean-forward="true" selection-start-line="540" selection-start-column="12" selection-end-line="540" selection-end-column="12" />
+                <state relative-caret-position="340">
+                  <caret line="107" column="13" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -88,11 +88,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-238">
-                  <caret line="25" column="26" lean-forward="true" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+                <state relative-caret-position="561">
+                  <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -100,11 +100,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Block.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4879">
-                  <caret line="287" column="28" selection-start-line="287" selection-start-column="26" selection-end-line="287" selection-end-column="28" />
+                <state relative-caret-position="170">
+                  <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -115,7 +115,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/DividImage.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2278">
+                <state relative-caret-position="187">
                   <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
                 </state>
               </provider>
@@ -195,7 +195,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="1450" />
+    <option name="width" value="1279" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -204,7 +204,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -233,12 +232,13 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545823814909" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547308029239" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -448,7 +448,9 @@
       <workItem from="1545042004688" duration="2793000" />
       <workItem from="1545135262794" duration="1703000" />
       <workItem from="1545818959801" duration="4964000" />
-      <workItem from="1546004211359" duration="8167000" />
+      <workItem from="1546004211359" duration="8251000" />
+      <workItem from="1546076492689" duration="2972000" />
+      <workItem from="1547307847129" duration="778000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -464,11 +466,18 @@
       <option name="project" value="LOCAL" />
       <updated>1545018040135</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="change method of Matrix's calculation&#10;add showFeatureValueImage">
+      <created>1546055241412</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1546055241412</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194525000" />
+    <option name="totallyTimeSpent" value="198359000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -480,9 +489,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1450" height="1057" extended-state="0" />
+    <frame x="-7" y="0" width="1279" height="1057" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1352518" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15832649" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -491,15 +500,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49884528" visible="true" weight="0.32746956" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49568346" weight="0.34415585" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49466777" weight="0.34341252" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.13378379" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49667406" weight="0.32792208" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4964029" visible="true" weight="0.27056277" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50359714" side_tool="true" visible="true" weight="0.27056277" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4954881" weight="0.27056277" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.50533223" side_tool="true" visible="true" weight="0.3430736" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32792208" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -551,7 +560,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change method of Matrix's calculation" />
-    <option name="LAST_COMMIT_MESSAGE" value="change method of Matrix's calculation" />
+    <MESSAGE value="change method of Matrix's calculation&#10;add showFeatureValueImage" />
+    <option name="LAST_COMMIT_MESSAGE" value="change method of Matrix's calculation&#10;add showFeatureValueImage" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/adaptive.jpg" />
@@ -651,6 +661,9 @@
     <entry file="file://$PROJECT_DIR$/out/production/compDetection2/ImageUtility.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/featureResult.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -681,10 +694,10 @@
     <entry file="file://$PROJECT_DIR$/src/output/1.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Block.java">
+    <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4879">
-          <caret line="287" column="28" selection-start-line="287" selection-start-column="26" selection-end-line="287" selection-end-column="28" />
+        <state relative-caret-position="561">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -693,18 +706,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DividImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2278">
+        <state relative-caret-position="187">
           <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/featureResult.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
+    <entry file="file://$PROJECT_DIR$/src/Block.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="540" column="12" lean-forward="true" selection-start-line="540" selection-start-column="12" selection-end-line="540" selection-end-column="12" />
+        <state relative-caret-position="170">
+          <caret line="10" column="33" lean-forward="true" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
