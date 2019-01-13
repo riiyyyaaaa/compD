@@ -21,14 +21,16 @@ public class TexGLCM {
 
     public static void main(String[] args) throws IOException {
         String cd = new File(".").getAbsoluteFile().getParent();
-        File f = new File(cd + "\\src\\output\\1.jpg");
-        int[][][][] mat = calGCLM(f);
+//        File f = new File(cd + "\\src\\output\\1.jpg");
+//        int[][][][] mat = calGCLM(f);
         //calFeature(mat);
         //showFeatureValue(calFeature(mat));
         File dir = new File(cd + "\\src\\input\\");
         File[] list = dir.listFiles();
         for(int i=0; i<list.length; i++) {
-            showFeatureValueImage(calFeature(mat), list[i]);
+            System.out.println(list[i]);
+            int[][][][] mat_test = calGCLM(list[i]);
+            showFeatureValueImage(calFeature(mat_test), list[i]);
         }
 
     }
