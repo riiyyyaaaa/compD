@@ -2,17 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="fix main()">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (10).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (11).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (12).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (13).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (14).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (15).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (16).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (17).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (18).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (19).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (2).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (20).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (21).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (22).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (23).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (24).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (25).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (26).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (27).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (28).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (29).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (3).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (30).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (31).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (32).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (4).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (5).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (6).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (7).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (8).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img (9).jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/Block.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/Block.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/convertImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/convertImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/PropertyUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/PropertyUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/convertImage.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Block.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DividImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DividImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImageUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PropertyUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PropertyUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TexGLCM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TexGLCM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/output/convertImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/output/convertImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/output/convertImage.jpg" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,14 +59,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.5366516">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/PropertyUtil.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="141">
-                  <caret line="14" column="57" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
+                <state relative-caret-position="322">
+                  <caret line="23" column="67" selection-start-line="23" selection-start-column="67" selection-end-line="23" selection-end-column="67" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#1243#1244#0" expanded="true" />
@@ -39,14 +76,44 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Test.java">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+                <state relative-caret-position="182">
+                  <caret line="151" column="57" selection-start-line="151" selection-start-column="57" selection-end-line="151" selection-end-column="57" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/IntegrateBlock.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="70">
+                  <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/README.md">
+              <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+                <state split_layout="SPLIT">
+                  <first_editor relative-caret-position="210">
+                    <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+                  </first_editor>
+                  <second_editor />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="28">
+                  <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
@@ -58,37 +125,38 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/resourse/compDetection.properties">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="119">
-                  <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+                <state relative-caret-position="98">
+                  <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/DividImage.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-7">
+                  <caret line="116" column="24" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Block.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="201">
+                  <caret line="52" column="71" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="71" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
+            <entry file="file://$PROJECT_DIR$/src/ImageUtility.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="631">
-                  <caret line="100" column="37" selection-start-line="100" selection-start-column="37" selection-end-line="100" selection-end-column="37" />
-                  <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
-                  <caret line="109" column="42" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
-                  <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
-                  <caret line="120" column="33" selection-start-line="120" selection-start-column="33" selection-end-line="120" selection-end-column="33" />
-                  <caret line="122" column="42" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
-                  <caret line="128" column="46" selection-start-line="128" selection-start-column="46" selection-end-line="128" selection-end-column="46" />
-                  <caret line="155" column="70" selection-start-line="155" selection-start-column="70" selection-end-line="155" selection-end-column="70" />
-                  <caret line="155" column="84" selection-start-line="155" selection-start-column="84" selection-end-line="155" selection-end-column="84" />
-                  <caret line="188" column="43" selection-start-line="188" selection-start-column="43" selection-end-line="188" selection-end-column="43" />
-                  <caret line="193" column="56" selection-start-line="193" selection-start-column="56" selection-end-line="193" selection-end-column="56" />
-                  <caret line="200" column="56" selection-start-line="200" selection-start-column="56" selection-end-line="200" selection-end-column="56" />
-                  <caret line="223" column="60" selection-start-line="223" selection-start-column="60" selection-end-line="223" selection-end-column="60" />
-                  <caret line="224" column="54" selection-start-line="224" selection-start-column="54" selection-end-line="224" selection-end-column="54" />
-                  <caret line="226" column="43" selection-start-line="226" selection-start-column="43" selection-end-line="226" selection-end-column="43" />
-                  <caret line="226" column="57" selection-start-line="226" selection-start-column="57" selection-end-line="226" selection-end-column="57" />
-                  <caret line="379" column="33" selection-start-line="379" selection-start-column="33" selection-end-line="379" selection-end-column="33" />
-                  <caret line="428" column="33" selection-start-line="428" selection-start-column="33" selection-end-line="428" selection-end-column="33" />
-                  <caret line="476" column="76" selection-start-line="476" selection-start-column="76" selection-end-line="476" selection-end-column="76" />
-                  <caret line="483" column="34" selection-start-line="483" selection-start-column="34" selection-end-line="483" selection-end-column="34" />
-                  <caret line="489" column="31" selection-start-line="489" selection-start-column="31" selection-end-line="489" selection-end-column="31" />
+                <state relative-caret-position="294">
+                  <caret line="87" column="51" selection-start-line="87" selection-start-column="51" selection-end-line="87" selection-end-column="51" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -109,9 +177,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>if</find>
-      <find>intobl</find>
-      <find>getR</find>
       <find>numb</find>
       <find>oneside</find>
       <find>sum</find>
@@ -137,8 +202,11 @@
       <find>dl</find>
       <find>intoblock</find>
       <find>10</find>
-      <find>write</find>
       <find>concNum</find>
+      <find>imagesize</find>
+      <find>file</find>
+      <find>img</find>
+      <find>write</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -148,18 +216,19 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/dividImage.java" />
-        <option value="$PROJECT_DIR$/src/ImageUtility.java" />
         <option value="$PROJECT_DIR$/src/texGLCM.java" />
         <option value="$PROJECT_DIR$/src/testcv.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/Block.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Test.java" />
         <option value="$PROJECT_DIR$/src/lib.java" />
-        <option value="$PROJECT_DIR$/src/DividImage.java" />
-        <option value="$PROJECT_DIR$/src/PropertyUtil.java" />
         <option value="$PROJECT_DIR$/src/resourse/compDetection.properties" />
+        <option value="$PROJECT_DIR$/src/PropertyUtil.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/DividImage.java" />
+        <option value="$PROJECT_DIR$/src/Block.java" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/TexGLCM.java" />
+        <option value="$PROJECT_DIR$/src/ImageUtility.java" />
       </list>
     </option>
   </component>
@@ -170,8 +239,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="555" />
-    <option name="width" value="1380" />
+    <option name="x" value="290" />
+    <option name="width" value="1645" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -201,7 +270,7 @@
               <item name="compD" type="b2602c69:ProjectViewProjectNode" />
               <item name="compD" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="resourse" type="462c0819:PsiDirectoryNode" />
+              <item name="input" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -214,7 +283,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550134333159" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550136865052" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -224,17 +293,17 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\riya\Documents\compD" />
       <recent name="C:\Users\riya\Documents\compD\src\output" />
-      <recent name="C:\Users\riya\Documents\compD\src" />
-      <recent name="C:\Users\riya\Documents\untitled\src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\riya\Documents\compD" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\riya\Documents\compD\src\output" />
+      <recent name="C:\Users\riya\Documents\compD\src" />
+      <recent name="C:\Users\riya\Documents\untitled\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -453,7 +522,7 @@
       <workItem from="1548915783051" duration="31000" />
       <workItem from="1549267002582" duration="3986000" />
       <workItem from="1549629167740" duration="5125000" />
-      <workItem from="1549972893355" duration="7409000" />
+      <workItem from="1549972893355" duration="9930000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -494,7 +563,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227647000" />
+    <option name="totallyTimeSpent" value="230168000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -506,10 +575,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="555" y="0" width="1380" height="1057" extended-state="0" />
+    <frame x="290" y="0" width="1645" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16287878" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13564669" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -518,7 +587,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49884528" visible="true" weight="0.32746956" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4937063" visible="true" weight="0.22835498" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4937063" visible="true" weight="0.25974026" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -584,17 +653,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="fix main()" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/adaptive.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/normal.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/output/normal2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/adaptive2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/result2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/output/adaptive1.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -617,9 +675,6 @@
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/output/image2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/convertImage.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
@@ -646,13 +701,6 @@
     <entry file="file://$PROJECT_DIR$/img (2).jpg" />
     <entry file="file://$PROJECT_DIR$/image2.jpg" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_141/src.zip!/java/awt/image/BufferedImage.java" />
-    <entry file="file://$PROJECT_DIR$/src/testcv.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/out/production/compDetection2/TexGLCM.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -672,61 +720,23 @@
     <entry file="file://$PROJECT_DIR$/out/production/compDetection2/ImageUtility.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/1.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/output/featureResult.jpg" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="34">
-            <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Block.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="842">
-          <caret line="71" column="58" selection-start-line="71" selection-start-column="58" selection-end-line="71" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImageUtility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="62" column="5" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/img (4).jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DividImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/img (20).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1.jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        <state relative-caret-position="289">
+          <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -734,16 +744,52 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testcv.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="323">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DividImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="116" column="24" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/resultimg (1).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="210">
+            <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/convertImage.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PropertyUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="14" column="57" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
+        <state relative-caret-position="322">
+          <caret line="23" column="67" selection-start-line="23" selection-start-column="67" selection-end-line="23" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1243#1244#0" expanded="true" />
@@ -754,35 +800,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resourse/compDetection.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+        <state relative-caret-position="98">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IntegrateBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Block.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="52" column="71" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="100" column="37" selection-start-line="100" selection-start-column="37" selection-end-line="100" selection-end-column="37" />
-          <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
-          <caret line="109" column="42" selection-start-line="109" selection-start-column="42" selection-end-line="109" selection-end-column="42" />
-          <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
-          <caret line="120" column="33" selection-start-line="120" selection-start-column="33" selection-end-line="120" selection-end-column="33" />
-          <caret line="122" column="42" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
-          <caret line="128" column="46" selection-start-line="128" selection-start-column="46" selection-end-line="128" selection-end-column="46" />
-          <caret line="155" column="70" selection-start-line="155" selection-start-column="70" selection-end-line="155" selection-end-column="70" />
-          <caret line="155" column="84" selection-start-line="155" selection-start-column="84" selection-end-line="155" selection-end-column="84" />
-          <caret line="188" column="43" selection-start-line="188" selection-start-column="43" selection-end-line="188" selection-end-column="43" />
-          <caret line="193" column="56" selection-start-line="193" selection-start-column="56" selection-end-line="193" selection-end-column="56" />
-          <caret line="200" column="56" selection-start-line="200" selection-start-column="56" selection-end-line="200" selection-end-column="56" />
-          <caret line="223" column="60" selection-start-line="223" selection-start-column="60" selection-end-line="223" selection-end-column="60" />
-          <caret line="224" column="54" selection-start-line="224" selection-start-column="54" selection-end-line="224" selection-end-column="54" />
-          <caret line="226" column="43" selection-start-line="226" selection-start-column="43" selection-end-line="226" selection-end-column="43" />
-          <caret line="226" column="57" selection-start-line="226" selection-start-column="57" selection-end-line="226" selection-end-column="57" />
-          <caret line="379" column="33" selection-start-line="379" selection-start-column="33" selection-end-line="379" selection-end-column="33" />
-          <caret line="428" column="33" selection-start-line="428" selection-start-column="33" selection-end-line="428" selection-end-column="33" />
-          <caret line="476" column="76" selection-start-line="476" selection-start-column="76" selection-end-line="476" selection-end-column="76" />
-          <caret line="483" column="34" selection-start-line="483" selection-start-column="34" selection-end-line="483" selection-end-column="34" />
-          <caret line="489" column="31" selection-start-line="489" selection-start-column="31" selection-end-line="489" selection-end-column="31" />
+        <state relative-caret-position="182">
+          <caret line="151" column="57" selection-start-line="151" selection-start-column="57" selection-end-line="151" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImageUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="87" column="51" selection-start-line="87" selection-start-column="51" selection-end-line="87" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

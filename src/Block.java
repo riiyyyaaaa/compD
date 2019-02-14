@@ -7,9 +7,10 @@ import javax.imageio.ImageIO;
  * 画像を縦横num個のブロックに分割。 それらを基に2値で大まかな物体の配置を把握する
  */
 public class Block {
+    static PropertyUtil propertyUtil;
     public static final ImageUtility iu = new ImageUtility();
-    public static final int numOfBlock = 4; // 分割するブロックの数(1辺). これを変化させるときはTexGLCM.javaも変化させること!
-    public static final int lengthOfASide = 400; //画像の一片の長さ
+    public static final int numOfBlock = Integer.valueOf(propertyUtil.getProperty(("numOfBlock"))); // 分割するブロックの数(1辺). これを変化させるときはTexGLCM.javaも変化させること!
+    public static final int lengthOfASide = Integer.valueOf(propertyUtil.getProperty("imageSize")); //画像の一片の長さ
     public static final int bSize = lengthOfASide/numOfBlock;// 1つのブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {

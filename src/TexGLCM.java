@@ -18,9 +18,9 @@ public class TexGLCM {
     final static ImageUtility iu = new ImageUtility();
     final static Block di = new Block();
     final static int maxDensity =Integer.valueOf(propertyUtil.getProperty("maxDensity")); // 濃度数の最大値
-    final static int imagesize = Integer.valueOf(propertyUtil.getProperty("imageSize")); // リサイズ後の画像サイズ
+    final static int imageSize = Integer.valueOf(propertyUtil.getProperty("imageSize")); // リサイズ後の画像サイズ
     final static int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock")); //分割するブロックの数. これを変化させるときはBlock.javaも変化させること!
-    final static int oneSideBlockLength = imagesize/numOfBlock; // ブロックの一辺の長さ
+    final static int oneSideBlockLength = imageSize/numOfBlock; // ブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {
         String cd = new File(".").getAbsoluteFile().getParent();
@@ -149,10 +149,7 @@ public class TexGLCM {
         read = convertConc(read); //濃度値を圧縮
 
         //System.out.println("width: "  + read.getWidth());
-        read = iu.scaleImage(read, imagesize, imagesize);
-        String cd = new File(".").getAbsoluteFile().getParent();
-        File testFile = new File(cd + "\\src\\output\\convertImage.jpg");
-        ImageIO.write(read, "jpg", testFile);
+        read = iu.scaleImage(read, imageSize, imageSize);
         int[][][][] mat = new int[numOfBlock*numOfBlock][4][maxDensity+1][maxDensity+1];
 
         BufferedImage[] biarr = di.intoBlock(read);
@@ -526,11 +523,11 @@ public class TexGLCM {
         String fileName = file.getName();
         File outputFile = new File(cd + "\\src\\output\\result" + fileName);
 
-        BufferedImage output = new BufferedImage(imagesize*scale + imagesize, imagesize*scale, BufferedImage.TYPE_INT_RGB);
+        BufferedImage output = new BufferedImage(imageSize*scale + imageSize, imageSize*scale, BufferedImage.TYPE_INT_RGB);
         Graphics graphics = output.createGraphics();
         file = iu.Mono(file);
         BufferedImage read = ImageIO.read(file);
-        read = iu.scaleImage(read, imagesize, imagesize);
+        read = iu.scaleImage(read, imageSize, imageSize);
         //read = convertConc(read);
         BufferedImage[] biarr = di.intoBlock(read);
         int biarrLength = biarr.length;
@@ -538,7 +535,7 @@ public class TexGLCM {
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0,0, output.getWidth(), output.getHeight());
         graphics.setColor(Color.BLACK);
-        graphics.drawImage(read, imagesize*scale, imagesize, null);
+        graphics.drawImage(read, imageSize*scale, imageSize, null);
         for(int i=0; i<biarrLength; i++) {
             // 画像のブロックを並べる
             graphics.drawImage(biarr[i], (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength, null);

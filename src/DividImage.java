@@ -114,7 +114,7 @@ public class DividImage {
 //    }
 
     /**
-     * 分割し平均にしたブロックを1つのBUufferedImageとして出力
+     * 分割し平均にしたブロックを1つのBufferedImageとして出力
      */
     public static BufferedImage outputBlock(int[][] block) throws IOException {
         int bsize = 20;

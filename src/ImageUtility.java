@@ -83,9 +83,10 @@ public class ImageUtility {
             }
         }
         // イメージをファイルに出力する
+        String cd = new File(".").getAbsoluteFile().getParent();
         JFileChooser jfilechooser = new JFileChooser();
-        String filename = jfilechooser.getName(file);
-        File file2 = new File(filename);
+        String fileName = cd + "\\src\\output\\Mono" + jfilechooser.getName(file);
+        File file2 = new File(fileName);
         ImageIO.write(writeImage, "jpg", file2);
 
         return file2;
