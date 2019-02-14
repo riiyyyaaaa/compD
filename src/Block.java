@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
  */
 public class Block {
     public static final ImageUtility iu = new ImageUtility();
-    public static final int numOfBlock = 4; // 分割するブロックの数(1辺)
-    public static final int lengthOfASide = 200; //画像の一片の長さ
+    public static final int numOfBlock = 4; // 分割するブロックの数(1辺). これを変化させるときはTexGLCM.javaも変化させること!
+    public static final int lengthOfASide = 400; //画像の一片の長さ
     public static final int bSize = lengthOfASide/numOfBlock;// 1つのブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {
@@ -70,7 +70,6 @@ public class Block {
         blockColor = mvaveFileter(blockColor);    //平均化したブロックをさらに移動平均フィルタをかける
 //        File output = new File("./output/image" + outputname + ".jpg");
 //        ImageIO.write(outputNumb(block), "jpg", output);
-
 //
 //        int numB = 0;
 //        //int color;

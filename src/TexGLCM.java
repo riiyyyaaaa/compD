@@ -6,17 +6,20 @@ import java.util.*;
 import java.util.List;
 import javax.imageio.ImageIO;
 
+import static java.lang.Math.round;
+
 
 /**
  * 二次統計量を用いてテクスチャ解析
  */
 public class TexGLCM {
+    static PropertyUtil propertyUtil;
 
     final static ImageUtility iu = new ImageUtility();
     final static Block di = new Block();
-    final static int concNum = 32; // 濃度数の最大値
-    final static int imagesize = 200; // リサイズ後の画像サイズ
-    final static int numOfBlock = 4; //分割するブロックの数
+    final static int maxDensity =Integer.valueOf(propertyUtil.getProperty("maxDensity")); // 濃度数の最大値
+    final static int imagesize = Integer.valueOf(propertyUtil.getProperty("imageSize")); // リサイズ後の画像サイズ
+    final static int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock")); //分割するブロックの数. これを変化させるときはBlock.javaも変化させること!
     final static int oneSideBlockLength = imagesize/numOfBlock; // ブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {
@@ -30,7 +33,7 @@ public class TexGLCM {
         for(int i=0; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = calGCLM(list[i]);
-            showFeatureValueImage(calFeature(mat_test), list[i]);
+ //           showFeatureValueImage(calFeature(mat_test), list[i]);
         }
 
     }
@@ -38,7 +41,7 @@ public class TexGLCM {
     /**
      * 濃度共起行列からテクスチャ特徴(エネルギー、慣性、エントロピー、相関)を抽出する
      * @param mat 対象の濃度共起行列
-     * @return テクスチャ特徴となる各ブロック4つの値
+     * @return feature テクスチャ特徴となる各ブロック4つの値
      */
     public static double[][][] calFeature(int[][][][] mat) {
         double[][][] feature = new double[100][4][4];
@@ -49,8 +52,8 @@ public class TexGLCM {
                 for(int z = 0; z<4; z++) {
                     feature[i][rad][z] = 0;
                 }
-                for (int y = 0; y < concNum + 1; y++) {
-                    for (int x = 0; x < concNum + 1; x++) {
+                for (int y = 0; y < maxDensity + 1; y++) {
+                    for (int x = 0; x < maxDensity + 1; x++) {
                         // エネルギー
                         feature[i][rad][0] += mat[i][rad][y][x]*mat[i][rad][y][x];
                         // 慣性、分散、コントラスト
@@ -86,25 +89,25 @@ public class TexGLCM {
         double preMuX, preMuY;
 
         // μを求める
-        for(int x=0; x<concNum+1; x++) {
+        for(int x=0; x<maxDensity+1; x++) {
             preMuX = 0;
-            for(int y=0; y<concNum+1; y++) {
+            for(int y=0; y<maxDensity+1; y++) {
                 preMuX += mat[y][x];
             }
             sigmaAndMu[2] += x*preMuX;
         }
-        for(int y=0; y<concNum+1; y++) {
+        for(int y=0; y<maxDensity+1; y++) {
             preMuY = 0;
-            for(int x=0; x<concNum+1; x++) {
+            for(int x=0; x<maxDensity+1; x++) {
                 preMuY += mat[y][x];
             }
             sigmaAndMu[3]+= y*preMuY;
         }
 
         // σを求める
-        for(int x=0; x<concNum+1; x++) {
+        for(int x=0; x<maxDensity+1; x++) {
             preSigmaX = 0;
-            for (int y = 0; y < concNum + 1; y++) {
+            for (int y = 0; y < maxDensity + 1; y++) {
                 preSigmaX += mat[y][x];
                 //System.out.println(mat[y][x]);
             }
@@ -112,18 +115,18 @@ public class TexGLCM {
             //System.out.println( "sigmasndmu"+(x - sigmaAndMu[2]));
             //System.out.println(preSigmaX);
         }
-        sigmaAndMu[0] *= 1/(double)(concNum+1);
+        sigmaAndMu[0] *= 1/(double)(maxDensity+1);
         sigmaAndMu[0] = Math.sqrt(sigmaAndMu[0]);
 
-        for(int y=0; y<concNum+1; y++) {
+        for(int y=0; y<maxDensity+1; y++) {
             preSigmaY = 0;
-            for (int x = 0; x < concNum + 1; x++) {
+            for (int x = 0; x < maxDensity + 1; x++) {
                 preSigmaY += mat[y][x];
             }
             sigmaAndMu[1] += (y - sigmaAndMu[3])*(y - sigmaAndMu[3])*preSigmaY;
             //System.out.println( "preSig" + preSigmaY + ", PRESIG-: " + (y-sigmaAndMu[3]) + ", res:" + sigmaAndMu[1]);
         }
-        sigmaAndMu[1] *= 1/(double)(concNum+1);
+        sigmaAndMu[1] *= 1/(double)(maxDensity+1);
         //System.out.print("/con: " + sigmaAndMu[1]);
         sigmaAndMu[1] = Math.sqrt(sigmaAndMu[1]);
         //System.out.println(", result: " + sigmaAndMu[1]);
@@ -150,7 +153,7 @@ public class TexGLCM {
         String cd = new File(".").getAbsoluteFile().getParent();
         File testFile = new File(cd + "\\src\\output\\convertImage.jpg");
         ImageIO.write(read, "jpg", testFile);
-        int[][][][] mat = new int[numOfBlock*numOfBlock][4][concNum+1][concNum+1];
+        int[][][][] mat = new int[numOfBlock*numOfBlock][4][maxDensity+1][maxDensity+1];
 
         BufferedImage[] biarr = di.intoBlock(read);
 
@@ -183,19 +186,19 @@ public class TexGLCM {
 //                List<List<Point>> hashConc = get32Hash(biarr[blockNum]);
 //
 //                System.out.println("----------- matrix -----------");
-//                for(int i=0; i<concNum+1; i++) {
+//                for(int i=0; i<maxDensity+1; i++) {
 //                    List<Integer> list = new ArrayList<>();
 //                    List<Point> points = hashConc.get(i); //濃度iである座標を見つける
 //
 //                    if(points != null) {
-//                        for (int j = 0; j < concNum + 1; j++) {
+//                        for (int j = 0; j < maxDensity + 1; j++) {
 //                            int sum = calProbability(rad, biarr[blockNum], points, j);
 //                            list.add(sum);
 //
 //                            //System.out.printf("%3d",sum);
 //                        }
 //                    } else {
-//                        for (int j = 0; j < concNum+1; j++) {
+//                        for (int j = 0; j < maxDensity+1; j++) {
 //                            list.add(0);
 //                            //System.out.print("  0");
 //                        }
@@ -218,10 +221,10 @@ public class TexGLCM {
      * @return
      */
     public static int[][] calMat(int rad, BufferedImage block) {
-        List<List<Integer>> mat = new ArrayList<>(concNum+1);
-        List<Integer> ele = new ArrayList<>(concNum+1);
+        List<List<Integer>> mat = new ArrayList<>(maxDensity+1);
+        List<Integer> ele = new ArrayList<>(maxDensity+1);
 
-        int[][] matArr = new int[concNum+1][concNum+1];
+        int[][] matArr = new int[maxDensity+1][maxDensity+1];
         //Arrays.fill(matArr, 0);
         int colorC;
         int colorP;
@@ -374,7 +377,7 @@ public class TexGLCM {
 
         // Initialize
         lists.clear();
-        for(int x=0; x<concNum+1; x++) {
+        for(int x=0; x<maxDensity+1; x++) {
             lists.add(x, null);
         }
 
@@ -423,7 +426,7 @@ public class TexGLCM {
 //        System.out.println("------output ireg -------");
 //        System.out.println(ire);
         int sumpoint=0;
-        for(int x=0; x<concNum+1; x++) {
+        for(int x=0; x<maxDensity+1; x++) {
             System.out.println(x + ": " + lists.get(x));
             if(lists.get(x) != null) {
                 sumpoint += lists.get(x).size();
@@ -471,20 +474,20 @@ public class TexGLCM {
 
 
     /**
-     * グレースケール画像の濃度を0~255では大きすぎるので0~32くらいに丸めこむ テクスチャ特徴をより細かくとりたければconcNumを大きくすればよい
+     * グレースケール画像の濃度を0~255では大きすぎるので0~32くらいに丸めこむ テクスチャ特徴をより細かくとりたければmaxDensityを大きくすればよい
      * 出力画像はかなり暗いので画面の明度を上げないと見えない
      */
     public static BufferedImage convertConc(BufferedImage bImage) throws IOException {
         int h = bImage.getHeight();
         int w = bImage.getWidth();
         int c, rgb;
-        int num = 256 / concNum;
+        int num = 256 / maxDensity;
 
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
                 c = iu.r(bImage.getRGB(j, i)) / num;
                 // System.out.println(" " + iu.r(bImage.getRGB(j, i)) + " , " + c);
-                if(c>concNum || c<0){
+                if(c>maxDensity || c<0){
                     System.out.println("not Color");
                 }
                 rgb = iu.rgb(c, c, c);
@@ -543,7 +546,7 @@ public class TexGLCM {
             graphics.drawString("エネルギー、慣性、エントロピー、相関", 50, 10);
             for(int rad=0; rad<4; rad++) {
                 for(int j=0; j<featureMat[i][rad].length; j++) {
-                    graphics.drawString(String.valueOf(featureMat[i][rad][j]), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*50 + j*10 + 20);
+                    graphics.drawString(String.valueOf(round(featureMat[i][rad][j])), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*50 + j*10 + 20);
                 }
             }
         }

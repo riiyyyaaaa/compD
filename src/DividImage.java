@@ -9,7 +9,8 @@ import java.util.*;
 import javax.swing.JFileChooser;
 
 /**
- * 画像を縦横num個のブロックに分割。 それらを基に2値で大まかな物体の配置を把握する
+ * 画像を縦横num個のブロックに分割。
+ * それらを基に2値で大まかな物体の配置を把握する
  */
 public class DividImage {
     public static final ImageUtility iu = new ImageUtility();
