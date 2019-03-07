@@ -19,7 +19,7 @@ public class TexGLCM {
     final static Block di = new Block();
     final static int maxDensity =Integer.valueOf(propertyUtil.getProperty("maxDensity")); // 濃度数の最大値
     final static int imageSize = Integer.valueOf(propertyUtil.getProperty("imageSize")); // リサイズ後の画像サイズ
-    final static int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock")); //分割するブロックの数. これを変化させるときはBlock.javaも変化させること!
+    final static int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock")); //分割するブロックの数
     final static int oneSideBlockLength = imageSize/numOfBlock; // ブロックの一辺の長さ
 
     public static void main(String[] args) throws IOException {
@@ -150,15 +150,16 @@ public class TexGLCM {
 
         //System.out.println("width: "  + read.getWidth());
         read = iu.scaleImage(read, imageSize, imageSize);
-        int[][][][] mat = new int[numOfBlock*numOfBlock][4][maxDensity+1][maxDensity+1];
+        int[][][][] mat = new int[numOfBlock*numOfBlock][4][maxDensity][maxDensity];
 
         BufferedImage[] biarr = di.intoBlock(read);
 
         for(int i=0; i<biarr.length; i++) {
+            mat[i] = calMat2(biarr[i]);
             for(int rad = 0; rad<4; rad++) {
                 System.out.println("\n---------- num:" + i + ", rad:" + rad + ": Mat ----------");
                 //int[][] matArr = calMat(rad, biarr[i]);
-                mat[i][rad] = calMat(rad, biarr[i]);
+                //mat[i][rad] = calMat(rad, biarr[i]);
                 int sum = 0;
                 for (int y = 0; y < mat[i][rad].length; y++) {
                     for (int x = 0; x < mat[i][rad].length; x++) {
@@ -212,16 +213,71 @@ public class TexGLCM {
     }
 
     /**
-     * 33*33の確率を示す濃度共起行列を返却
+     * 濃度共起行列を求める
+     * @param block
+     * @return matArr
+     */
+     public static int[][][] calMat2(BufferedImage block) {
+        int[][][] matArr = new int[4][maxDensity][maxDensity];
+
+        int colorC;
+        int colorP;
+        int w = block.getWidth();
+        int h = block.getHeight();
+
+        for(int i = 0; i < h; i++) {
+            for(int j = 0; j < w; j++) {
+                colorC = iu.r(block.getRGB(j, i));
+                // rad == 0, pi
+                if(j != w-1) {
+                    colorP = iu.r(block.getRGB(j+1, i));
+                    matArr[0][colorC][colorP]++;
+                }
+                if(j != 0) {
+                    colorP = iu.r(block.getRGB(j-1, i));
+                    matArr[0][colorC][colorP]++;
+                }
+                // rad == pi/4, 5*pi/4
+                if(j != w-1 && i != 0) {
+                    colorP = iu.r(block.getRGB(j+1, i-1));
+                    matArr[1][colorC][colorP]++;
+                }
+                if(j != 0 && i != h-1) {
+                    colorP = iu.r(block.getRGB(j-1, i+1));
+                    matArr[1][colorC][colorP]++;
+                }
+                // rad == pi/2, 3*pi/2
+                if(i != 0) {
+                    colorP = iu.r(block.getRGB(j, i-1));
+                    matArr[2][colorC][colorP]++;
+                }
+                if(i != h-1) {
+                    colorP = iu.r(block.getRGB(j, i+1));
+                    matArr[2][colorC][colorP]++;
+                }
+                // rad == 3*pi/4, 7*pi/4
+                if(j != 0 && i != 0) {
+                    colorP = iu.r(block.getRGB(j-1, i-1));
+                    matArr[3][colorC][colorP]++;
+                }
+                if(j != w-1 && i != h-1) {
+                    colorP = iu.r(block.getRGB(j+1, i+1));
+                    matArr[3][colorC][colorP]++;
+                }
+            }
+        }
+        return matArr;
+     }
+
+
+    /**
+     * 33(maxDensity)*33(maxDensityj)の確率を示す濃度共起行列を返却
      * @param rad
      * @param block
      * @return
      */
     public static int[][] calMat(int rad, BufferedImage block) {
-        List<List<Integer>> mat = new ArrayList<>(maxDensity+1);
-        List<Integer> ele = new ArrayList<>(maxDensity+1);
-
-        int[][] matArr = new int[maxDensity+1][maxDensity+1];
+        int[][] matArr = new int[maxDensity][maxDensity];
         //Arrays.fill(matArr, 0);
         int colorC;
         int colorP;
