@@ -33,7 +33,7 @@ public class TexGLCM {
         for(int i=0; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = calGCLM(list[i]);
- //           showFeatureValueImage(calFeature(mat_test), list[i]);
+            showFeatureValueImage(calFeature(mat_test), list[i]);
         }
 
     }
@@ -48,12 +48,22 @@ public class TexGLCM {
 
         for(int i=0; i<numOfBlock*numOfBlock; i++) {
             for(int rad = 0; rad<4; rad++) {
-                double[] sigma = calSigma(mat[i][rad]);
+                // 確率の分母
+                int sum = 0;
+                for (int y = 0; y < mat[i][rad].length; y++) {
+                    for (int x = 0; x < mat[i][rad].length; x++) {
+                        System.out.printf("%3d", mat[i][rad][y][x]);
+                        sum += mat[i][rad][y][x];
+                    }
+                }
+
+                double[] sigma = calSigma(mat[i][rad], sum);
+
                 for(int z = 0; z<4; z++) {
                     feature[i][rad][z] = 0;
                 }
-                for (int y = 0; y < maxDensity + 1; y++) {
-                    for (int x = 0; x < maxDensity + 1; x++) {
+                for (int y = 0; y < maxDensity; y++) {
+                    for (int x = 0; x < maxDensity; x++) {
                         // エネルギー
                         feature[i][rad][0] += mat[i][rad][y][x]*mat[i][rad][y][x];
                         // 慣性、分散、コントラスト
@@ -63,9 +73,12 @@ public class TexGLCM {
                             feature[i][rad][2] += mat[i][rad][y][x] * (Math.log(mat[i][rad][y][x])) / Math.log(2);
                         }
                         // 相関
-                        feature[i][rad][3] += (x*y*mat[i][rad][y][x]-sigma[2]*sigma[3])/(sigma[0]*sigma[1]);
+                        feature[i][rad][3] += x*y*mat[i][rad][y][x];
                     }
                 }
+                // 相関
+                feature[i][rad][3] = (feature[i][rad][3]-sigma[2]*sigma[3])/(sigma[0]*sigma[1]);
+
                 //feature[i][rad][2] = -feature[i][rad][2];
                 System.out.println("num is " + i);
                 System.out.println("エネルギー: " + feature[i][rad][0]);
@@ -80,34 +93,35 @@ public class TexGLCM {
 
     /**
      * 相関に用いるシグマ、ミューを求める
-     * @param mat　あるブロックの1つの濃度共起行列
+     * @param mat, sumMat　あるブロックの1つの濃度共起行列
      * @return σx, σy, μx, μy　の順に入れた配列
      */
-    public static double[] calSigma(int[][] mat) {
+    public static double[] calSigma(int[][] mat, int sumMat) {
         double[] sigmaAndMu = {0,0,0,0};
         double preSigmaX, preSigmaY;
         double preMuX, preMuY;
 
+        // TODO 以下の計算式の修正　
         // μを求める
-        for(int x=0; x<maxDensity+1; x++) {
+        for(int y=0; y<maxDensity; y++) {
             preMuX = 0;
-            for(int y=0; y<maxDensity+1; y++) {
-                preMuX += mat[y][x];
+            for(int x=0; x<maxDensity; x++) {
+                preMuX += mat[x][y];
             }
-            sigmaAndMu[2] += x*preMuX;
+            sigmaAndMu[2] += y*preMuX;
         }
-        for(int y=0; y<maxDensity+1; y++) {
+        for(int y=0; y<maxDensity; y++) {
             preMuY = 0;
-            for(int x=0; x<maxDensity+1; x++) {
+            for(int x=0; x<maxDensity; x++) {
                 preMuY += mat[y][x];
             }
             sigmaAndMu[3]+= y*preMuY;
         }
 
         // σを求める
-        for(int x=0; x<maxDensity+1; x++) {
+        for(int x=0; x<maxDensity; x++) {
             preSigmaX = 0;
-            for (int y = 0; y < maxDensity + 1; y++) {
+            for (int y = 0; y < maxDensity; y++) {
                 preSigmaX += mat[y][x];
                 //System.out.println(mat[y][x]);
             }
@@ -115,18 +129,18 @@ public class TexGLCM {
             //System.out.println( "sigmasndmu"+(x - sigmaAndMu[2]));
             //System.out.println(preSigmaX);
         }
-        sigmaAndMu[0] *= 1/(double)(maxDensity+1);
+        sigmaAndMu[0] *= 1/(double)(maxDensity);
         sigmaAndMu[0] = Math.sqrt(sigmaAndMu[0]);
 
-        for(int y=0; y<maxDensity+1; y++) {
+        for(int y=0; y<maxDensity; y++) {
             preSigmaY = 0;
-            for (int x = 0; x < maxDensity + 1; x++) {
+            for (int x = 0; x < maxDensity; x++) {
                 preSigmaY += mat[y][x];
             }
             sigmaAndMu[1] += (y - sigmaAndMu[3])*(y - sigmaAndMu[3])*preSigmaY;
             //System.out.println( "preSig" + preSigmaY + ", PRESIG-: " + (y-sigmaAndMu[3]) + ", res:" + sigmaAndMu[1]);
         }
-        sigmaAndMu[1] *= 1/(double)(maxDensity+1);
+        sigmaAndMu[1] *= 1/(double)(maxDensity);
         //System.out.print("/con: " + sigmaAndMu[1]);
         sigmaAndMu[1] = Math.sqrt(sigmaAndMu[1]);
         //System.out.println(", result: " + sigmaAndMu[1]);
