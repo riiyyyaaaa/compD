@@ -46,34 +46,37 @@ public class TexGLCM {
     public static double[][][] calFeature(int[][][][] mat) {
         double[][][] feature = new double[100][4][4];
 
+
+
         for(int i=0; i<numOfBlock*numOfBlock; i++) {
+
             for(int rad = 0; rad<4; rad++) {
-                // 確率の分母
-                int sum = 0;
+
+                // 分母
+                double sumMat = 0;
                 for (int y = 0; y < mat[i][rad].length; y++) {
                     for (int x = 0; x < mat[i][rad].length; x++) {
-                        System.out.printf("%3d", mat[i][rad][y][x]);
-                        sum += mat[i][rad][y][x];
+                        sumMat += mat[i][rad][y][x];
                     }
                 }
 
-                double[] sigma = calSigma(mat[i][rad], sum);
-
+                double[] sigma = calSigma(mat[i][rad], sumMat);
                 for(int z = 0; z<4; z++) {
                     feature[i][rad][z] = 0;
                 }
+
                 for (int y = 0; y < maxDensity; y++) {
                     for (int x = 0; x < maxDensity; x++) {
                         // エネルギー
-                        feature[i][rad][0] += mat[i][rad][y][x]*mat[i][rad][y][x];
+                        feature[i][rad][0] += (double)mat[i][rad][y][x]/sumMat*(double)mat[i][rad][y][x]/sumMat;
                         // 慣性、分散、コントラスト
-                        feature[i][rad][1] += (x-y)*(x-y)*mat[i][rad][y][x];
+                        feature[i][rad][1] += (x-y)*(x-y)*(double)mat[i][rad][y][x]/sumMat;
                         // エントロピー
                         if(mat[i][rad][y][x] != 0) {
-                            feature[i][rad][2] += mat[i][rad][y][x] * (Math.log(mat[i][rad][y][x])) / Math.log(2);
+                            feature[i][rad][2] -= (double)mat[i][rad][y][x]/sumMat * (Math.log(mat[i][rad][y][x])) / Math.log(2);
                         }
                         // 相関
-                        feature[i][rad][3] += x*y*mat[i][rad][y][x];
+                        feature[i][rad][3] += x*y*(double)mat[i][rad][y][x]/sumMat;
                     }
                 }
                 // 相関
@@ -93,27 +96,26 @@ public class TexGLCM {
 
     /**
      * 相関に用いるシグマ、ミューを求める
-     * @param mat, sumMat　あるブロックの1つの濃度共起行列
+     * @param mat　あるブロックの1つの濃度共起行列
      * @return σx, σy, μx, μy　の順に入れた配列
      */
-    public static double[] calSigma(int[][] mat, int sumMat) {
+    public static double[] calSigma(int[][] mat, double sumMat) {
         double[] sigmaAndMu = {0,0,0,0};
         double preSigmaX, preSigmaY;
         double preMuX, preMuY;
 
-        // TODO 以下の計算式の修正　
         // μを求める
-        for(int y=0; y<maxDensity; y++) {
+        for(int x=0; x<maxDensity; x++) {
             preMuX = 0;
-            for(int x=0; x<maxDensity; x++) {
-                preMuX += mat[x][y];
+            for(int y=0; y<maxDensity; y++) {
+                preMuX += (double)mat[y][x]/sumMat;
             }
-            sigmaAndMu[2] += y*preMuX;
+            sigmaAndMu[2] += x*preMuX;
         }
         for(int y=0; y<maxDensity; y++) {
             preMuY = 0;
             for(int x=0; x<maxDensity; x++) {
-                preMuY += mat[y][x];
+                preMuY += (double)mat[y][x]/sumMat;
             }
             sigmaAndMu[3]+= y*preMuY;
         }
@@ -122,7 +124,7 @@ public class TexGLCM {
         for(int x=0; x<maxDensity; x++) {
             preSigmaX = 0;
             for (int y = 0; y < maxDensity; y++) {
-                preSigmaX += mat[y][x];
+                preSigmaX += (double)mat[y][x]/sumMat;
                 //System.out.println(mat[y][x]);
             }
             sigmaAndMu[0] += (x - sigmaAndMu[2])*(x - sigmaAndMu[2])*preSigmaX;
@@ -135,7 +137,7 @@ public class TexGLCM {
         for(int y=0; y<maxDensity; y++) {
             preSigmaY = 0;
             for (int x = 0; x < maxDensity; x++) {
-                preSigmaY += mat[y][x];
+                preSigmaY += (double)mat[y][x]/sumMat;
             }
             sigmaAndMu[1] += (y - sigmaAndMu[3])*(y - sigmaAndMu[3])*preSigmaY;
             //System.out.println( "preSig" + preSigmaY + ", PRESIG-: " + (y-sigmaAndMu[3]) + ", res:" + sigmaAndMu[1]);

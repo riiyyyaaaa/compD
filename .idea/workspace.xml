@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="change small things">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/image2.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (1).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (1).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (10).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (10).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (11).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (11).jpg" afterDir="false" />
@@ -35,11 +36,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (7).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (7).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (8).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (8).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (9).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (9).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/resource/compDetection.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/resource/compDetection.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TexGLCM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TexGLCM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/output/image2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resource/compDetection.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resource/compDetection.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -79,8 +77,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="154">
-                  <caret line="104" column="11" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="11" />
+                <state relative-caret-position="252">
+                  <caret line="67" column="17" lean-forward="true" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -258,7 +256,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551960563719" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554358134707" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -502,7 +500,7 @@
       <workItem from="1550652910831" duration="1896000" />
       <workItem from="1551591940133" duration="11888000" />
       <workItem from="1552636731057" duration="1643000" />
-      <workItem from="1553848292498" duration="5406000" />
+      <workItem from="1553848292498" duration="7237000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -546,11 +544,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550137011831</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix TexGLCM.java">
+      <created>1554196725660</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1554196725660</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="252926000" />
+    <option name="totallyTimeSpent" value="254757000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -638,7 +643,8 @@
     <MESSAGE value="add method of showFeatureValueImage()" />
     <MESSAGE value="fix main()" />
     <MESSAGE value="change small things" />
-    <option name="LAST_COMMIT_MESSAGE" value="change small things" />
+    <MESSAGE value="fix TexGLCM.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix TexGLCM.java" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/blockImageMono.jpg" />
@@ -797,8 +803,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="104" column="11" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="11" />
+        <state relative-caret-position="252">
+          <caret line="67" column="17" lean-forward="true" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
