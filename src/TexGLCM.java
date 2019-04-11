@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -591,6 +592,7 @@ public class TexGLCM {
      */
     public static void showFeatureValueImage(double[][][] featureMat, File file) throws IOException {
         int scale = 8;
+        int fontSize = 30;
         String cd = new File(".").getAbsoluteFile().getParent();
         String fileName = file.getName();
         File outputFile = new File(cd + "\\src\\output\\result" + fileName);
@@ -603,19 +605,22 @@ public class TexGLCM {
         //read = convertConc(read);
         BufferedImage[] biarr = di.intoBlock(read);
         int biarrLength = biarr.length;
+        BigDecimal feature;
 
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0,0, output.getWidth(), output.getHeight());
         graphics.setColor(Color.BLACK);
         graphics.drawImage(read, imageSize*scale, imageSize, null);
+        graphics.setFont(new Font("", Font.PLAIN, fontSize));
         for(int i=0; i<biarrLength; i++) {
             // 画像のブロックを並べる
             graphics.drawImage(biarr[i], (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength, null);
             // ブロックの特徴量を並べる
-            graphics.drawString("エネルギー、慣性、エントロピー、相関", 50, 10);
+            graphics.drawString("エネルギー、慣性、エントロピー、相関", (numOfBlock)*scale*oneSideBlockLength + 5, 50);
             for(int rad=0; rad<4; rad++) {
                 for(int j=0; j<featureMat[i][rad].length; j++) {
-                    graphics.drawString(String.valueOf(round(featureMat[i][rad][j])), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*50 + j*10 + 20);
+                    feature = new BigDecimal(String.valueOf(featureMat[i][rad][j]));
+                    graphics.drawString(String.valueOf(feature.setScale(4, BigDecimal.ROUND_DOWN)), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*(fontSize*5) + j*fontSize + 20);
                 }
             }
         }
