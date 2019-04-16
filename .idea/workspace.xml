@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="change">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="change small things">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (1).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (1).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (10).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (10).jpg" afterDir="false" />
@@ -36,10 +35,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (7).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (7).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (8).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (8).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (9).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/resultimg (9).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/resource/compDetection.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/resource/compDetection.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/texGLCM.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TexGLCM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TexGLCM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resource/compDetection.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resource/compDetection.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,7 +55,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/PropertyUtil.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="182">
+                <state relative-caret-position="126">
                   <caret line="13" column="69" selection-start-line="13" selection-start-column="69" selection-end-line="13" selection-end-column="69" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -70,8 +67,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/IntegrateBlock.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+                <state relative-caret-position="70">
+                  <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
@@ -79,29 +76,11 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="377">
-                  <caret line="622" column="240" selection-start-line="622" selection-start-column="240" selection-end-line="622" selection-end-column="240" />
+                <state relative-caret-position="410">
+                  <caret line="626" column="28" lean-forward="true" selection-start-line="626" selection-start-column="28" selection-end-line="626" selection-end-column="28" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/math/BigDecimal.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="224">
-                  <caret line="493" selection-start-line="493" selection-end-line="493" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/resource/compDetection.properties">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="70">
-                  <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
                 </state>
               </provider>
             </entry>
@@ -127,19 +106,23 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/output/resultimg (15).jpg">
-              <provider selected="true" editor-type-id="images" />
-            </entry>
-          </file>
         </leaf>
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/resource/compDetection.properties">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="70">
+                  <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/DividImage.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="196">
+                <state relative-caret-position="1512">
                   <caret line="116" column="24" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
                 </state>
               </provider>
@@ -226,6 +209,12 @@
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
   <component name="MavenProjectNavigator">
     <treeState>
       <expand />
@@ -233,9 +222,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-13" />
+    <option name="x" value="726" />
     <option name="width" value="1200" />
-    <option name="height" value="1100" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -243,7 +232,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,23 +244,18 @@
               <item name="compD" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="compD" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compD" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="resource" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554384814413" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554972360153" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -282,17 +265,18 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\riya\Documents\compD" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\matsuda\Documents\compD\src\input" />
       <recent name="C:\Users\riya\Documents\compD\src\output" />
+      <recent name="C:\Users\riya\Documents\compD\src" />
+      <recent name="C:\Users\riya\Documents\untitled\src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\riya\Documents\compD" />
       <recent name="C:\Users\riya\Documents\compD\src\output" />
-      <recent name="C:\Users\riya\Documents\compD\src" />
-      <recent name="C:\Users\riya\Documents\untitled\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -371,9 +355,8 @@
         <option name="DOMAIN" value="false" />
         <option name="SERVER_GROUP" />
         <option name="USERNAME" value="" />
-        <option name="PASSWORD" value="" />
       </server-settings>
-      <predefined_log_file enabled="true" id="JBoss" />
+      <predefined_log_file id="JBoss" enabled="true" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="63851" />
       </RunnerSettings>
@@ -432,7 +415,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG">
+    <configuration default="true" type="TestNG" factoryName="TestNG">
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <properties />
       <listeners />
@@ -520,6 +503,8 @@
       <workItem from="1554536838863" duration="2124000" />
       <workItem from="1554798767505" duration="3799000" />
       <workItem from="1554902573458" duration="3245000" />
+      <workItem from="1554964959011" duration="2943000" />
+      <workItem from="1555120207919" duration="1452000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -574,7 +559,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="264131000" />
+    <option name="totallyTimeSpent" value="268530000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -586,10 +571,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-13" y="0" width="1200" height="1100" extended-state="0" />
+    <frame x="726" y="0" width="1200" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77873564" visible="true" weight="0.10964912" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77873564" visible="true" weight="0.12719299" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -598,7 +583,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.22126436" side_tool="true" weight="0.21545894" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49884528" visible="true" weight="0.32746956" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4937063" visible="true" weight="0.2967942" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4937063" visible="true" weight="0.29901424" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -655,6 +640,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change method of Matrix's calculation" />
@@ -751,19 +739,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/resultimg (4).jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/resultimg (4).jpg" />
     <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/resultimg (1).jpg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/src/output/resultimg (1).jpg" />
+    <entry file="file://$PROJECT_DIR$/src/output/resultimg (15).jpg" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/math/BigDecimal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="493" selection-start-line="493" selection-end-line="493" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PropertyUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="13" column="69" selection-start-line="13" selection-start-column="69" selection-end-line="13" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IntegrateBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        <state relative-caret-position="70">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -784,12 +786,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/resultimg (15).jpg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/src/resource/compDetection.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DividImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
+        <state relative-caret-position="1512">
           <caret line="116" column="24" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
         </state>
       </provider>
@@ -804,34 +810,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PropertyUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="13" column="69" selection-start-line="13" selection-start-column="69" selection-end-line="13" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resource/compDetection.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/math/BigDecimal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="493" selection-start-line="493" selection-end-line="493" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TexGLCM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="622" column="240" selection-start-line="622" selection-start-column="240" selection-end-line="622" selection-end-column="240" />
+        <state relative-caret-position="410">
+          <caret line="626" column="28" lean-forward="true" selection-start-line="626" selection-start-column="28" selection-end-line="626" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

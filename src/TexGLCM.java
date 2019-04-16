@@ -619,8 +619,12 @@ public class TexGLCM {
             graphics.drawString("エネルギー、慣性、エントロピー、相関", (numOfBlock)*scale*oneSideBlockLength + 5, 50);
             for(int rad=0; rad<4; rad++) {
                 for(int j=0; j<featureMat[i][rad].length; j++) {
-                    feature = new BigDecimal(String.valueOf(featureMat[i][rad][j]));
-                    graphics.drawString(String.valueOf(feature.setScale(4, BigDecimal.ROUND_DOWN)), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*(fontSize*5) + j*fontSize + 20);
+                    System.out.println(featureMat[i][rad][j]);
+                    //feature = new BigDecimal(String.valueOf(featureMat[i][rad][j]));
+                    //graphics.drawString(String.valueOf(feature.setScale(4, BigDecimal.ROUND_DOWN)), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*(fontSize*5) + j*fontSize + 20);
+                    graphics.drawString(String.valueOf(featureMat[i][rad][j]),
+                            (i%numOfBlock)*scale*oneSideBlockLength,
+                            (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*(fontSize*5) + j*fontSize + 20);
                 }
             }
         }
