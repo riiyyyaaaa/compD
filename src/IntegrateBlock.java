@@ -16,7 +16,7 @@ public class IntegrateBlock {
         String cd = new File(".").getAbsoluteFile().getParent();
         File dir = new File(cd + "\\src\\input\\");
 
-        File[] list = dir.listFiles();
+        File[] list = dir.listFiles();git
         for(int i=0; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);

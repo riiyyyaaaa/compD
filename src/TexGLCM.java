@@ -2,12 +2,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.List;
 import javax.imageio.ImageIO;
 
-import static java.lang.Math.round;
+
 
 
 /**
@@ -605,7 +604,6 @@ public class TexGLCM {
         //read = convertConc(read);
         BufferedImage[] biarr = di.intoBlock(read);
         int biarrLength = biarr.length;
-        BigDecimal feature;
 
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0,0, output.getWidth(), output.getHeight());
