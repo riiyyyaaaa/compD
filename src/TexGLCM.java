@@ -33,7 +33,7 @@ public class TexGLCM {
         File[] list = dir.listFiles();
         for(int i=0; i<list.length; i++) {
             System.out.println(list[i]);
-            int[][][][] mat_test = calGCLM(list[i]);
+            int[][][][] mat_test = calGLCM(list[i]);
             showFeatureValueImage(calFeature(mat_test), list[i]);
         }
 
@@ -74,7 +74,7 @@ public class TexGLCM {
                         feature[i][rad][1] += (x-y)*(x-y)*(double)mat[i][rad][y][x]/sumMat;
                         // エントロピー
                         if(mat[i][rad][y][x] != 0) {
-                            feature[i][rad][2] -= (double)mat[i][rad][y][x]/sumMat * (Math.log(mat[i][rad][y][x])) / Math.log(2);
+                            feature[i][rad][2] += (double)mat[i][rad][y][x]/sumMat * (Math.log(mat[i][rad][y][x])) / Math.log(2);
                         }
                         // 相関
                         feature[i][rad][3] += x*y*(double)mat[i][rad][y][x]/sumMat;
@@ -159,7 +159,7 @@ public class TexGLCM {
      * @return 全ブロック、全角度の濃度共起行列　nullは入らない
      * @throws IOException
      */
-    public static int[][][][] calGCLM(File file) throws IOException {
+    public static int[][][][] calGLCM(File file) throws IOException {
 
         file = iu.Mono(file);
         BufferedImage read = ImageIO.read(file);
@@ -616,11 +616,15 @@ public class TexGLCM {
             // 画像のブロックを並べる
             graphics.drawImage(biarr[i], (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength, null);
             // ブロックの特徴量を並べる
-            graphics.drawString("エネルギー、慣性、エントロピー、相関", (numOfBlock)*scale*oneSideBlockLength + 5, 50);
+            graphics.drawString("エネルギー、慣性、エントロピー、相関", (numOfBlock)*scale*oneSideBlockLength, 50);
             for(int rad=0; rad<4; rad++) {
                 for(int j=0; j<featureMat[i][rad].length; j++) {
-                    feature = new BigDecimal(String.valueOf(featureMat[i][rad][j]));
-                    graphics.drawString(String.valueOf(feature.setScale(4, BigDecimal.ROUND_DOWN)), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*(fontSize*5) + j*fontSize + 20);
+                    System.out.println(featureMat[i][rad][j]);
+                    //feature = new BigDecimal(String.valueOf(featureMat[i][rad][j]));
+                    //graphics.drawString(String.valueOf(feature.setScale(4, BigDecimal.ROUND_DOWN)), (i%numOfBlock)*scale*oneSideBlockLength, (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*(fontSize*5) + j*fontSize + 20);
+                    graphics.drawString(String.valueOf(featureMat[i][rad][j]),
+                            (i%numOfBlock)*scale*oneSideBlockLength,
+                            (i/numOfBlock)*scale*oneSideBlockLength + oneSideBlockLength + rad*(fontSize*5) + j*fontSize + 20);
                 }
             }
         }
