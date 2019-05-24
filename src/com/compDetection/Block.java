@@ -1,3 +1,7 @@
+package com.compDetection;
+
+import com.compDetection.PropertyUtil;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

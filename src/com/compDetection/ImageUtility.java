@@ -1,3 +1,5 @@
+package com.compDetection;
+
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -69,7 +71,7 @@ public class ImageUtility {
         BufferedImage readImage = ImageIO.read(file);
         int w = readImage.getWidth(), h = readImage.getHeight();
         BufferedImage writeImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-        // ImageUtility iu = new ImageUtility();
+        ImageUtility iu = new ImageUtility();
 
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {

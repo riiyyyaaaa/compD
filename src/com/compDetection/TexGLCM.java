@@ -1,3 +1,6 @@
+package com.compDetection;
+
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,7 +48,6 @@ public class TexGLCM {
      */
     public static double[][][] calFeature(int[][][][] mat) {
         double[][][] feature = new double[100][4][4];
-
 
 
         for(int i=0; i<numOfBlock*numOfBlock; i++) {

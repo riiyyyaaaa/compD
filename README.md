@@ -4,7 +4,7 @@
 テクスチャ特徴によって構図を把握する
 
 ## 実行方法
-compD/src/TexGLCM.java を実行
+compD/src/com.compDetection/TexGLCM.java を実行
 
 ## 値の設定
 compD/src/resource/compDetection.properties でパラメーターを変更
