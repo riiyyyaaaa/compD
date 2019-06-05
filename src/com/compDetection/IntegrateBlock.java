@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
  */
 public class IntegrateBlock {
     static PropertyUtil propertyUtil;
+    static IntegrateBlock iB = new IntegrateBlock();
 
     String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
     int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
@@ -45,8 +46,8 @@ public class IntegrateBlock {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
 
-            IntegrateBlock iB = new IntegrateBlock();
             iB.calDistanceMat(TexGLCM.calFeature(mat_test));
+
 
         }
 
@@ -57,7 +58,7 @@ public class IntegrateBlock {
      * @param featureMat
      * @return
      */
-    public List<List<Double>> calDistanceMat(double[][][] featureMat) {
+    public List<List<List<Double>>> calDistanceMat(double[][][] featureMat) {
         // 使用する特徴の番号をcompDetection.propertiesから持ってくる
         int[] fNum = new int[featureNumStr.length];
         for(int i=0; i<featureNumStr.length; i++) {
@@ -66,21 +67,38 @@ public class IntegrateBlock {
 
         int fNumLen = featureMat.length;
 
-        List<List<Double>> datas = new ArrayList<>();
+        List<List<Double>> data = convFeatData2CalData(featureMat, fNum);
+        List<List<List<Double>>> disMat = new ArrayList<>();
 
-        for(int i=0; i<fNumLen; i++) {
-            List<Double> data = convFeatData2CalData(featureMat[i], fNum);
-            datas.add(data);
+        for(int i=0; i<numOfBlock+numOfBlock; i++) {
+            List<List<Double>> horizon = new ArrayList<>();
+            for(int j=0; j<numOfBlock*numOfBlock; j++) {
+                if(i<j) {
+                    List<List<Double>> material = new ArrayList<>();
+                    material.add(data.get(i));
+                    material.add(data.get(j));
+                    horizon.add(j, calAve(material));
+                } else {
+                    // TODO 合ってるか要チェック
+                    horizon.add(j, disMat.get(j).get(i));
+                }
+            }
+            disMat.add(horizon);
         }
-
-        //double[][] disMat = {};
-        List<List<Double>> disMat = new ArrayList<>();
 
 
 
         return disMat;
     }
 
+
+    /**
+     * Add value of 1 to group(List)
+     * Show progress of Clustering
+     * @param c1
+     * @param c2
+     * @return
+     */
     public List<List<Integer>> refIntegration(int c1, int c2) {
         this.group.get(c1).add(c2, 1);
         this.group.get(c2).add(c1, 1);
@@ -90,40 +108,46 @@ public class IntegrateBlock {
 
     /**
      * Convert featureMat to calculatingMat
+     * four rad including features integrate to one line
      * @param featureData
      * @param featureNum
      * @return
      */
-    public List<Double> convFeatData2CalData(double[][] featureData, int[] featureNum) {
+    public List<List<Double>> convFeatData2CalData(double[][][] featureData, int[] featureNum) {
         int fLen = featureNum.length;
+        int dataNum = numOfBlock*numOfBlock;
+        List<List<Double>> calDatas = new ArrayList<>();
 
-        List<Double> calData = new ArrayList<>();
-        for(int i=0; i<4; i++) {
-            for(int j=0; j<fLen; j++) {
-                calData.add(featureData[i][featureNum[j]]);
+        for(int num = 0; num<dataNum; num++) {
+            List<Double> calData = new ArrayList<>();
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < fLen; j++) {
+                    calData.add(featureData[num][i][featureNum[j]]);
+                }
             }
+            calDatas.add(calData);
         }
-        return calData;
+        return calDatas;
     }
 
 
     /**
      * Calculate center of average in N dimension.
+     * これを使うこと!!!!!!
      * @param data
      * @return ave
      */
-    public double[] calAve(double[][] data) { ;
-        int colum = data.length;
-        int line = data[0].length;
-        double[] ave = new double[line];
-
-        Arrays.fill(ave, 0);
+    public List<Double> calAve(List<List<Double>> data) { ;
+        int column = data.size();
+        int line = data.get(0).size();
+        List<Double> ave = new ArrayList<>(line);
+        Collections.addAll(ave, 0.0);
 
         for(int i=0; i<line; i++) {
-            for(int j=0; j<colum; j++) {
-                ave[i] += data[i][j];
+            for(int j=0; j<column; j++) {
+                ave.add(i,ave.get(i) + data.get(j).get(i));
             }
-            ave[i] /= line;
+            ave.add(i, ave.get(i)/column);
         }
 
         return ave;
