@@ -85,11 +85,11 @@ public class TexGLCM {
                 feature[i][rad][3] = (feature[i][rad][3]-sigma[2]*sigma[3])/(sigma[0]*sigma[1]);
 
                 //feature[i][rad][2] = -feature[i][rad][2];
-                System.out.println("num is " + i);
-                System.out.println("エネルギー: " + feature[i][rad][0]);
-                System.out.println("慣性: " + feature[i][rad][1]);
-                System.out.println("エントロピー: " + feature[i][rad][2]);
-                System.out.println("相関: " + feature[i][rad][3]);
+//                System.out.println("num is " + i);
+//                System.out.println("エネルギー: " + feature[i][rad][0]);
+//                System.out.println("慣性: " + feature[i][rad][1]);
+//                System.out.println("エントロピー: " + feature[i][rad][2]);
+//                System.out.println("相関: " + feature[i][rad][3]);
             }
         }
 
