@@ -19,6 +19,7 @@ public class IntegrateBlock {
     String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
     int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
     List<List<Integer>> group;
+    List<List<Double>> process; // 25回分の統合したクラスと距離
 
 
 //    /**
@@ -46,7 +47,7 @@ public class IntegrateBlock {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
 
-            iB.calDistanceMat(TexGLCM.calFeature(mat_test));
+            iB.calFirstDistanceMat(TexGLCM.calFeature(mat_test));
 
 
         }
@@ -58,7 +59,7 @@ public class IntegrateBlock {
      * @param featureMat
      * @return
      */
-    public List<List<Double>> calDistanceMat(double[][][] featureMat) {
+    public List<List<Double>> calFirstDistanceMat(double[][][] featureMat) {
         // 使用する特徴の番号をcompDetection.propertiesから持ってくる
         int[] fNum = new int[featureNumStr.length];
         for(int i=0; i<featureNumStr.length; i++) {
@@ -70,27 +71,27 @@ public class IntegrateBlock {
         List<List<Double>> data = convFeatData2CalData(featureMat, fNum);
         List<List<Double>> disMat = new ArrayList<>();
 
+        // TODO テスト用データ
         List<Double> testData1 = Arrays.asList(5.0, 4.0, 0.0, 1.0, 2.0, 8.0, 10.0, 1.0);
         List<Double> testData2 = Arrays.asList(1.0, 2.0, 5.0, 4.0, 9.0, 10.0, 8.0, 3.0);
+        List<Double> tsstDatg2 = Arrays.asList(3.0, 4.0, 1.0, 2.0, 8.0, 9.0, 8.0, 1.0);
+        List<Double> testData3 = Arrays.asList(3.0, 3.0, 0.0, 4.0, 9.0, 8.0, 9.0, 2.0);
 
-        for(int i=0; i<1; i++) {
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
             List<Double> horizon = new ArrayList<>();
-            for(int j=0; j<2; j++) {
+            for(int j=0; j<numOfBlock*numOfBlock; j++) {
                 if(i<j) {
-                    System.out.println("< i:" + i + ", j:" + j);
 
                     List<List<Double>> material = new ArrayList<>();
-//                    material.add(data.get(i));
-//                    material.add(data.get(j));
-                    material.add(testData1);
-                    material.add(testData2);
-                    System.out.println(calAve(material));
+                    material.add(data.get(i));
+                    material.add(data.get(j));
+//                    material.add(testData1);
+//                    material.add(testData2);
+                    //System.out.println(calAve(material));
                     horizon.add(j, calDis(material, calAve(material)));
-                    System.out.println(calDis(material, calAve(material)));
+                    //System.out.println(calDis(material, calAve(material)));
 
-                    System.out.println("si: " + calAve(material).size());
                 } else if(i>j) {
-                    System.out.println("> i:" + i + ", j:" + j);
                     // TODO 合ってるか要チェック
                     horizon.add(j, disMat.get(j).get(i));
                 } else {
@@ -99,13 +100,91 @@ public class IntegrateBlock {
             }
 
             disMat.add(horizon);
-            System.out.println(horizon);
+            //System.out.println(horizon);
         }
 
-        System.out.println("column: " + disMat.size() + ", line: " + disMat.get(0).size() + ", data size: " + disMat.get(0).size());
+        //System.out.println("column: " + disMat.size() + ", line: " + disMat.get(0).size() + ", data size: " + disMat.get(0).size());
+
+        for(int i=0; i<disMat.size(); i++) {
+            for(int j=0; j<disMat.get(i).size(); j++) {
+                System.out.print(disMat.get(i).get(j) + " ");
+            }
+            System.out.println();
+        }
+
+        calMinClass(disMat);
 
         return disMat;
     }
+
+    public void calDistanceMatRepeat(double[][][] featureMat) {
+        // 使用する特徴の番号をcompDetection.propertiesから持ってくる
+        int[] fNum = new int[featureNumStr.length];
+        for(int i=0; i<featureNumStr.length; i++) {
+            fNum[i] = Integer.valueOf(featureNumStr[i]);
+        }
+
+        int fNumLen = featureMat.length;
+
+        List<List<Double>> data = convFeatData2CalData(featureMat, fNum);
+        List<List<Double>> disMat = new ArrayList<>();
+
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+            List<Double> horizon = new ArrayList<>();
+            for(int j=0; j<numOfBlock*numOfBlock; j++) {
+                if(i<j) {
+                    if (group.get(i).get(j) == 0) {
+                        List<List<Double>> material = new ArrayList<>();
+                        material = makeData4Ave(i, j, data);
+                        horizon.add(j, calDis(material, calAve(material)));
+                    } else {
+                        horizon.add(j, 0.0);
+                    }
+                } else if(i>j) {
+                    horizon.add(j, disMat.get(j).get(i));
+                } else {
+                    horizon.add(j, 0.0);
+                }
+
+            }
+            disMat.add(horizon);
+        }
+        calMinClass(disMat);
+        for(int i=0; i<disMat.size(); i++) {
+            for(int j=0; j<disMat.get(i).size(); j++) {
+                System.out.print(disMat.get(i).get(j) + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * Calculate minimum value of distance between classes
+     *
+     * @param disMat
+     * @return
+     */
+    public List<Integer> calMinClass(List<List<Double>> disMat) {
+        int matLen = disMat.size();
+        double min = disMat.get(0).get(1);
+        List<Integer> classes = new ArrayList<>();
+
+        for(int i=0; i<matLen; i++) {
+            for(int j=i+1; j<matLen; j++) {
+                if(min>disMat.get(i).get(j)){
+                    min = disMat.get(i).get(j);
+                    classes = Arrays.asList(i, j);
+                }
+            }
+        }
+        refIntegration(classes.get(0), classes.get(1));
+        List processData = Arrays.asList((double)classes.get(0), (double)classes.get(1), min);
+        process.add(processData);
+        //System.out.println(classes);
+        return classes;
+    }
+
+
 
 /**
  *
@@ -152,6 +231,19 @@ public class IntegrateBlock {
         return calDatas;
     }
 
+    public List<List<Double>> makeData4Ave(int class1, int class2, List<List<Double>> data) {
+        List<List<Double>> material = new ArrayList<>();
+        material.add(data.get(class1));
+        material.add(data.get(class2));
+
+        for(int i=1; i<numOfBlock; i++) {
+            if(group.get(class1).get(i) == 1 || group.get(class2).get(i) == 1) {
+                material.add(data.get(i));
+            }
+        }
+
+        return material;
+    }
 
     /**
      * Calculate center of average in N dimension.
@@ -164,18 +256,16 @@ public class IntegrateBlock {
         int dimension = data.get(0).size();
         List<Double> ave = new ArrayList<>();
 
-        System.out.println("line: " + dimension);
         for(int i=0; i<dimension; i++) {
             double sum = 0;
-            for(int j=0; j<numOfData; j++) {
+            for (int j = 0; j < numOfData; j++) {
                 sum += data.get(j).get(i);
                 //ave.add(i, sum);
             }
-            double valueAve = sum/numOfData;
+            double valueAve = sum / numOfData;
             ave.add(i, valueAve);
 
         }
-        System.out.println("line:: " + ave.size());
 
         return ave;
     }
