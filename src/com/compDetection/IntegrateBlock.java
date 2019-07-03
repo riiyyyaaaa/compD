@@ -61,7 +61,7 @@ public class IntegrateBlock {
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
 
             iB.calFirstDistanceMat(featureMat);
-            for(int j=0; j<299; j++) {
+            for(int j=0; j<25; j++) {
                 System.out.println("count: " + j);
                 iB.calDistanceMatRepeat(featureMat);
             }
@@ -169,8 +169,8 @@ public class IntegrateBlock {
                         material.addAll(material1);
                         material.addAll(material2);
                         distance = calDis(material, calAve(material)) - calDis(material1, calAve(material1)) - calDis(material2, calAve(material2));
-                        System.out.println("i: "+ i + ", j: " + j);
-                        System.out.println("resultDis: " + distance + ", allDis: " + calDis(material, calAve(material)) + ", 1Dis: " + calDis(material1, calAve(material1)) + ", 2Dis: " + calDis(material2, calAve(material2)));
+                        //System.out.println("i: "+ i + ", j: " + j);
+                        //System.out.println("resultDis: " + distance + ", allDis: " + calDis(material, calAve(material)) + ", 1Dis: " + calDis(material1, calAve(material1)) + ", 2Dis: " + calDis(material2, calAve(material2)));
                         horizon.add(j, distance);
                     } else {
                         horizon.add(j, distance);
@@ -245,9 +245,27 @@ public class IntegrateBlock {
      */
     public List<List<Integer>> refIntegration(int c1, int c2) {
         System.out.println("class1: " + c1 + ", class2: " + c2);
-        System.out.println(this.group.get(c1));
+        //System.out.println(this.group.get(c1));
+
         this.group.get(c1).set(c2, 1);
         this.group.get(c2).set(c1, 1);
+
+        System.out.println(this.group.get(c1));
+        System.out.println(this.group.get(c2));
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+
+            if(this.group.get(c1).get(i) == 1 && i != c2) {
+                System.out.println("i1: " + i);
+
+                this.group.get(c2).set(i, 1);
+            } else if(this.group.get(c2).get(i) == 1 && i != c1) {
+                System.out.println("i2: " + i);
+                this.group.get(c1).set(i, 1);
+            }
+        }
+        System.out.println();
+        System.out.println(this.group.get(c1));
+        System.out.println(this.group.get(c2));
 
         return group;
     }
