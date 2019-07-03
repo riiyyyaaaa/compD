@@ -18,9 +18,21 @@ public class IntegrateBlock {
 
     String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
     int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
-    List<List<Integer>> group;
-    List<List<Double>> process; // 25回分の統合したクラスと距離
+    List<List<Integer>> group = new ArrayList<>();
+    List<List<Double>> process = new ArrayList<>(); // 25回分の統合したクラスと距離
 
+    public IntegrateBlock() {
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+            List list = new ArrayList();
+            for(int j=0; j<numOfBlock*numOfBlock; j++) {
+                list.add(0);
+            }
+            //Collections.addAll(list, 0);
+            group.add(list);
+            //System.out.println(group);
+        }
+
+    }
 
 //    /**
 //     * ブロックの番号と列のインデックス番号が対応
@@ -46,9 +58,21 @@ public class IntegrateBlock {
         for(int i=0; i<1; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
+            double[][][] featureMat = TexGLCM.calFeature((mat_test));
 
-            iB.calFirstDistanceMat(TexGLCM.calFeature(mat_test));
+            iB.calFirstDistanceMat(featureMat);
+            for(int j=0; j<299; j++) {
+                System.out.println("count: " + j);
+                iB.calDistanceMatRepeat(featureMat);
+            }
 
+            for(int j=0; j<25; j++) {
+                System.out.println(iB.group.get(j));
+            }
+            System.out.println();
+            for(int j=0; j<25; j++) {
+                System.out.println(iB.process.get(j));
+            }
 
         }
 
@@ -133,15 +157,30 @@ public class IntegrateBlock {
             List<Double> horizon = new ArrayList<>();
             for(int j=0; j<numOfBlock*numOfBlock; j++) {
                 if(i<j) {
-                    if (group.get(i).get(j) == 0) {
+                    double distance = 0.0;
+                    if (group.get(i).get(j) != 1 ) {
                         List<List<Double>> material = new ArrayList<>();
-                        material = makeData4Ave(i, j, data);
-                        horizon.add(j, calDis(material, calAve(material)));
+                        List<List<Double>> material1 = new ArrayList<>();
+                        List<List<Double>> material2 = new ArrayList<>();
+
+                        //material = makeData4Ave(i, j, data);
+                        material1 = makeDataForAve(i, data);
+                        material2 = makeDataForAve(j, data);
+                        material.addAll(material1);
+                        material.addAll(material2);
+                        distance = calDis(material, calAve(material)) - calDis(material1, calAve(material1)) - calDis(material2, calAve(material2));
+                        System.out.println("i: "+ i + ", j: " + j);
+                        System.out.println("resultDis: " + distance + ", allDis: " + calDis(material, calAve(material)) + ", 1Dis: " + calDis(material1, calAve(material1)) + ", 2Dis: " + calDis(material2, calAve(material2)));
+                        horizon.add(j, distance);
+                    } else {
+                        horizon.add(j, distance);
+                    }
+                } else if(i>j) {
+                    if(group.get(i).get(j) != 1) {
+                        horizon.add(j, disMat.get(j).get(i));
                     } else {
                         horizon.add(j, 0.0);
                     }
-                } else if(i>j) {
-                    horizon.add(j, disMat.get(j).get(i));
                 } else {
                     horizon.add(j, 0.0);
                 }
@@ -152,7 +191,8 @@ public class IntegrateBlock {
         calMinClass(disMat);
         for(int i=0; i<disMat.size(); i++) {
             for(int j=0; j<disMat.get(i).size(); j++) {
-                System.out.print(disMat.get(i).get(j) + " ");
+                System.out.printf("%6.1f ", disMat.get(i).get(j));
+                //System.out.print(disMat.get(i).get(j) + " ");
             }
             System.out.println();
         }
@@ -166,21 +206,24 @@ public class IntegrateBlock {
      */
     public List<Integer> calMinClass(List<List<Double>> disMat) {
         int matLen = disMat.size();
-        double min = disMat.get(0).get(1);
+        double min = 1000;
         List<Integer> classes = new ArrayList<>();
 
         for(int i=0; i<matLen; i++) {
             for(int j=i+1; j<matLen; j++) {
-                if(min>disMat.get(i).get(j)){
+                if(min>disMat.get(i).get(j) && disMat.get(i).get(j) != 0){
                     min = disMat.get(i).get(j);
                     classes = Arrays.asList(i, j);
                 }
             }
         }
+
+        System.out.println(classes);
         refIntegration(classes.get(0), classes.get(1));
         List processData = Arrays.asList((double)classes.get(0), (double)classes.get(1), min);
-        process.add(processData);
-        //System.out.println(classes);
+        System.out.println(processData);
+        this.process.add(processData);
+
         return classes;
     }
 
@@ -201,8 +244,10 @@ public class IntegrateBlock {
      * @return
      */
     public List<List<Integer>> refIntegration(int c1, int c2) {
-        this.group.get(c1).add(c2, 1);
-        this.group.get(c2).add(c1, 1);
+        System.out.println("class1: " + c1 + ", class2: " + c2);
+        System.out.println(this.group.get(c1));
+        this.group.get(c1).set(c2, 1);
+        this.group.get(c2).set(c1, 1);
 
         return group;
     }
@@ -236,12 +281,24 @@ public class IntegrateBlock {
         material.add(data.get(class1));
         material.add(data.get(class2));
 
-        for(int i=1; i<numOfBlock; i++) {
+        for(int i=1; i<numOfBlock*numOfBlock; i++) {
             if(group.get(class1).get(i) == 1 || group.get(class2).get(i) == 1) {
                 material.add(data.get(i));
             }
         }
 
+        return material;
+    }
+
+    public List<List<Double>> makeDataForAve(int classNum, List<List<Double>> rowData) {
+        List<List<Double>> material = new ArrayList<>();
+        material.add(rowData.get(classNum));
+
+        for(int i=1; i<numOfBlock*numOfBlock; i++) {
+            if(group.get(classNum).get(i) == 1) {
+                material.add(rowData.get(i));
+            }
+        }
         return material;
     }
 
@@ -255,7 +312,6 @@ public class IntegrateBlock {
         int numOfData = data.size();
         int dimension = data.get(0).size();
         List<Double> ave = new ArrayList<>();
-
         for(int i=0; i<dimension; i++) {
             double sum = 0;
             for (int j = 0; j < numOfData; j++) {

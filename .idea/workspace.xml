@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="add calDistanceMat">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/IntegrateBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/IntegrateBlock.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -35,8 +33,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="541">
-                  <caret line="157" column="9" selection-start-line="157" selection-start-column="9" selection-end-line="157" selection-end-column="9" />
+                <state relative-caret-position="153">
+                  <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
                 </state>
               </provider>
             </entry>
@@ -60,8 +58,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/Block.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="714">
-                  <caret line="48" selection-start-line="48" selection-end-line="48" />
+                <state relative-caret-position="195">
+                  <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -69,8 +67,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="107" selection-start-line="107" selection-end-line="112" selection-end-column="9" />
+                <state relative-caret-position="4080">
+                  <caret line="246" column="15" selection-start-line="246" selection-start-column="8" selection-end-line="246" selection-end-column="15" />
                 </state>
               </provider>
             </entry>
@@ -87,8 +85,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="327">
-                  <caret line="183" column="24" selection-start-line="183" selection-start-column="24" selection-end-line="183" selection-end-column="24" />
+                <state relative-caret-position="2856">
+                  <caret line="183" column="44" selection-start-line="183" selection-start-column="43" selection-end-line="183" selection-end-column="44" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -109,12 +107,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>divid</find>
-      <find>dl</find>
-      <find>intoblock</find>
-      <find>10</find>
-      <find>concNum</find>
-      <find>imagesize</find>
       <find>file</find>
       <find>img</find>
       <find>write</find>
@@ -139,6 +131,12 @@
       <find>line</find>
       <find>System</find>
       <find>calDis</find>
+      <find>fill</find>
+      <find>add</find>
+      <find>make</find>
+      <find>calMin</find>
+      <find>System.</find>
+      <find>%</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,8 +175,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="1326" />
+    <option name="x" value="-11" />
+    <option name="width" value="1672" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -233,7 +231,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561971795123" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562173284965" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../study" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -503,7 +501,7 @@
       <workItem from="1561051983556" duration="1141000" />
       <workItem from="1561360331921" duration="14165000" />
       <workItem from="1561791694448" duration="1807000" />
-      <workItem from="1561904707294" duration="6738000" />
+      <workItem from="1561904707294" duration="24966000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -579,7 +577,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="352135000" />
+    <option name="totallyTimeSpent" value="370363000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -591,10 +589,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1326" height="1057" extended-state="0" />
-    <editor active="true" />
+    <frame x="-11" y="0" width="1672" height="1057" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77873564" visible="true" weight="0.14770932" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77873564" visible="true" weight="0.053970225" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -603,15 +600,15 @@
       <window_info id="Favorites" order="6" sideWeight="0.22126436" side_tool="true" weight="0.21545894" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49884528" weight="0.32683983" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8807267" visible="true" weight="0.29220778" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.87903225" visible="true" weight="0.47402596" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.13378379" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49667406" weight="0.32792208" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4888179" weight="0.18290043" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.119273305" side_tool="true" visible="true" weight="0.29220778" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48736176" weight="0.18290043" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.12096774" side_tool="true" visible="true" weight="0.47402596" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49933776" weight="0.32792208" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -810,13 +807,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/compDetection/Block.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6698">
@@ -824,10 +814,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/compDetection/Block.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/compDetection/TexGLCM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="183" column="24" selection-start-line="183" selection-start-column="24" selection-end-line="183" selection-end-column="24" />
+        <state relative-caret-position="2856">
+          <caret line="183" column="44" selection-start-line="183" selection-start-column="43" selection-end-line="183" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -836,8 +833,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="157" column="9" selection-start-line="157" selection-start-column="9" selection-end-line="157" selection-end-column="9" />
+        <state relative-caret-position="153">
+          <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
         </state>
       </provider>
     </entry>
