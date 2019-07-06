@@ -61,16 +61,16 @@ public class IntegrateBlock {
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
 
             iB.calFirstDistanceMat(featureMat);
-            for(int j=0; j<25; j++) {
+            for(int j=0; j<23; j++) {
                 System.out.println("count: " + j);
                 iB.calDistanceMatRepeat(featureMat);
             }
 
-            for(int j=0; j<25; j++) {
+            for(int j=0; j<23; j++) {
                 System.out.println(iB.group.get(j));
             }
             System.out.println();
-            for(int j=0; j<25; j++) {
+            for(int j=0; j<23; j++) {
                 System.out.println(iB.process.get(j));
             }
 
@@ -158,7 +158,9 @@ public class IntegrateBlock {
             for(int j=0; j<numOfBlock*numOfBlock; j++) {
                 if(i<j) {
                     double distance = 0.0;
-                    if (group.get(i).get(j) != 1 ) {
+                    System.out.println(this.group.get(i));
+                    if (this.group.get(i).get(j) != 1 ) {
+                        System.out.println("i: " + i + ", j: " + j);
                         List<List<Double>> material = new ArrayList<>();
                         List<List<Double>> material1 = new ArrayList<>();
                         List<List<Double>> material2 = new ArrayList<>();
@@ -219,7 +221,7 @@ public class IntegrateBlock {
         }
 
         System.out.println(classes);
-        refIntegration(classes.get(0), classes.get(1));
+        refInteg(classes.get(0), classes.get(1));
         List processData = Arrays.asList((double)classes.get(0), (double)classes.get(1), min);
         System.out.println(processData);
         this.process.add(processData);
@@ -256,11 +258,16 @@ public class IntegrateBlock {
 
             if(this.group.get(c1).get(i) == 1 && i != c2) {
                 System.out.println("i1: " + i);
-
                 this.group.get(c2).set(i, 1);
+                System.out.println("i " + this.group.get(i));
+                this.group.get(i).set(c2,1);
+                System.out.println("i " + this.group.get(i));
             } else if(this.group.get(c2).get(i) == 1 && i != c1) {
                 System.out.println("i2: " + i);
                 this.group.get(c1).set(i, 1);
+                System.out.println("i " + this.group.get(i));
+                this.group.get(i).set(c1, 1);
+                System.out.println("i " + this.group.get(i));
             }
         }
         System.out.println();
@@ -269,6 +276,37 @@ public class IntegrateBlock {
 
         return group;
     }
+
+    public List<List<Integer>> refInteg(int class1, int class2) {
+        this.group.get(class1).set(class2, 1);
+        this.group.get(class2).set(class1, 1);
+
+        List<Integer> partOfGroup = new ArrayList<>();
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+            if(this.group.get(class1).get(i) == 1 || this.group.get(class2).get(i) == 1) {
+                partOfGroup.add(1);
+            } else {
+                partOfGroup.add(0);
+            }
+        }
+
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+            if(partOfGroup.get(i) == 1) {
+                for(int j=0; j<numOfBlock*numOfBlock; j++) {
+                    if(partOfGroup.get(j) == 1 && i != j) {
+                        this.group.get(j).set(i, 1);
+                    }
+                }
+            }
+        }
+
+        System.out.println();
+        System.out.println(this.group.get(class1));
+        System.out.println(this.group.get(class2));
+
+        return group;
+    }
+
 
     /**
      * Convert featureMat to calculatingMat

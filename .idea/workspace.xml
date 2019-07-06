@@ -34,8 +34,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+                <state relative-caret-position="119">
+                  <caret line="223" selection-start-line="223" selection-end-line="223" />
                 </state>
               </provider>
             </entry>
@@ -68,8 +68,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="121">
-                  <caret line="257" column="47" selection-start-line="257" selection-start-column="47" selection-end-line="257" selection-end-column="47" />
+                <state relative-caret-position="204">
+                  <caret line="72" column="29" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
                 </state>
               </provider>
             </entry>
@@ -108,7 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>img</find>
       <find>write</find>
       <find>resource</find>
       <find>calMat</find>
@@ -138,6 +137,7 @@
       <find>System.</find>
       <find>%</find>
       <find>Dis</find>
+      <find>[0, 1]</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -232,7 +232,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562179146680" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562398123568" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../study" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -502,7 +502,7 @@
       <workItem from="1561051983556" duration="1141000" />
       <workItem from="1561360331921" duration="14165000" />
       <workItem from="1561791694448" duration="1807000" />
-      <workItem from="1561904707294" duration="29655000" />
+      <workItem from="1561904707294" duration="39211000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -578,7 +578,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="375052000" />
+    <option name="totallyTimeSpent" value="384608000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -602,15 +602,15 @@
       <window_info id="Favorites" order="6" sideWeight="0.22126436" side_tool="true" weight="0.21545894" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49884528" weight="0.32683983" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8784119" visible="true" weight="0.47402596" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8777916" visible="true" weight="0.5270563" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.13378379" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49667406" weight="0.32792208" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48697272" weight="0.18290043" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.12158809" side_tool="true" visible="true" weight="0.47402596" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48635235" weight="0.18290043" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.12220844" side_tool="true" visible="true" weight="0.5270563" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49933776" weight="0.32792208" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -835,8 +835,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="204">
+          <caret line="72" column="29" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
         </state>
       </provider>
     </entry>
