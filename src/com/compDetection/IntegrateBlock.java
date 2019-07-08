@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 public class IntegrateBlock {
     static PropertyUtil propertyUtil;
     static IntegrateBlock iB = new IntegrateBlock();
+    static Block image;
 
     String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
     int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
@@ -61,17 +62,17 @@ public class IntegrateBlock {
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
 
             iB.calFirstDistanceMat(featureMat);
-            for(int j=0; j<23; j++) {
+            for(int j=0; j<iB.numOfBlock*iB.numOfBlock-2; j++) {
                 System.out.println("count: " + j);
                 iB.calDistanceMatRepeat(featureMat);
             }
 
-            for(int j=0; j<23; j++) {
-                System.out.println(iB.group.get(j));
+            for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
+                System.out.println("group(" + j+ "): " + iB.group.get(j));
             }
             System.out.println();
-            for(int j=0; j<23; j++) {
-                System.out.println(iB.process.get(j));
+            for(int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
+                System.out.println("Integ(" + j + ")" + iB.process.get(j));
             }
 
         }
@@ -158,9 +159,9 @@ public class IntegrateBlock {
             for(int j=0; j<numOfBlock*numOfBlock; j++) {
                 if(i<j) {
                     double distance = 0.0;
-                    System.out.println(this.group.get(i));
+                    //System.out.println("gr(" + i + ")" + this.group.get(i));
                     if (this.group.get(i).get(j) != 1 ) {
-                        System.out.println("i: " + i + ", j: " + j);
+                        //System.out.println("i: " + i + ", j: " + j);
                         List<List<Double>> material = new ArrayList<>();
                         List<List<Double>> material1 = new ArrayList<>();
                         List<List<Double>> material2 = new ArrayList<>();
@@ -190,7 +191,7 @@ public class IntegrateBlock {
             }
             disMat.add(horizon);
         }
-        calMinClass(disMat);
+
         for(int i=0; i<disMat.size(); i++) {
             for(int j=0; j<disMat.get(i).size(); j++) {
                 System.out.printf("%6.1f ", disMat.get(i).get(j));
@@ -198,6 +199,11 @@ public class IntegrateBlock {
             }
             System.out.println();
         }
+        calMinClass(disMat);
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+        showIntegration();
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
     }
 
     /**
@@ -208,7 +214,7 @@ public class IntegrateBlock {
      */
     public List<Integer> calMinClass(List<List<Double>> disMat) {
         int matLen = disMat.size();
-        double min = 1000;
+        double min = 10000;
         List<Integer> classes = new ArrayList<>();
 
         for(int i=0; i<matLen; i++) {
@@ -220,10 +226,11 @@ public class IntegrateBlock {
             }
         }
 
-        System.out.println(classes);
+        //System.out.println(classes);
+        System.out.println(classes + "\n");
         refInteg(classes.get(0), classes.get(1));
         List processData = Arrays.asList((double)classes.get(0), (double)classes.get(1), min);
-        System.out.println(processData);
+        //System.out.println(processData);
         this.process.add(processData);
 
         return classes;
@@ -301,8 +308,9 @@ public class IntegrateBlock {
         }
 
         System.out.println();
-        System.out.println(this.group.get(class1));
-        System.out.println(this.group.get(class2));
+        System.out.println("group(" + class1 + ")" +this.group.get(class1));
+        System.out.println("group(" + class2 + ")" + this.group.get(class2));
+        System.out.println();
 
         return group;
     }
@@ -437,6 +445,43 @@ public class IntegrateBlock {
         }
 
         return dis;
+    }
+
+    public List<List<Integer>> showIntegration() {
+        int[] flag = new int[25];
+        Arrays.fill(flag, 0);
+
+        List<List<Integer>> cluster = new ArrayList<>();
+
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+            List<Integer> piece = new ArrayList<>();
+            if(flag[i] == 0) {
+                piece.add(i);
+                flag[i] = 1;
+                for(int j=0; j<numOfBlock*numOfBlock; j++) {
+                    if(this.group.get(i).get(j) == 1) {
+                        piece.add(j);
+                        flag[j] = 1;
+                    }
+                }
+                cluster.add(piece);
+            }
+        }
+        System.out.println();
+        for(int i=0; i<cluster.size(); i++) {
+            System.out.println(cluster.get(i));
+        }
+        System.out.println();
+
+        return(cluster);
+    }
+
+    public void showIntegrationBlogk(List<List<Integer>> cluster, BufferedImage input) {
+        int[] colorPalette = new int[cluster.size()];
+        BufferedImage[] imageBlock = image.intoBlock(input);
+
+
+
     }
 
 }

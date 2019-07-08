@@ -116,8 +116,8 @@ public class Block {
                 count++;
             }
         }
-        //TODO delete it
-        System.out.println("The number of block is " + count);
+
+        //System.out.println("The number of block is " + count);
 
         return block;
     }

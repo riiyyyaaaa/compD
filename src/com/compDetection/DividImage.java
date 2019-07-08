@@ -68,18 +68,18 @@ public class DividImage {
 //    /**
 //     * 引数のデータとブロック数()からブロックにわけたBufferedImageを配列で返却
 //     */
-//    public static BufferedImage[] intoBlock(BufferedImage origin, int numb) {
+//    public static BufferedImage[] intoBlock(BufferedImage origin, int numBlock) {
 //        int w = origin.getWidth();
 //        int h = origin.getHeight();
-//        int intw = w / numb;
-//        int inth = h / numb;
-//        BufferedImage[] block = new BufferedImage[numb * numb];
+//        int intw = w / numBlock;
+//        int inth = h / numBlock;
+//        BufferedImage[] block = new BufferedImage[numBlock * numBlock];
 //        int count = 0;
 //
-//        System.out.println("w:" + intw + ", h:" + inth);
+//        //System.out.println("w:" + intw + ", h:" + inth);
 //
-//        for (int i = 0; i < numb; i++) {
-//            for (int j = 0; j < numb; j++) {
+//        for (int i = 0; i < numBlock; i++) {
+//            for (int j = 0; j < numBlock; j++) {
 //                block[count] = origin.getSubimage(j * intw, i * inth, intw, inth);
 //                count++;
 //            }
