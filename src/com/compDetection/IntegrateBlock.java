@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.*;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -33,9 +34,26 @@ public class IntegrateBlock {
                 list.add(0);
             }
             //Collections.addAll(list, 0);
-            group.add(list);
+            group.add(i, list);
             //System.out.println(group);
+
         }
+
+
+
+    }
+    public void reset() {
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+            List list = new ArrayList();
+            for(int j=0; j<numOfBlock*numOfBlock; j++) {
+                list.add(0);
+            }
+            //Collections.addAll(list, 0);
+            group.add(i, list);
+            //System.out.println(group);
+
+        }
+        process.clear();
 
     }
 
@@ -60,21 +78,37 @@ public class IntegrateBlock {
         File dir = new File(cd + "\\src\\input\\");
 
         File[] list = dir.listFiles();
-        for(int i=0; i<1; i++) {
+        for(int i=5; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
             BufferedImage read = ImageIO.read(list[i]);
+            BufferedImage output = new BufferedImage(iB.lengthOfASide*6, iB.lengthOfASide*5, BufferedImage.TYPE_INT_RGB);
+            Graphics gr = output.createGraphics();
 
-
+            read = iu.scaleImage(read, iB.imageSize, iB.imageSize);
             iB.calFirstDistanceMat(featureMat);
+            gr.drawImage(read, 0, 0, null);
+
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock-2; j++) {
                 System.out.println("count: " + j);
                 iB.calDistanceMatRepeat(featureMat);
                 File file = new File(cd + "\\src\\output\\IntegrateOutput\\test" + j + ".jpg");
-                read = iu.scaleImage(read, iB.imageSize, iB.imageSize);
-                iB.showIntegrationBlock(iB.showIntegration(), read, file);
+
+                BufferedImage pieceImage = iB.showIntegrationBlock(iB.showIntegration(), read, file);
+                gr.drawImage(pieceImage, ((j+1)%6)*iB.lengthOfASide, ((j+1)/6)*iB.lengthOfASide, null);
             }
+
+            gr.setColor(Color.WHITE);
+            gr.setFont(new Font("", Font.PLAIN, 40));
+            for (int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
+               gr.drawString("" + iB.process.get(j).get(0).intValue() + ", " + iB.process.get(j).get(1).intValue() + ": " + iB.process.get(j).get(2).intValue(), (j%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + (j/6)*80 + 50);
+            }
+
+            gr.dispose();
+            File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
+            ImageIO.write(output, "jpg",resultFile);
+
 
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
                 System.out.println("group(" + j+ "): " + iB.group.get(j));
@@ -84,6 +118,7 @@ public class IntegrateBlock {
                 System.out.println("Integ(" + j + ")" + iB.process.get(j));
             }
 
+            iB.reset();
 
         }
 
@@ -486,7 +521,7 @@ public class IntegrateBlock {
         return(cluster);
     }
 
-    public void showIntegrationBlock(List<List<Integer>> cluster, BufferedImage input, File file) throws IOException {
+    public BufferedImage showIntegrationBlock(List<List<Integer>> cluster, BufferedImage input, File file) throws IOException {
         BufferedImage[] imageBlock = image.intoBlock(input);
         BufferedImage outputPaintedBlock = new BufferedImage(lengthOfASide, lengthOfASide, BufferedImage.TYPE_INT_RGB);
         int w = imageBlock[0].getWidth();
@@ -531,7 +566,7 @@ public class IntegrateBlock {
                             block.setRGB(l, k, iu.argb(0, r, g, b));
                         }
                     }
-                    System.out.println("x: " + (i%numOfBlock)*bSize + ", y: " + (i/numOfBlock)*bSize);
+                    //x: " + (i%numOfBlock)*bSize + ", y: " + (i/numOfBlock)*bSize);
 
 
 
@@ -553,7 +588,10 @@ public class IntegrateBlock {
             }
         }
         graphics.dispose();
-        ImageIO.write(outputPaintedBlock, "jpg", file);
+        //ImageIO.write(outputPaintedBlock, "jpg", file);
+
+        return outputPaintedBlock;
     }
+
 
 }
