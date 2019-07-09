@@ -16,9 +16,13 @@ public class IntegrateBlock {
     static PropertyUtil propertyUtil;
     static IntegrateBlock iB = new IntegrateBlock();
     static Block image;
+    static ImageUtility iu;
 
     String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
     int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
+    int imageSize = Integer.valueOf(propertyUtil.getProperty("imageSize"));
+    int lengthOfASide = Integer.valueOf(propertyUtil.getProperty("imageSize")); //画像の一片の長さ
+    int bSize = lengthOfASide/numOfBlock;// 1つのブロックの一辺の長さ
     List<List<Integer>> group = new ArrayList<>();
     List<List<Double>> process = new ArrayList<>(); // 25回分の統合したクラスと距離
 
@@ -60,11 +64,16 @@ public class IntegrateBlock {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
+            BufferedImage read = ImageIO.read(list[i]);
+
 
             iB.calFirstDistanceMat(featureMat);
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock-2; j++) {
                 System.out.println("count: " + j);
                 iB.calDistanceMatRepeat(featureMat);
+                File file = new File(cd + "\\src\\output\\IntegrateOutput\\test" + j + ".jpg");
+                read = iu.scaleImage(read, iB.imageSize, iB.imageSize);
+                iB.showIntegrationBlock(iB.showIntegration(), read, file);
             }
 
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
@@ -74,6 +83,7 @@ public class IntegrateBlock {
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
                 System.out.println("Integ(" + j + ")" + iB.process.get(j));
             }
+
 
         }
 
@@ -476,12 +486,74 @@ public class IntegrateBlock {
         return(cluster);
     }
 
-    public void showIntegrationBlogk(List<List<Integer>> cluster, BufferedImage input) {
-        int[] colorPalette = new int[cluster.size()];
+    public void showIntegrationBlock(List<List<Integer>> cluster, BufferedImage input, File file) throws IOException {
         BufferedImage[] imageBlock = image.intoBlock(input);
+        BufferedImage outputPaintedBlock = new BufferedImage(lengthOfASide, lengthOfASide, BufferedImage.TYPE_INT_RGB);
+        int w = imageBlock[0].getWidth();
+        int h = imageBlock[0].getHeight();
+        int[][] colorPalette = {{0,204,255},{0,204,204},{0,204,153},{0,204,102},{0,294,51},{0,255,255},{0,255,204},{0,255,153},{0,255,102},
+                {0,153,204},{0,153,153},{0,153,102},{102,153,255},{192,153,204},{102,153,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}};
+//        for(int i=0; i<h; i++) {
+//            for(int j=0; j<w; j++) {
+//                outputPaintedBlock.setRGB(j, i, imageBlock[0].getRGB(j, i));
+//            }
+//        }
+        Graphics graphics = outputPaintedBlock.createGraphics();
+
+        for(int i=0; i<numOfBlock*numOfBlock; i++) {
+            for(int j=0; j<cluster.size(); j++) {
+                if(cluster.get(j).contains(i)) {
+                    //System.out.println("i: " + i + ", j: " + j);
+                    BufferedImage block = imageBlock[i];
+
+
+                    for(int k=0; k<bSize; k++) {
+                        for(int l=0; l<bSize; l++) {
+                            int r = colorPalette[j][0];
+                            int g = colorPalette[j][1];
+                            int b = colorPalette[j][2];
+//                            int r =  iu.r(imageBlock[i].getRGB(l, k)) + colorPalette[j][0];
+//                            if( iu.r(imageBlock[i].getRGB(l, k)) + colorPalette[j][0]>255){
+//                                r = 255;
+//                            }
+//
+//                            int g =  iu.g(imageBlock[i].getRGB(l, k)) + colorPalette[j][1];
+//                            if(iu.g(imageBlock[i].getRGB(l, k)) + colorPalette[j][1]>255) {
+//                                g = 255;
+//                            }
+//
+//                            int b =  iu.b(imageBlock[i].getRGB(l, k)) + colorPalette[j][2];
+//                            if(iu.g(imageBlock[i].getRGB(l, k)) + colorPalette[j][2]>255) {
+//                                b = 255;
+//                            }
+
+                            block.setRGB(l, k, iu.argb(0, r, g, b));
+                        }
+                    }
+                    System.out.println("x: " + (i%numOfBlock)*bSize + ", y: " + (i/numOfBlock)*bSize);
 
 
 
+                    graphics.drawImage(imageBlock[i], (i%numOfBlock)*bSize, (i/numOfBlock)*bSize, null);
+//                    for(int k=0; k<bSize; k++) {
+//                        for(int l=0; l<bSize; l++) {
+//                           graphics.drawImage(imageBlock[]);
+//                        }
+//                    }
+                    //image.paintIntegrateBlock(imageBlock[i], j);
+                   // BufferedImage block  =  image.paintIntegrateBlock(imageBlock[i], j);;
+//                    for(int k=0; k<w; k++) {
+//                        for(int l=0; l<h; l++) {
+//                            outputPaintedBlock.setRGB(i%numOfBlock*bSize+l, ((i+1)/numOfBlock-1)*bSize+k, block.getRGB(l,k));
+//                        }
+//                    }
+
+                }
+            }
+        }
+        graphics.dispose();
+        ImageIO.write(outputPaintedBlock, "jpg", file);
     }
 
 }

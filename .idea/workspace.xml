@@ -4,7 +4,6 @@
     <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="add calDistanceMat">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/compDetection/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/compDetection/DividImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/DividImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,97 +17,38 @@
     <favorites_list name="compD" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50466496">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/compDetection/PropertyUtil.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="612">
-                  <caret line="204" column="52" selection-start-line="204" selection-start-column="52" selection-end-line="204" selection-end-column="52" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/compDetection/ImageUtility.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1705">
-                  <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/compDetection/DividImage.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="119">
-                  <caret line="66" lean-forward="true" selection-start-line="66" selection-start-column="2" selection-end-line="87" selection-end-column="7" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/com/compDetection/Block.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="570">
-                  <caret line="119" column="10" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="712">
-                  <caret line="480" selection-start-line="480" selection-end-line="480" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/ArrayList.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="6698">
-                  <caret line="432" selection-start-line="432" selection-end-line="432" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/com/compDetection/TexGLCM.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2924">
-                  <caret line="172" column="44" selection-start-line="172" selection-start-column="35" selection-end-line="172" selection-end-column="44" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="514" column="55" selection-start-line="514" selection-start-column="55" selection-end-line="514" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/compDetection/Block.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="263" column="17" selection-start-line="263" selection-start-column="17" selection-end-line="263" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/compDetection/TexGLCM.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="534">
+              <caret line="623" column="14" selection-start-line="623" selection-start-column="14" selection-end-line="623" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -119,9 +59,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>scale</find>
-      <find>size</find>
-      <find>エントロピー</find>
       <find>iu</find>
       <find>calF</find>
       <find>rad</find>
@@ -140,15 +77,18 @@
       <find>add</find>
       <find>make</find>
       <find>System.</find>
-      <find>%</find>
       <find>Dis</find>
       <find>[0, 1]</find>
       <find>calDis</find>
       <find>calDistance</find>
       <find>calMin</find>
-      <find>count</find>
-      <find>intoBlock</find>
       <find>intoBl</find>
+      <find>intoBlock</find>
+      <find>calGL</find>
+      <find>calGLC</find>
+      <find>%</find>
+      <find>pain</find>
+      <find>count</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,10 +114,10 @@
         <option value="$PROJECT_DIR$/src/com/compDetection/ImageUtility.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/resource/compDetection.properties" />
-        <option value="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" />
-        <option value="$PROJECT_DIR$/src/com/compDetection/TexGLCM.java" />
         <option value="$PROJECT_DIR$/src/com/compDetection/DividImage.java" />
+        <option value="$PROJECT_DIR$/src/com/compDetection/TexGLCM.java" />
         <option value="$PROJECT_DIR$/src/com/compDetection/Block.java" />
+        <option value="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" />
       </list>
     </option>
   </component>
@@ -187,9 +127,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-11" />
-    <option name="width" value="1935" />
+    <option name="width" value="1659" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -231,6 +171,13 @@
               <item name="compD" type="b2602c69:ProjectViewProjectNode" />
               <item name="compD" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+              <item name="IntegrateOutput" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="compD" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compD" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="resource" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -244,7 +191,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562576458595" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562642674755" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../study" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -280,6 +227,20 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.IntegrateBlock">
+    <configuration name="Block" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.compDetection.Block" />
+      <module name="compDetection2" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.compDetection.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="IntegrateBlock" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.compDetection.IntegrateBlock" />
       <module name="compDetection2" />
@@ -326,14 +287,6 @@
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="testcv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="testcv" />
-      <module name="compDetection2" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -420,19 +373,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Unnamed" />
-      <item itemvalue="Application.testcv" />
       <item itemvalue="Application.TexGLCM" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Test" />
       <item itemvalue="Application.IntegrateBlock" />
+      <item itemvalue="Application.Block" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.IntegrateBlock" />
+        <item itemvalue="Application.Block" />
         <item itemvalue="Application.TexGLCM" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.testcv" />
       </list>
     </recent_temporary>
   </component>
@@ -514,7 +467,7 @@
       <workItem from="1561051983556" duration="1141000" />
       <workItem from="1561360331921" duration="14165000" />
       <workItem from="1561791694448" duration="1807000" />
-      <workItem from="1561904707294" duration="47562000" />
+      <workItem from="1561904707294" duration="61183000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -590,7 +543,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="392959000" />
+    <option name="totallyTimeSpent" value="406580000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -602,10 +555,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="0" width="1935" height="1057" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77873564" visible="true" weight="0.08586667" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77873564" visible="true" weight="0.0858209" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -620,12 +573,12 @@
       <window_info anchor="bottom" id="TODO" order="5" weight="0.13378379" />
       <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.49667406" weight="0.32792208" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48511165" weight="0.31709957" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48511165" weight="0.31404072" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.12344913" side_tool="true" weight="0.47943723" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49933776" weight="0.32792208" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" sideWeight="0.49920762" weight="0.24091521" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -634,10 +587,10 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.4078319" />
       <window_info anchor="right" id="Maven" order="9" />
-      <window_info anchor="right" id="Run" order="10" sideWeight="0.87655085" side_tool="true" visible="true" weight="0.29653335" />
+      <window_info anchor="right" id="Run" order="10" sideWeight="0.5007924" side_tool="true" visible="true" weight="0.2979744" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77873564" visible="true" weight="0.22788033" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77873564" visible="true" weight="0.0858209" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -645,20 +598,19 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" sideWeight="0.22126436" side_tool="true" weight="0.21545894" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49884528" visible="true" weight="0.32683983" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49331635" weight="0.3030303" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.13378379" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49667406" weight="0.32792208" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49458945" weight="0.22943723" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50541055" side_tool="true" weight="0.45238096" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32792208" />
-      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49884528" weight="0.32683983" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.13378379" />
+      <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.49667406" weight="0.32792208" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.48511165" visible="true" weight="0.31404072" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.12344913" side_tool="true" weight="0.47943723" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49933776" weight="0.32792208" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" sideWeight="0.49920762" weight="0.24091521" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -667,6 +619,7 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.4078319" />
       <window_info anchor="right" id="Maven" order="9" />
+      <window_info anchor="right" id="Run" order="10" sideWeight="0.5007924" side_tool="true" visible="true" weight="0.30490404" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -683,39 +636,11 @@
     <MESSAGE value="add calDistanceMat" />
     <option name="LAST_COMMIT_MESSAGE" value="add calDistanceMat" />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/img (6).jpg" />
-    <entry file="file://$PROJECT_DIR$/img (8).jpg" />
-    <entry file="file://$PROJECT_DIR$/img (26).jpg" />
-    <entry file="file://$PROJECT_DIR$/src/convertImage.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/output/normal1.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/result.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/image2.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/output/2.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/3.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/1.jpg" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_141/src.zip!/java/lang/System.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_141/src.zip!/java/awt/Point.java" />
-    <entry file="file://$PROJECT_DIR$/.idea/uiDesigner.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/img (2).jpg" />
-    <entry file="file://$PROJECT_DIR$/image2.jpg" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_141/src.zip!/java/awt/image/BufferedImage.java" />
-    <entry file="file://$PROJECT_DIR$/out/production/compDetection2/output/convertImage.jpg" />
-    <entry file="file://$PROJECT_DIR$/out/production/compDetection2/Block.class" />
-    <entry file="file://$PROJECT_DIR$/out/production/compDetection2/DividImage.class" />
-    <entry file="file://$PROJECT_DIR$/out/production/compDetection2/ImageUtility.class" />
-    <entry file="file://$PROJECT_DIR$/src/output/featureResult.jpg" />
-    <entry file="file://$PROJECT_DIR$/src/lib.java" />
     <entry file="file://$PROJECT_DIR$/img (4).jpg" />
     <entry file="file://$PROJECT_DIR$/img (20).jpg" />
     <entry file="file://$PROJECT_DIR$/1.jpg" />
@@ -780,9 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/output/resultimg (2).jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resource/compDetection.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -792,16 +714,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/output/resultimg (12).jpg">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/compDetection/PropertyUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -813,16 +725,41 @@
     <entry file="file://$PROJECT_DIR$/src/output/resultimg (24).jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
+    <entry file="file://$PROJECT_DIR$/src/com/compDetection/DividImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="204" column="52" selection-start-line="204" selection-start-column="52" selection-end-line="204" selection-end-column="52" />
+        <state relative-caret-position="119">
+          <caret line="66" selection-start-line="66" selection-start-column="2" selection-end-line="87" selection-end-column="7" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/compDetection/PropertyUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/Monoimg (1).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/Monoimg (3).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/resultimg (2).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/Monoimg (4).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/Monoimg (8).jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/compDetection/ImageUtility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1705">
+        <state relative-caret-position="-1348">
           <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -832,25 +769,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/compDetection/TexGLCM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2924">
-          <caret line="172" column="44" selection-start-line="172" selection-start-column="35" selection-end-line="172" selection-end-column="44" />
+        <state relative-caret-position="534">
+          <caret line="623" column="14" selection-start-line="623" selection-start-column="14" selection-end-line="623" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/compDetection/DividImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="66" lean-forward="true" selection-start-line="66" selection-start-column="2" selection-end-line="87" selection-end-column="7" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test8.jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/compDetection/Block.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="119" column="10" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
+        <state relative-caret-position="296">
+          <caret line="263" column="17" selection-start-line="263" selection-start-column="17" selection-end-line="263" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test3.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test5.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test11.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test14.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test16.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test18.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test20.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test21.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test22.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test9.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test7.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test0.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test4.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test6.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/output/IntegrateOutput/test12.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="514" column="55" selection-start-line="514" selection-start-column="55" selection-end-line="514" selection-end-column="55" />
         </state>
       </provider>
     </entry>

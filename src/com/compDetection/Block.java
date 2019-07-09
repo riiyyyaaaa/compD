@@ -100,7 +100,7 @@ public class Block {
     /**
      * 引数のデータからブロックにわけたBufferedImageを配列で返却
      */
-    public static BufferedImage[] intoBlock(BufferedImage origin) {
+    public static BufferedImage[] intoBlock (BufferedImage origin) {
         int w = origin.getWidth();
         int h = origin.getHeight();
         int intw = w / numOfBlock;
@@ -246,6 +246,38 @@ public class Block {
         File file = new File("blockImageMono.jpg");
         ImageIO.write(output, "jpg", file);
         return output;
+    }
+
+    public BufferedImage paintIntegrateBlock(BufferedImage imageBlock, int colorNum) {
+        int[][] colorPalette = {{0,204,255},{0,204,204},{0,204,153},{0,204,102},{0,294,51},{0,255,255},{0,255,204},{0,255,153},{0,255,102},
+                {0,153,204},{0,153,153},{0,153,102},{102,153,255},{192,153,204},{102,153,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153}};
+        BufferedImage result = new BufferedImage(imageBlock.getWidth(), imageBlock.getHeight(), BufferedImage.TYPE_INT_RGB);
+        int w = imageBlock.getWidth();
+        int h = imageBlock.getHeight();
+
+        for(int i=0; i<h; i++) {
+            for(int j=0; j<w; j++) {
+                int r =  iu.r(imageBlock.getRGB(j, i)) + colorPalette[colorNum][0];
+                if( iu.r(imageBlock.getRGB(j, i)) + colorPalette[colorNum][0]>255){
+                    r = 255;
+                }
+
+                int g =  iu.g(imageBlock.getRGB(j, i)) + colorPalette[colorNum][1];
+                if(iu.g(imageBlock.getRGB(j, i)) + colorPalette[colorNum][1]>255) {
+                    g = 255;
+                }
+
+                int b =  iu.b(imageBlock.getRGB(j, i)) + colorPalette[colorNum][2];
+                if(iu.g(imageBlock.getRGB(j, i)) + colorPalette[colorNum][2]>255) {
+                    b = 255;
+                }
+
+                result.setRGB(j, i, iu.argb(0, r, g, b));
+            }
+        }
+
+        return result;
     }
 
     /**
