@@ -14,18 +14,18 @@ import javax.imageio.ImageIO;
  * ウォード法を用いてクラスタリング(仮)
  */
 public class IntegrateBlock {
-    static PropertyUtil propertyUtil;
-    static IntegrateBlock iB = new IntegrateBlock();
-    static Block image;
-    static ImageUtility iu;
+    private static PropertyUtil propertyUtil;
+    private static IntegrateBlock iB = new IntegrateBlock();
+    private static Block image;
+    private static ImageUtility iu;
 
-    String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
-    int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
-    int imageSize = Integer.valueOf(propertyUtil.getProperty("imageSize"));
-    int lengthOfASide = Integer.valueOf(propertyUtil.getProperty("imageSize")); //画像の一片の長さ
-    int bSize = lengthOfASide/numOfBlock;// 1つのブロックの一辺の長さ
-    List<List<Integer>> group = new ArrayList<>();
-    List<List<Double>> process = new ArrayList<>(); // 25回分の統合したクラスと距離
+    private String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
+    private int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
+    private int imageSize = Integer.valueOf(propertyUtil.getProperty("imageSize"));
+    private int lengthOfASide = Integer.valueOf(propertyUtil.getProperty("imageSize")); //画像の一片の長さ
+    private int bSize = lengthOfASide/numOfBlock;// 1つのブロックの一辺の長さ
+    private List<List<Integer>> group = new ArrayList<>();
+    private List<List<Double>> process = new ArrayList<>(); // 25回分の統合したクラスと距離
 
     public IntegrateBlock() {
         for(int i=0; i<numOfBlock*numOfBlock; i++) {
@@ -78,7 +78,7 @@ public class IntegrateBlock {
         File dir = new File(cd + "\\src\\input\\");
 
         File[] list = dir.listFiles();
-        for(int i=5; i<list.length; i++) {
+        for(int i=15; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
@@ -101,8 +101,19 @@ public class IntegrateBlock {
 
             gr.setColor(Color.WHITE);
             gr.setFont(new Font("", Font.PLAIN, 40));
+
+            int redFlag = 0;
             for (int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
-               gr.drawString("" + iB.process.get(j).get(0).intValue() + ", " + iB.process.get(j).get(1).intValue() + ": " + iB.process.get(j).get(2).intValue(), (j%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + (j/6)*80 + 50);
+                gr.drawString("" + iB.process.get(j).get(0).intValue() + ", " + iB.process.get(j).get(1).intValue() + ": " + iB.process.get(j).get(2).intValue(), (j%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + (j/6)*80 + 50);
+                if(iB.process.get(j).get(2).intValue()>=10 && redFlag == 0) {
+                    redFlag = 1;
+                    gr.setColor(Color.RED);
+                    BasicStroke bs = new BasicStroke(5);
+                    ((Graphics2D) gr).setStroke(bs);
+                    gr.drawRect((j%6)*iB.lengthOfASide, (j/6)*iB.lengthOfASide, iB.lengthOfASide, iB.lengthOfASide);
+                    //gr.drawLine(((j)%6)*iB.lengthOfASide,((j)/6)*iB.lengthOfASide,((j)%6)*iB.lengthOfASide+iB.lengthOfASide,((j)/6)*iB.lengthOfASide+iB.lengthOfASide);
+                    gr.setColor(Color.WHITE);
+                }
             }
 
             gr.dispose();
@@ -141,7 +152,7 @@ public class IntegrateBlock {
         List<List<Double>> data = convFeatData2CalData(featureMat, fNum);
         List<List<Double>> disMat = new ArrayList<>();
 
-        // TODO テスト用データ
+        // テスト用データ
         List<Double> testData1 = Arrays.asList(5.0, 4.0, 0.0, 1.0, 2.0, 8.0, 10.0, 1.0);
         List<Double> testData2 = Arrays.asList(1.0, 2.0, 5.0, 4.0, 9.0, 10.0, 8.0, 3.0);
         List<Double> tsstDatg2 = Arrays.asList(3.0, 4.0, 1.0, 2.0, 8.0, 9.0, 8.0, 1.0);
@@ -162,7 +173,6 @@ public class IntegrateBlock {
                     //System.out.println(calDis(material, calAve(material)));
 
                 } else if(i>j) {
-                    // TODO 合ってるか要チェック
                     horizon.add(j, disMat.get(j).get(i));
                 } else {
                     horizon.add(j, 0.0);
@@ -526,8 +536,8 @@ public class IntegrateBlock {
         BufferedImage outputPaintedBlock = new BufferedImage(lengthOfASide, lengthOfASide, BufferedImage.TYPE_INT_RGB);
         int w = imageBlock[0].getWidth();
         int h = imageBlock[0].getHeight();
-        int[][] colorPalette = {{0,204,255},{0,204,204},{0,204,153},{0,204,102},{0,294,51},{0,255,255},{0,255,204},{0,255,153},{0,255,102},
-                {0,153,204},{0,153,153},{0,153,102},{102,153,255},{192,153,204},{102,153,153},{102,153,102},{204,255,255},{204,255,204},
+        int[][] colorPalette = {{0,204,255},{0,180,180},{0,100,153},{0,204,102},{0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
+                {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
                 {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}};
 //        for(int i=0; i<h; i++) {
 //            for(int j=0; j<w; j++) {
