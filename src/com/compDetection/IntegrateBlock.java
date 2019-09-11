@@ -102,19 +102,21 @@ public class IntegrateBlock {
             gr.setColor(Color.WHITE);
             gr.setFont(new Font("", Font.PLAIN, 40));
 
-            int redFlag = 0;
-            for (int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
-                gr.drawString("" + iB.process.get(j).get(0).intValue() + ", " + iB.process.get(j).get(1).intValue() + ": " + iB.process.get(j).get(2).intValue(), (j%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + (j/6)*80 + 50);
-                if(iB.process.get(j).get(2).intValue()>=10 && redFlag == 0) {
-                    redFlag = 1;
-                    gr.setColor(Color.RED);
-                    BasicStroke bs = new BasicStroke(5);
-                    ((Graphics2D) gr).setStroke(bs);
-                    gr.drawRect((j%6)*iB.lengthOfASide, (j/6)*iB.lengthOfASide, iB.lengthOfASide, iB.lengthOfASide);
-                    //gr.drawLine(((j)%6)*iB.lengthOfASide,((j)/6)*iB.lengthOfASide,((j)%6)*iB.lengthOfASide+iB.lengthOfASide,((j)/6)*iB.lengthOfASide+iB.lengthOfASide);
-                    gr.setColor(Color.WHITE);
-                }
-            }
+//            // 10超えたら赤枠
+//            int redFlag = 0;
+//            for (int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
+//                gr.drawString("" + iB.process.get(j).get(0).intValue() + ", " + iB.process.get(j).get(1).intValue() + ": " + iB.process.get(j).get(2).intValue(), (j%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + (j/6)*80 + 50);
+//                if(iB.process.get(j).get(2).intValue()>=10 && redFlag == 0) {
+//                    redFlag = 1;
+//                    gr.setColor(Color.RED);
+//                    BasicStroke bs = new BasicStroke(5);
+//                    ((Graphics2D) gr).setStroke(bs);
+//                    gr.drawRect((j%6)*iB.lengthOfASide, (j/6)*iB.lengthOfASide, iB.lengthOfASide, iB.lengthOfASide);
+//                    //gr.drawLine(((j)%6)*iB.lengthOfASide,((j)/6)*iB.lengthOfASide,((j)%6)*iB.lengthOfASide+iB.lengthOfASide,((j)/6)*iB.lengthOfASide+iB.lengthOfASide);
+//                    gr.setColor(Color.WHITE);
+//                }
+//            }
+            iB.drawRedFrame(gr);
 
             gr.dispose();
             File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
@@ -529,6 +531,37 @@ public class IntegrateBlock {
         System.out.println();
 
         return(cluster);
+    }
+
+
+    /**
+     * リストに24番を抜いた最大の差分、その番号、25番目の差分を入れる
+     * @param graphics
+     */
+    public void drawRedFrame(Graphics graphics) {
+        System.out.println("start");
+        //List maxList = new ArrayList<Double>();
+        boolean flag = false;
+        int numBlock = iB.numOfBlock*iB.numOfBlock;
+        List max = new ArrayList<Double>();
+        for (int j = 0; j < iB.numOfBlock * iB.numOfBlock-2; j++) {
+            double diff = iB.process.get(j).get(2)-iB.process.get(j+1).get(2);
+            if (iB.process.get(j).get(2)-iB.process.get(j+1).get(2) > diff) {
+                max.add(0, diff);
+                max.add(1, j+1);
+            }
+        }
+        max.add(2, iB.process.get(numBlock-3).get(2)-iB.process.get(numBlock-2).get(2));
+        if ((double)max.get(0) < (double)max.get(2) && (double)max.get(0) < 5.0) {
+            max.add(1, 24);
+        }
+
+        int fase = (int)max.get(1);
+        graphics.setColor(Color.RED);
+        BasicStroke bs = new BasicStroke(5);
+        ((Graphics2D)graphics).setStroke(bs);
+        graphics.drawRect((fase%6)*iB.lengthOfASide, (fase/6)*iB.lengthOfASide, iB.lengthOfASide, iB.lengthOfASide);
+        graphics.setColor(Color.WHITE);
     }
 
     public BufferedImage showIntegrationBlock(List<List<Integer>> cluster, BufferedImage input, File file) throws IOException {
