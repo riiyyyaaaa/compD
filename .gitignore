@@ -1,3 +1,6 @@
-src/output
-src/input
-src/resource
+src/output/
+src/input/
+src/resource/
+output/
+input/
+resource/
