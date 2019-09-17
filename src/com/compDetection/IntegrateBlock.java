@@ -258,9 +258,9 @@ public class IntegrateBlock {
         }
         calMinClass(disMat);
 
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-        showIntegration();
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+//        showIntegration();
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
     }
 
     /**
@@ -540,27 +540,38 @@ public class IntegrateBlock {
      */
     public void drawRedFrame(Graphics graphics) {
         System.out.println("start");
+        System.out.println("process num: " + iB.process.size());
         //List maxList = new ArrayList<Double>();
-        boolean flag = false;
-        int numBlock = iB.numOfBlock*iB.numOfBlock;
-        List max = new ArrayList<Double>();
-        for (int j = 0; j < iB.numOfBlock * iB.numOfBlock-2; j++) {
-            double diff = iB.process.get(j).get(2)-iB.process.get(j+1).get(2);
-            if (iB.process.get(j).get(2)-iB.process.get(j+1).get(2) > diff) {
-                max.add(0, diff);
-                max.add(1, j+1);
+        double maxDiff = 0;
+        int blNum = iB.numOfBlock*iB.numOfBlock-1;
+        List max = Arrays.asList(0.0, 0.0, 0.0);
+        for (int j = 0; j < iB.numOfBlock * iB.numOfBlock-3; j++) {
+            graphics.drawString("" + iB.process.get(j+1).get(0).intValue() + ", " + iB.process.get(j+1).get(1).intValue() + ": " + iB.process.get(j+1).get(2).intValue(), ((j+1)%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + ((j+1)/6)*80 + 50);
+            double diff = iB.process.get(j+1).get(2)-iB.process.get(j).get(2);
+            if (diff > maxDiff) {
+                maxDiff = diff;
+                max.set(0, maxDiff);
+                max.set(1, (double)(j));
             }
         }
-        max.add(2, iB.process.get(numBlock-3).get(2)-iB.process.get(numBlock-2).get(2));
-        if ((double)max.get(0) < (double)max.get(2) && (double)max.get(0) < 5.0) {
-            max.add(1, 24);
+        graphics.drawString("" + iB.process.get(blNum-1).get(0).intValue() + ", " + iB.process.get(blNum-1).get(1).intValue() + ": " + iB.process.get(blNum-1).get(2).intValue(), ((blNum-1)%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + ((blNum-1)/6)*80 + 50);
+
+        double lasDiff = iB.process.get(blNum-1).get(2)-iB.process.get(blNum-2).get(2);
+        max.set(2, lasDiff);
+        System.out.println(lasDiff);
+
+        System.out.println("max: " + max);
+
+        if ((double)max.get(0) < (double)max.get(2) && (double)max.get(0) < 10.0) {
+            max.set(1, 22.0);
         }
 
-        int fase = (int)max.get(1);
+        double fase = (double)max.get(1);
+        int faseI = (int)fase;
         graphics.setColor(Color.RED);
         BasicStroke bs = new BasicStroke(5);
         ((Graphics2D)graphics).setStroke(bs);
-        graphics.drawRect((fase%6)*iB.lengthOfASide, (fase/6)*iB.lengthOfASide, iB.lengthOfASide, iB.lengthOfASide);
+        graphics.drawRect((faseI%6)*iB.lengthOfASide, (faseI/6)*iB.lengthOfASide, iB.lengthOfASide, iB.lengthOfASide);
         graphics.setColor(Color.WHITE);
     }
 
