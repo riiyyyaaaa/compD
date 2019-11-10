@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 /**
  * TexGLCMを基に似たテクスチャのブロックを統合する
- * ウォード法を用いてクラスタリング(仮)
+ * ウォード法を用いてクラスタリング
  */
 public class IntegrateBlock {
     private static PropertyUtil propertyUtil;
@@ -78,12 +78,12 @@ public class IntegrateBlock {
         File dir = new File(cd + "\\src\\input\\");
 
         File[] list = dir.listFiles();
-        for(int i=15; i<list.length; i++) {
+        for(int i=0; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
             BufferedImage read = ImageIO.read(list[i]);
-            BufferedImage output = new BufferedImage(iB.lengthOfASide*6, iB.lengthOfASide*5, BufferedImage.TYPE_INT_RGB);
+            BufferedImage output = new BufferedImage(iB.lengthOfASide*iB.numOfBlock, iB.lengthOfASide*iB.numOfBlock, BufferedImage.TYPE_INT_RGB);
             Graphics gr = output.createGraphics();
 
             read = iu.scaleImage(read, iB.imageSize, iB.imageSize);
@@ -96,7 +96,15 @@ public class IntegrateBlock {
                 File file = new File(cd + "\\src\\output\\IntegrateOutput\\test" + j + ".jpg");
 
                 BufferedImage pieceImage = iB.showIntegrationBlock(iB.showIntegration(), read, file);
-                gr.drawImage(pieceImage, ((j+1)%6)*iB.lengthOfASide, ((j+1)/6)*iB.lengthOfASide, null);
+                if(j>iB.numOfBlock*iB.numOfBlock-10) {
+                    List<Double> tex = iB.showAveTex(iB.showIntegration());
+                    for(int k=0; k<tex.size(); k++) {
+                        gr.drawString(String.valueOf(tex.get(k)), ((j + 1) % 6) * iB.lengthOfASide + 150, iB.lengthOfASide * 4 + ((j + 1) / 6) * 80 + 50 + k*5);
+                    }
+                }
+                gr.drawImage(pieceImage, ((j+1)%iB.numOfBlock)*iB.lengthOfASide, ((j+1)/iB.numOfBlock)*iB.lengthOfASide, null);
+
+
             }
 
             gr.setColor(Color.WHITE);
@@ -154,7 +162,7 @@ public class IntegrateBlock {
         List<List<Double>> data = convFeatData2CalData(featureMat, fNum);
         List<List<Double>> disMat = new ArrayList<>();
 
-        // テスト用データ
+        // Data for test
         List<Double> testData1 = Arrays.asList(5.0, 4.0, 0.0, 1.0, 2.0, 8.0, 10.0, 1.0);
         List<Double> testData2 = Arrays.asList(1.0, 2.0, 5.0, 4.0, 9.0, 10.0, 8.0, 3.0);
         List<Double> tsstDatg2 = Arrays.asList(3.0, 4.0, 1.0, 2.0, 8.0, 9.0, 8.0, 1.0);
@@ -231,7 +239,7 @@ public class IntegrateBlock {
                         distance = calDis(material, calAve(material)) - calDis(material1, calAve(material1)) - calDis(material2, calAve(material2));
                         //System.out.println("i: "+ i + ", j: " + j);
                         //System.out.println("resultDis: " + distance + ", allDis: " + calDis(material, calAve(material)) + ", 1Dis: " + calDis(material1, calAve(material1)) + ", 2Dis: " + calDis(material2, calAve(material2)));
-                        horizon.add(j, distance);
+                        horizon.add(j, Math.abs(distance));
                     } else {
                         horizon.add(j, distance);
                     }
@@ -276,7 +284,7 @@ public class IntegrateBlock {
 
         for(int i=0; i<matLen; i++) {
             for(int j=i+1; j<matLen; j++) {
-                if(min>disMat.get(i).get(j) && disMat.get(i).get(j) != 0){
+                if(min>=disMat.get(i).get(j) && disMat.get(i).get(j) != 0){
                     min = disMat.get(i).get(j);
                     classes = Arrays.asList(i, j);
                 }
@@ -292,7 +300,6 @@ public class IntegrateBlock {
 
         return classes;
     }
-
 
 
 /**
@@ -439,7 +446,12 @@ public class IntegrateBlock {
                 sum += data.get(j).get(i);
                 //ave.add(i, sum);
             }
-            double valueAve = sum / numOfData;
+
+            double valueAve = 0.0;
+            if(numOfData != 0.0) {
+                valueAve = sum / numOfData;
+            }
+
             ave.add(i, valueAve);
 
         }
@@ -460,8 +472,13 @@ public class IntegrateBlock {
         for(int i=0; i<data.length; i++) {
             dis += (data[i] - dataAve[i]) * (data[i] - dataAve[i]);
         }
-        dis = Math.sqrt(dis);
+//        if(dis > 0) {
+//            dis = Math.sqrt(dis);
+//        } else {
+//            dis = 0;
+//        }
 
+        dis = Math.sqrt(Math.abs(dis));
         return dis;
     }
 
@@ -479,7 +496,13 @@ public class IntegrateBlock {
             for(int j=0; j<data.get(0).size(); j++) {
                 dis += (data.get(i).get(j) - dataAve.get(j)) * (data.get(i).get(j) - dataAve.get(j));
             }
-            disAll += Math.sqrt(dis);
+            if(dis >= 0.0) {
+                disAll += Math.sqrt(dis);
+            }
+//            if(dis != 0) {
+//                disAll += Math.sqrt(Math.abs(dis));
+//            }
+
         }
 
         return disAll;
@@ -504,8 +527,12 @@ public class IntegrateBlock {
         return dis;
     }
 
+    /**
+     * i番とj番が同じクラスであれば1、そうでなければ0とする。
+     * @return
+     */
     public List<List<Integer>> showIntegration() {
-        int[] flag = new int[25];
+        int[] flag = new int[numOfBlock*numOfBlock];
         Arrays.fill(flag, 0);
 
         List<List<Integer>> cluster = new ArrayList<>();
@@ -525,12 +552,28 @@ public class IntegrateBlock {
             }
         }
         System.out.println();
+
         for(int i=0; i<cluster.size(); i++) {
             System.out.println(cluster.get(i));
         }
         System.out.println();
 
         return(cluster);
+    }
+
+    public List<Double> showAveTex(List<List<Integer>> cluster) {
+        List<Double> result = new ArrayList<>();
+
+        for(int i=0; i<cluster.size(); i++) {
+            int len = cluster.get(i).size();
+            double ave = 0;
+            for(int j=0; j<len; j++) {
+                ave += cluster.get(i).get(j);
+            }
+            result.add(ave);
+        }
+
+        return result;
     }
 
 
@@ -542,19 +585,19 @@ public class IntegrateBlock {
         System.out.println("start");
         System.out.println("process num: " + iB.process.size());
         //List maxList = new ArrayList<Double>();
-        double maxDiff = 0;
+        double maxDiff = 0.0;
         int blNum = iB.numOfBlock*iB.numOfBlock-1;
         List max = Arrays.asList(0.0, 0.0, 0.0);
-        for (int j = 0; j < iB.numOfBlock * iB.numOfBlock-3; j++) {
-            graphics.drawString("" + iB.process.get(j+1).get(0).intValue() + ", " + iB.process.get(j+1).get(1).intValue() + ": " + iB.process.get(j+1).get(2).intValue(), ((j+1)%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + ((j+1)/6)*80 + 50);
+        for (int j = 0; j < numOfBlock * numOfBlock-3; j++) {
+            //graphics.drawString("" + iB.process.get(j+1).get(0).intValue() + ", " + iB.process.get(j+1).get(1).intValue() + ": " + iB.process.get(j+1).get(2).intValue(), ((j+1)%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + ((j+1)/6)*80 + 50);
             double diff = iB.process.get(j+1).get(2)-iB.process.get(j).get(2);
-            if (diff > maxDiff) {
+            if (diff >= maxDiff) {
                 maxDiff = diff;
                 max.set(0, maxDiff);
                 max.set(1, (double)(j));
             }
         }
-        graphics.drawString("" + iB.process.get(blNum-1).get(0).intValue() + ", " + iB.process.get(blNum-1).get(1).intValue() + ": " + iB.process.get(blNum-1).get(2).intValue(), ((blNum-1)%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + ((blNum-1)/6)*80 + 50);
+        //graphics.drawString("" + iB.process.get(blNum-1).get(0).intValue() + ", " + iB.process.get(blNum-1).get(1).intValue() + ": " + iB.process.get(blNum-1).get(2).intValue(), ((blNum-1)%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + ((blNum-1)/6)*80 + 50);
 
         double lasDiff = iB.process.get(blNum-1).get(2)-iB.process.get(blNum-2).get(2);
         max.set(2, lasDiff);
@@ -563,24 +606,44 @@ public class IntegrateBlock {
         System.out.println("max: " + max);
 
         if ((double)max.get(0) < (double)max.get(2) && (double)max.get(0) < 10.0) {
-            max.set(1, 22.0);
+            max.set(1, (double)numOfBlock*numOfBlock-3.0);
         }
 
         double fase = (double)max.get(1);
+        String faseStr = String.valueOf(fase);
         int faseI = (int)fase;
         graphics.setColor(Color.RED);
         BasicStroke bs = new BasicStroke(5);
         ((Graphics2D)graphics).setStroke(bs);
         graphics.drawRect((faseI%6)*iB.lengthOfASide, (faseI/6)*iB.lengthOfASide, iB.lengthOfASide, iB.lengthOfASide);
+        graphics.drawString(faseStr,40,40);
         graphics.setColor(Color.WHITE);
+
     }
 
+    /**
+     * Draw a image of process.
+     * @param cluster
+     * @param input
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public BufferedImage showIntegrationBlock(List<List<Integer>> cluster, BufferedImage input, File file) throws IOException {
         BufferedImage[] imageBlock = image.intoBlock(input);
         BufferedImage outputPaintedBlock = new BufferedImage(lengthOfASide, lengthOfASide, BufferedImage.TYPE_INT_RGB);
         int w = imageBlock[0].getWidth();
         int h = imageBlock[0].getHeight();
         int[][] colorPalette = {{0,204,255},{0,180,180},{0,100,153},{0,204,102},{0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
+                {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}, {0,204,255},{0,180,180},{0,100,153},{0,204,102},
+                {0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
+                {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}, {0,204,255},{0,180,180},{0,100,153},{0,204,102},
+                {0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
+                {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}, {0,204,255},{0,180,180},{0,100,153},{0,204,102},
+                {0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
                 {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
                 {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}};
 //        for(int i=0; i<h; i++) {
@@ -646,6 +709,49 @@ public class IntegrateBlock {
 
         return outputPaintedBlock;
     }
+
+    public BufferedImage prossFilter(BufferedImage image) {
+
+        int cal = 0;
+        int w = image.getWidth(), h = image.getHeight();
+        BufferedImage filteredImage  = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);;
+        double ro = 5;
+        double[][] filter = new double[numOfBlock][numOfBlock];
+
+        for (double i = -numOfBlock / 2; i <= numOfBlock / 2; i++) {
+            for (double j = -numOfBlock / 2; j <= numOfBlock / 2; j++) {
+                filter[(int) (i + numOfBlock / 2)][(int) (j + numOfBlock / 2)] = 1 / (2 * Math.PI * ro * ro)
+                        * Math.exp(-(j * j + i * i) / (2 * ro * ro));
+            }
+
+        }
+
+        for (int i = 1; i < w - filter.length + 2; i++) {
+            for (int j = 1; j < h - filter.length + 2; j++) {
+                cal = 0;
+                for (int k = 0; k < filter.length; k++) {
+                    for (int l = 0; l < filter.length; l++) {
+                        int c = image.getRGB(i - 1 + l, j - 1 + k);
+                        int r = iu.r(c);
+                        cal += r * filter[k][l];
+                        // System.out.print(" " + cal);
+                    }
+                }
+                // 計算した結果が0<cal<255以外の時の処理
+                if (cal > 225) {
+                    cal = 225;
+                } else if (cal < 0) {
+                    cal = 0;
+                }
+                // グレースケール画像を返却
+                int rgb = iu.rgb((int) cal, (int) cal, (int) cal);
+                filteredImage.setRGB(i, j, (int) rgb);
+            }
+        }
+
+        return filteredImage;
+    }
+
 
 
 }
