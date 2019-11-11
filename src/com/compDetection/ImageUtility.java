@@ -172,5 +172,54 @@ public class ImageUtility {
 
     }
 
+    public BufferedImage prossFilter(BufferedImage image) throws IOException{
+
+        int cal = 0;
+        int filterSize = 5;
+        int w = image.getWidth(), h = image.getHeight();
+        BufferedImage filteredImage  = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);;
+        double ro = 5;
+        double[][] filter = new double[filterSize][filterSize];
+
+        for (double i = -filterSize / 2; i <= filterSize / 2; i++) {
+            for (double j = -filterSize / 2; j <= filterSize/ 2; j++) {
+                filter[(int) (i + filterSize / 2)][(int) (j + filterSize/ 2)] = 1 / (2 * Math.PI * ro * ro)
+                        * Math.exp(-(j * j + i * i) / (2 * ro * ro));
+            }
+
+        }
+
+        for (int i = 1; i < w - filter.length + 2; i++) {
+            for (int j = 1; j < h - filter.length + 2; j++) {
+                cal = 0;
+                for (int k = 0; k < filter.length; k++) {
+                    for (int l = 0; l < filter.length; l++) {
+                        int c = image.getRGB(i - 1 + l, j - 1 + k);
+                        int r = r(c);
+                        cal += r * filter[k][l];
+                        // System.out.print(" " + cal);
+                    }
+                }
+                // 計算した結果が0<cal<255以外の時の処理
+                if (cal > 225) {
+                    cal = 225;
+                } else if (cal < 0) {
+                    cal = 0;
+                }
+                // グレースケール画像を返却
+                int rgb = rgb((int) cal, (int) cal, (int) cal);
+                filteredImage.setRGB(i, j, (int) rgb);
+            }
+        }
+        // イメージをファイルに出力する
+        String cd = new File(".").getAbsoluteFile().getParent();
+        JFileChooser jfilechooser = new JFileChooser();
+        String fileName = cd + "\\src\\output\\Mono.jpg";
+        File file2 = new File(fileName);
+        ImageIO.write(filteredImage, "jpg", file2);
+
+        return filteredImage;
+    }
+
 
 }

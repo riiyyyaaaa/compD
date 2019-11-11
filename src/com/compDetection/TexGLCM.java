@@ -164,6 +164,7 @@ public class TexGLCM {
 
         file = iu.Mono(file);
         BufferedImage read = ImageIO.read(file);
+        //read = iu.prossFilter(read);
         read = convertConc(read); //濃度値を圧縮
 
         //System.out.println("width: "  + read.getWidth());

@@ -78,7 +78,7 @@ public class IntegrateBlock {
         File dir = new File(cd + "\\src\\input\\");
 
         File[] list = dir.listFiles();
-        for(int i=0; i<list.length; i++) {
+        for(int i=9; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
@@ -93,7 +93,7 @@ public class IntegrateBlock {
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock-2; j++) {
                 System.out.println("count: " + j);
                 iB.calDistanceMatRepeat(featureMat);
-                File file = new File(cd + "\\src\\output\\IntegrateOutput\\test" + j + ".jpg");
+                File file = new File(cd + "\\src\\output\\IntegrateOutput\\result" + j + ".jpg");
 
                 BufferedImage pieceImage = iB.showIntegrationBlock(iB.showIntegration(), read, file);
                 if(j>iB.numOfBlock*iB.numOfBlock-10) {
@@ -496,9 +496,10 @@ public class IntegrateBlock {
             for(int j=0; j<data.get(0).size(); j++) {
                 dis += (data.get(i).get(j) - dataAve.get(j)) * (data.get(i).get(j) - dataAve.get(j));
             }
-            if(dis >= 0.0) {
-                disAll += Math.sqrt(dis);
-            }
+//            if(dis >= 0.0) {
+//                disAll += Math.sqrt(dis);
+//            }
+            disAll += Math.sqrt(Math.abs(dis));
 //            if(dis != 0) {
 //                disAll += Math.sqrt(Math.abs(dis));
 //            }
@@ -620,6 +621,9 @@ public class IntegrateBlock {
         graphics.setColor(Color.WHITE);
 
     }
+//
+//    public BufferedImage showIntegRecentBlock(List<List<INteger>> cluster)
+
 
     /**
      * Draw a image of process.
@@ -635,6 +639,18 @@ public class IntegrateBlock {
         int w = imageBlock[0].getWidth();
         int h = imageBlock[0].getHeight();
         int[][] colorPalette = {{0,204,255},{0,180,180},{0,100,153},{0,204,102},{0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
+                {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}, {0,204,255},{0,180,180},{0,100,153},{0,204,102},
+                {0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
+                {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}, {0,204,255},{0,180,180},{0,100,153},{0,204,102},
+                {0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
+                {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}, {0,204,255},{0,180,180},{0,100,153},{0,204,102},
+                {0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
+                {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
+                {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}, {0,204,255},{0,180,180},{0,100,153},{0,204,102},
+                {0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
                 {0,153,204},{0,133,153},{0,153,180},{102,153,255},{192,153,204},{102,138,153},{102,153,102},{204,255,255},{204,255,204},
                 {204,255,153},{204,255,102},{204,255,0},{255,255,153},{255,255,100}, {0,204,255},{0,180,180},{0,100,153},{0,204,102},
                 {0,294,51},{0,255,255},{0,255,204},{50,255,153},{0,255,102},
@@ -710,47 +726,6 @@ public class IntegrateBlock {
         return outputPaintedBlock;
     }
 
-    public BufferedImage prossFilter(BufferedImage image) {
-
-        int cal = 0;
-        int w = image.getWidth(), h = image.getHeight();
-        BufferedImage filteredImage  = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);;
-        double ro = 5;
-        double[][] filter = new double[numOfBlock][numOfBlock];
-
-        for (double i = -numOfBlock / 2; i <= numOfBlock / 2; i++) {
-            for (double j = -numOfBlock / 2; j <= numOfBlock / 2; j++) {
-                filter[(int) (i + numOfBlock / 2)][(int) (j + numOfBlock / 2)] = 1 / (2 * Math.PI * ro * ro)
-                        * Math.exp(-(j * j + i * i) / (2 * ro * ro));
-            }
-
-        }
-
-        for (int i = 1; i < w - filter.length + 2; i++) {
-            for (int j = 1; j < h - filter.length + 2; j++) {
-                cal = 0;
-                for (int k = 0; k < filter.length; k++) {
-                    for (int l = 0; l < filter.length; l++) {
-                        int c = image.getRGB(i - 1 + l, j - 1 + k);
-                        int r = iu.r(c);
-                        cal += r * filter[k][l];
-                        // System.out.print(" " + cal);
-                    }
-                }
-                // 計算した結果が0<cal<255以外の時の処理
-                if (cal > 225) {
-                    cal = 225;
-                } else if (cal < 0) {
-                    cal = 0;
-                }
-                // グレースケール画像を返却
-                int rgb = iu.rgb((int) cal, (int) cal, (int) cal);
-                filteredImage.setRGB(i, j, (int) rgb);
-            }
-        }
-
-        return filteredImage;
-    }
 
 
 
