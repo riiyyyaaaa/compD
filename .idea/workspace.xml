@@ -3,43 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="add calDistanceMat">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/ImageUtility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/ImageUtility.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/IntegrateBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/IntegrateBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/TexGLCM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/TexGLCM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (1).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (1).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (10).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (10).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (11).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (11).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (12).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (12).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (13).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (13).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (14).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (14).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (15).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (15).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (16).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (16).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (17).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (17).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (18).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (18).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (19).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (19).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (2).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (2).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (20).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (20).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (21).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (21).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (22).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (22).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (23).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (23).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (24).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (24).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (25).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (25).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (26).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (26).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (27).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (27).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (28).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (28).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (29).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (29).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (3).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (3).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (30).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (30).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (31).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (31).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (32).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (32).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (4).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (4).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (5).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (5).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (6).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (6).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (7).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (7).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (8).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (8).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/input/img (9).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/input/img (9).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result0.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/IntegrateBlock.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result10.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result11.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result12.jpg" afterDir="false" />
@@ -48,66 +12,7 @@
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result15.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result15.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result16.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result16.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result17.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result17.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result18.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result18.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result19.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result19.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result20.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result20.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result21.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result21.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result22.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result22.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result23.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result23.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result24.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result24.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result25.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result25.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result26.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result26.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result27.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result27.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result28.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result28.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result29.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result29.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result30.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result30.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result31.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result31.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result32.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result32.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result33.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result33.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result34.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result34.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result35.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result35.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result36.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result36.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result5.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result7.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result8.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result9.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (1).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (1).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (10).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (10).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (11).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (11).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (12).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (12).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (13).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (13).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (14).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (14).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (15).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (15).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (16).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (16).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (17).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (17).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (18).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (18).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (19).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (19).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (2).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (2).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (20).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (20).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (21).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (21).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (22).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (22).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (23).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (23).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (24).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (24).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (25).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (25).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (26).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (26).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (27).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (27).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (28).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (28).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (29).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (29).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (3).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (3).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (30).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (30).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (31).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (31).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (32).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (32).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (4).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (4).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (5).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (5).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (6).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (6).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (7).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (7).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (8).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (8).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (9).jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/Monoimg (9).jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/compDetection/ImageUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/ImageUtility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/compDetection/TexGLCM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/TexGLCM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resource/compDetection.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resource/compDetection.properties" afterDir="false" />
@@ -123,14 +28,14 @@
     <favorites_list name="compD" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.55074424">
+    <splitter split-orientation="horizontal" split-proportion="0.45680407">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="14">
-                  <caret line="249" column="42" selection-start-line="249" selection-start-column="42" selection-end-line="249" selection-end-column="42" />
+                <state relative-caret-position="84">
+                  <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
                 </state>
               </provider>
             </entry>
@@ -148,20 +53,20 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="381">
-                  <caret line="252" column="35" lean-forward="true" selection-start-line="252" selection-start-column="35" selection-end-line="252" selection-end-column="35" />
+                <state relative-caret-position="212">
+                  <caret line="238" column="25" selection-start-line="238" selection-start-column="25" selection-end-line="238" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/TexGLCM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2212">
-                  <caret line="164" column="22" selection-start-line="164" selection-start-column="18" selection-end-line="164" selection-end-column="22" />
+                <state relative-caret-position="166">
+                  <caret line="103" column="60" selection-start-line="103" selection-start-column="60" selection-end-line="103" selection-end-column="60" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -172,8 +77,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/resource/compDetection.properties">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="70">
-                  <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+                <state relative-caret-position="98">
+                  <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
                 </state>
               </provider>
             </entry>
@@ -181,7 +86,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/compDetection/ImageUtility.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-305">
+                <state relative-caret-position="896">
                   <caret line="91" column="8" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -203,10 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Red</find>
-      <find>drawString</find>
-      <find>numo</find>
-      <find>showIntegration(</find>
       <find>group</find>
       <find>calDistanceMa</find>
       <find>group(</find>
@@ -221,18 +122,22 @@
       <find>showIntegration()</find>
       <find>colorPalette</find>
       <find>graphics</find>
-      <find>cal</find>
       <find>disMat</find>
       <find>sqrt</find>
       <find>img</find>
       <find>result</find>
       <find>Mono</find>
       <find>RED</find>
-      <find>calAve</find>
       <find>&amp;&amp;</find>
       <find>= 0</find>
-      <find>calDis</find>
       <find>classes</find>
+      <find>cal</find>
+      <find>!!!!!!</find>
+      <find>calDIs</find>
+      <find>calDis</find>
+      <find>calAve</find>
+      <find>calGLCM</find>
+      <find>NaN</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -258,9 +163,9 @@
         <option value="$PROJECT_DIR$/src/com/compDetection/DividImage.java" />
         <option value="$PROJECT_DIR$/src/com/compDetection/Block.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/com/compDetection/TexGLCM.java" />
         <option value="$PROJECT_DIR$/src/com/compDetection/ImageUtility.java" />
         <option value="$PROJECT_DIR$/src/resource/compDetection.properties" />
+        <option value="$PROJECT_DIR$/src/com/compDetection/TexGLCM.java" />
         <option value="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" />
       </list>
     </option>
@@ -271,9 +176,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-11" />
-    <option name="width" value="1642" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="435" />
+    <option name="y" value="13" />
+    <option name="width" value="1253" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -282,7 +188,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -317,12 +222,13 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573461483748" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573698088038" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../seminar-log" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -614,7 +520,8 @@
       <workItem from="1572946388174" duration="26564000" />
       <workItem from="1573370763847" duration="9816000" />
       <workItem from="1573461554268" duration="1790000" />
-      <workItem from="1573463447875" duration="5659000" />
+      <workItem from="1573463447875" duration="9302000" />
+      <workItem from="1573534794394" duration="6927000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -690,7 +597,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="493081000" />
+    <option name="totallyTimeSpent" value="503651000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -702,11 +609,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="0" width="1642" height="1057" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6897638" visible="true" weight="0.06573957" />
-      <window_info id="Structure" order="1" sideWeight="0.31023622" side_tool="true" visible="true" weight="0.06573957" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.686636" visible="true" weight="0.05597015" />
+      <window_info id="Structure" order="1" sideWeight="0.31336406" side_tool="true" visible="true" weight="0.05597015" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -720,11 +627,11 @@
       <window_info anchor="bottom" id="TODO" order="5" sideWeight="0.27039784" weight="0.20670995" />
       <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.49667406" weight="0.32792208" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.29962075" visible="true" weight="0.29522753" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.29957357" weight="0.45934066" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.2897196" side_tool="true" weight="0.13311689" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49800533" weight="0.39512712" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4968017" weight="0.3945055" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="12" sideWeight="0.70037925" side_tool="true" visible="true" weight="0.29522753" />
+      <window_info active="true" anchor="bottom" id="Run" order="12" sideWeight="0.50319827" side_tool="true" visible="true" weight="0.52307695" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" sideWeight="0.49920762" weight="0.24091521" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -916,19 +823,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/compDetection/TexGLCM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2212">
-          <caret line="164" column="22" selection-start-line="164" selection-start-column="18" selection-end-line="164" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/compDetection/ImageUtility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-305">
+        <state relative-caret-position="896">
           <caret line="91" column="8" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -938,15 +835,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resource/compDetection.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="98">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/compDetection/TexGLCM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="103" column="60" selection-start-line="103" selection-start-column="60" selection-end-line="103" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="249" column="42" selection-start-line="249" selection-start-column="42" selection-end-line="249" selection-end-column="42" />
+        <state relative-caret-position="84">
+          <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
         </state>
       </provider>
     </entry>

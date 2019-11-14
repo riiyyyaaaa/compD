@@ -78,10 +78,34 @@ public class IntegrateBlock {
         File dir = new File(cd + "\\src\\input\\");
 
         File[] list = dir.listFiles();
-        for(int i=9; i<list.length; i++) {
+        for(int i=49; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
+
+//            for(int j=0; j<mat_test.length; j++) {
+//                for(int k=0; k<mat_test[j].length; k++) {
+//                    for(int l=0; l<mat_test[j][k].length; l++) {
+//                        for(int m=0; m<mat_test[j][k][l].length; m++) {
+//                            if(Objects.isNull(mat_test[j][k][l][m])) {
+//                                System.out.println("N: " + j + ": " + k +" :"  + l + " :" + m);
+//                                System.out.println(mat_test[j][k][l][m]);
+//
+//                            }
+//                        }
+//                    }
+//                }
+//            }
             double[][][] featureMat = TexGLCM.calFeature((mat_test));
+//            for(int j=0; j<featureMat.length; j++) {
+//                for(int k=0; k<featureMat[j].length; k++) {
+//                    for(int l=0; l<featureMat[j][k].length; l++) {
+//                        if(Double.isNaN(featureMat[j][k][l])) {
+//                            System.out.println("N: " + j + ": " + k +" :"  + l);
+//                            System.out.println(featureMat[j][k][l]);
+//                        }
+//                    }
+//                }
+//            }
             BufferedImage read = ImageIO.read(list[i]);
             BufferedImage output = new BufferedImage(iB.lengthOfASide*iB.numOfBlock, iB.lengthOfASide*iB.numOfBlock, BufferedImage.TYPE_INT_RGB);
             Graphics gr = output.createGraphics();
@@ -179,7 +203,11 @@ public class IntegrateBlock {
 //                    material.add(testData1);
 //                    material.add(testData2);
                     //System.out.println(calAve(material));
-                    horizon.add(j, calDis(material, calAve(material)));
+                    double dis = calDis(material, calAve(material));
+//                     if (Double.isNaN(dis)) {
+//                        System.out.println("!!!!!!!!!!!!!");
+//                    }
+                    horizon.add(j, dis);
                     //System.out.println(calDis(material, calAve(material)));
 
                 } else if(i>j) {
@@ -444,17 +472,24 @@ public class IntegrateBlock {
             double sum = 0;
             for (int j = 0; j < numOfData; j++) {
                 sum += data.get(j).get(i);
+
                 //ave.add(i, sum);
+
             }
+
 
             double valueAve = 0.0;
             if(numOfData != 0.0) {
-                valueAve = sum / numOfData;
+                valueAve = Math.abs(sum) / numOfData;
             }
+//            if(Double.isNaN(valueAve)) {
+//                System.out.println(data.get(i));
+//            }
 
             ave.add(i, valueAve);
 
         }
+
 
         return ave;
     }
@@ -489,7 +524,7 @@ public class IntegrateBlock {
      * @return
      */
      public double calDis(List<List<Double>> data, List<Double> dataAve) {
-        double disAll = 0;
+        double disAll = 0.0;
 
         for(int i=0; i<data.size(); i++) {
             double dis = 0;
@@ -499,12 +534,15 @@ public class IntegrateBlock {
 //            if(dis >= 0.0) {
 //                disAll += Math.sqrt(dis);
 //            }
-            disAll += Math.sqrt(Math.abs(dis));
-//            if(dis != 0) {
-//                disAll += Math.sqrt(Math.abs(dis));
-//            }
+            //disAll += Math.sqrt(Math.abs(dis));
+            if(dis != 0.0) {
+                disAll += Math.sqrt(Math.abs(dis));
+            }
 
         }
+//        if(Double.isNaN(disAll)) {
+//            System.out.println("!!!!!!!!!!!!");
+//        }
 
         return disAll;
      }

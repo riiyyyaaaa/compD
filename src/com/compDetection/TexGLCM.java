@@ -55,7 +55,7 @@ public class TexGLCM {
             for(int rad = 0; rad<4; rad++) {
 
                 // 分母
-                double sumMat = 0;
+                double sumMat = 0.0;
                 for (int y = 0; y < mat[i][rad].length; y++) {
                     for (int x = 0; x < mat[i][rad].length; x++) {
                         sumMat += mat[i][rad][y][x];
@@ -70,20 +70,39 @@ public class TexGLCM {
                 for (int y = 0; y < maxDensity; y++) {
                     for (int x = 0; x < maxDensity; x++) {
                         // エネルギー
-                        feature[i][rad][0] += (double)mat[i][rad][y][x]/sumMat*(double)mat[i][rad][y][x]/sumMat;
+                        if (sumMat > 0.0) {
+                            feature[i][rad][0] += (double)mat[i][rad][y][x]/sumMat*(double)mat[i][rad][y][x]/sumMat;
+                        } else {
+                            feature[i][rad][0] += 0.0;
+                        }
+
                         // 慣性、分散、コントラスト
-                        feature[i][rad][1] += (x-y)*(x-y)*(double)mat[i][rad][y][x]/sumMat;
+                        if (sumMat > 0.0) {
+                            feature[i][rad][1] += (x-y)*(x-y)*(double)mat[i][rad][y][x]/sumMat;
+                        } else {
+                            feature[i][rad][1] += 0.0;
+                        }
+
                         // エントロピー
                         if(mat[i][rad][y][x] != 0) {
                             feature[i][rad][2] += (double)mat[i][rad][y][x]/sumMat * (Math.log(mat[i][rad][y][x])) / Math.log(2);
                         }
                         // 相関
-                        feature[i][rad][3] += x*y*(double)mat[i][rad][y][x]/sumMat;
+                        if (sumMat > 0.0) {
+                            feature[i][rad][3] += x*y*(double)mat[i][rad][y][x]/sumMat;
+                        } else {
+                            feature[i][rad][3] += 0.0;
+                        }
+
                     }
                 }
                 // 相関
-                feature[i][rad][3] = (feature[i][rad][3]-sigma[2]*sigma[3])/(sigma[0]*sigma[1]);
-
+                if(sigma[0]*sigma[1] >0.0) {
+                    feature[i][rad][3] = (feature[i][rad][3] - sigma[2] * sigma[3]) / (sigma[0] * sigma[1]);
+                } else {
+                    feature[i][rad][3] = 0.0;
+                    System.out.println("!!!!!!!!!!!!!!!!!!!!");
+                }
                 //feature[i][rad][2] = -feature[i][rad][2];
 //                System.out.println("num is " + i);
 //                System.out.println("エネルギー: " + feature[i][rad][0]);
