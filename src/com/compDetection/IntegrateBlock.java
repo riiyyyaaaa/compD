@@ -686,6 +686,11 @@ public class IntegrateBlock {
 
     }
 
+    /**
+     * numOfBlock*numOfBlockのリストに0~(分割数)の数でナンバリング
+     * @param cluster
+     * @return
+     */
     public List<List<Integer>> makeBlockArray(List<List<Integer>> cluster) {
         List<List<Integer>> blocks = new ArrayList(numOfBlock);
 
@@ -709,6 +714,40 @@ public class IntegrateBlock {
         }
 
         return blocks;
+    }
+
+    /**
+     * ブロックの数がnumOfBlock未満のクラスを確認する
+     * 無ければ0番目にnumOfBlock*numOfBlockしか入っていない。
+     * ある場合はnumOfBlock*numOfBlock以降、1番目以降が対象のクラス
+     * @param blocks
+     * @param clusterNum
+     * @return
+     */
+    public List<Integer> checkDelBlock(List<List<Integer>> blocks, int clusterNum) {
+        List<Integer> delCluster = new ArrayList<>();
+        // 初期値としてとりあえず与えておく
+        delCluster.add(numOfBlock*numOfBlock);
+        int[] count = new int[clusterNum];
+        Arrays.fill(count, 0);
+
+        for(int i=0; i<numOfBlock; i++) {
+            for(int j=0; j<numOfBlock; j++) {
+                for(int k=0; k<clusterNum; k++) {
+                    if(blocks.get(i).get(j) == k) {
+                        count[k] ++;
+                    }
+                }
+            }
+        }
+
+        for(int i=0; i<clusterNum; i++) {
+            if(count[i] < numOfBlock) {
+                delCluster.add(i);
+            }
+        }
+
+        return delCluster;
     }
 
 
