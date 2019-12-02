@@ -708,7 +708,7 @@ public class IntegrateBlock {
             List<Integer> block = new ArrayList(numOfBlock);
             for(int j=0; j<numOfBlock; j++) {
                 for(int k=0; k<cluster.size(); k++) {
-                    if(cluster.get(k).contains((i+1)*(j+1)-1)){
+                    if(cluster.get(k).contains(8*i + j)){
                         block.add(k);
                     }
                 }
