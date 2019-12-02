@@ -18,6 +18,7 @@ public class IntegrateBlock {
     private static IntegrateBlock iB = new IntegrateBlock();
     private static Block image;
     private static ImageUtility iu;
+    private static Classification cl;
 
     private String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
     private int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
@@ -74,13 +75,17 @@ public class IntegrateBlock {
 //        }
 //        System.out.println(group);
 //    }
+    public static void main(String[] args) throws IOException {
+        iB.first();
 
-    public static void main(String[] arg) throws IOException {
+    }
+
+    public void first() throws IOException {
         String cd = new File(".").getAbsoluteFile().getParent();
         File dir = new File(cd + "\\src\\input\\");
 
         File[] list = dir.listFiles();
-        for(int i=0; i<list.length; i++) {
+        for(int i=2; i<3; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
 
@@ -137,7 +142,11 @@ public class IntegrateBlock {
                 // 最下段のみ出力、全部出力の時は外す
                 if(j >= iB.numOfBlock*(iB.numOfBlock-1)-1) {
                     gr.drawImage(pieceImage, ((j+2)%iB.numOfBlock)*iB.lengthOfASide, 0, null);
-                    resultBlock.add(iB.makeBlockArray(cluster));
+                    List<List<Integer>> blocks = iB.makeBlockArray(cluster);
+                    resultBlock.add(blocks);
+                    int clNum = numOfBlock*numOfBlock-2-j;
+                    System.out.println(blocks);
+                    calSLPos(blocks, clNum);
                 }
 
             }
@@ -300,13 +309,14 @@ public class IntegrateBlock {
             disMat.add(horizon);
         }
 
-        for(int i=0; i<disMat.size(); i++) {
-            for(int j=0; j<disMat.get(i).size(); j++) {
-                System.out.printf("%6.1f ", disMat.get(i).get(j));
-                //System.out.print(disMat.get(i).get(j) + " ");
-            }
-            System.out.println();
-        }
+        // 距離行列の表示
+//        for(int i=0; i<disMat.size(); i++) {
+//            for(int j=0; j<disMat.get(i).size(); j++) {
+//                System.out.printf("%6.1f ", disMat.get(i).get(j));
+//                //System.out.print(disMat.get(i).get(j) + " ");
+//            }
+//            System.out.println();
+//        }
         calMinClass(disMat);
 
 //        System.out.println("!!!!!!!!!!!!!!!!!!!!!");
@@ -606,12 +616,12 @@ public class IntegrateBlock {
             }
         }
 
-//        System.out.println();
-//        System.out.println("クラスタリング状況");
-//        for(int i=0; i<cluster.size(); i++) {
-//            System.out.println(cluster.get(i));
-//        }
-//        System.out.println();
+        System.out.println();
+        System.out.println("クラスタリング状況");
+        for(int i=0; i<cluster.size(); i++) {
+            System.out.println(cluster.get(i));
+        }
+        System.out.println();
 
         return(cluster);
     }
@@ -717,9 +727,9 @@ public class IntegrateBlock {
     }
 
     /**
-     * ブロックの数がnumOfBlock未満のクラスを確認する
+     * ブロックの数がnumOfBlock未満のクラスを確認する。
      * 無ければ0番目にnumOfBlock*numOfBlockしか入っていない。
-     * ある場合はnumOfBlock*numOfBlock以降、1番目以降が対象のクラス
+     * ある場合はnumOfBlock*numOfBlock以降、1番目以降が対象のクラス。
      * @param blocks
      * @param clusterNum
      * @return
@@ -849,6 +859,51 @@ public class IntegrateBlock {
 
         return outputPaintedBlock;
     }
+    public void calSLPos(List<List<Integer>> blocks, int clNum) {
+        List<List<Integer>> result = new ArrayList<>();
+        int[][] verLon = new int[clNum][numOfBlock];
+        int[][] horLon = new int[clNum][numOfBlock];
+        //Arrays.fill(verLon, 0);
+
+        for(int i=0; i<numOfBlock; i++) {
+            for(int j=0; j<numOfBlock; j++) {
+                for(int k=0; k<clNum; k++) {
+                    if(k == blocks.get(j).get(i) && j>0 && blocks.get(j).get(i) == blocks.get(j-1).get(i)) {
+                        verLon[k][i]++;
+                    }
+                    if(k == blocks.get(i).get(j) && j>0 && blocks.get(i).get(j) == blocks.get(i).get(j-1)) {
+                        horLon[k][i]++;
+                    }
+                }
+            }
+        }
+
+        System.out.println("Vertical");
+        for(int i=0; i<verLon.length; i++) {
+            for(int j=0; j<verLon[i].length; j++) {
+                System.out.print(verLon[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("Horizon");
+        for(int i=0; i<horLon.length; i++) {
+            for(int j=0; j<horLon[i].length; j++) {
+                System.out.print(horLon[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+
+        //System.out.println(verLon);
+        //System.out.println(horLon);
+        //Arrays.sort(verLon);
+        //Arrays.sort(horLon);
+
+
+        //return  result;
+    }
+
+
 
 
 
