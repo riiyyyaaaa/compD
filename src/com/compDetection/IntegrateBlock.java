@@ -28,6 +28,7 @@ public class IntegrateBlock {
     private List<List<Integer>> group = new ArrayList<>();
     private List<List<Double>> process = new ArrayList<>(); // 25回分の統合したクラスと距離
     private int rest = 3;
+    private List<List<List<Integer>>> clusterList = new ArrayList<>();  // 後ろからnumOfBlock個のクラスタリング状況
 
     double blockNum = 0.0;   // 最終的な分割数
     //List<List<List<Integer>>> blocks = new ArrayList<>();     // numOfBlock*numObBlockの配列を0~(blockNum-1)でラベリングした配列,rest個
@@ -142,11 +143,14 @@ public class IntegrateBlock {
                 // 最下段のみ出力、全部出力の時は外す
                 if(j >= iB.numOfBlock*(iB.numOfBlock-1)-1) {
                     gr.drawImage(pieceImage, ((j+2)%iB.numOfBlock)*iB.lengthOfASide, 0, null);
+
                     List<List<Integer>> blocks = iB.makeBlockArray(cluster);
-                    resultBlock.add(blocks);
                     int clNum = numOfBlock*numOfBlock-2-j;
+
+                    resultBlock.add(blocks);
                     System.out.println(blocks);
                     cl.calSLPos(blocks, clNum);
+                    clusterList.add(cluster);
                 }
 
             }
@@ -172,7 +176,14 @@ public class IntegrateBlock {
 //                    gr.setColor(Color.WHITE);
 //                }
             }
-            iB.drawRedFrame(gr);
+            int resultClNum = iB.drawRedFrame(gr);
+            int resultStage = numOfBlock*numOfBlock-resultClNum;
+            System.out.println("分割数: " + resultClNum);
+            System.out.println("Stage: " + resultStage);
+            for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
+                cl.getTexAve(featureMat, cluster);
+            }
+
 
             gr.dispose();
             File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
@@ -265,8 +276,6 @@ public class IntegrateBlock {
         for(int i=0; i<featureNumStr.length; i++) {
             fNum[i] = Integer.valueOf(featureNumStr[i]);
         }
-
-        int fNumLen = featureMat.length;
 
         List<List<Double>> data = convFeatData2CalData(featureMat, fNum);
         List<List<Double>> disMat = new ArrayList<>();
@@ -616,12 +625,12 @@ public class IntegrateBlock {
             }
         }
 
-        System.out.println();
-        System.out.println("クラスタリング状況");
-        for(int i=0; i<cluster.size(); i++) {
-            System.out.println(cluster.get(i));
-        }
-        System.out.println();
+//        System.out.println();
+//        System.out.println("クラスタリング状況");
+//        for(int i=0; i<cluster.size(); i++) {
+//            System.out.println(cluster.get(i));
+//        }
+//        System.out.println();
 
         return(cluster);
     }
@@ -649,16 +658,16 @@ public class IntegrateBlock {
 
 
     /**
-     * リストにn*n-1番を抜いた最大の差分、その番号、n*n番目の差分を入れる
+     * 適当な分類を選び、赤枠で囲う。その時選んだ番号を返却する。
      * @param graphics
      */
-    public void drawRedFrame(Graphics graphics) {
+    public int drawRedFrame(Graphics graphics) {
         System.out.println("start");
         System.out.println("process num: " + iB.process.size());
         //List maxList = new ArrayList<Double>();
         double maxDiff = 0.0;
         int blNum = iB.numOfBlock*iB.numOfBlock-1;
-        List max = Arrays.asList(0.0, 0.0, 0.0);
+        List max = Arrays.asList(0.0, 0.0, 0.0);    //リストにn*n-1番を抜いた最大の差分、その番号、n*n番目の差分を入れる
         for (int j = numOfBlock * numOfBlock - (rest+3); j < numOfBlock * numOfBlock-3; j++) {
             //graphics.drawString("" + iB.process.get(j+1).get(0).intValue() + ", " + iB.process.get(j+1).get(1).intValue() + ": " + iB.process.get(j+1).get(2).intValue(), ((j+1)%6)*iB.lengthOfASide + 150, iB.lengthOfASide*4 + ((j+1)/6)*80 + 50);
             double diff = iB.process.get(j+1).get(2)-iB.process.get(j).get(2);
@@ -694,6 +703,7 @@ public class IntegrateBlock {
         graphics.drawString(faseStr,40,40);
         graphics.setColor(Color.WHITE);
 
+        return numOfBlock*numOfBlock-faseI-2;
     }
 
     /**
@@ -860,53 +870,6 @@ public class IntegrateBlock {
         return outputPaintedBlock;
     }
 
-//    /**
-//     * 縦と横それぞれに連続したブロックが何個あるかを数える。
-//     * @param blocks
-//     * @param clNum
-//     */
-//    public void calSLPos(List<List<Integer>> blocks, int clNum) {
-//        List<List<Integer>> result = new ArrayList<>();
-//        int[][] verLon = new int[clNum][numOfBlock];
-//        int[][] horLon = new int[clNum][numOfBlock];
-//        //Arrays.fill(verLon, 0);
-//
-//        for(int i=0; i<numOfBlock; i++) {
-//            for(int j=0; j<numOfBlock; j++) {
-//                for(int k=0; k<clNum; k++) {
-//                    if(k == blocks.get(j).get(i) && j>0 && blocks.get(j).get(i) == blocks.get(j-1).get(i)) {
-//                        verLon[k][i]++;
-//                    }
-//                    if(k == blocks.get(i).get(j) && j>0 && blocks.get(i).get(j) == blocks.get(i).get(j-1)) {
-//                        horLon[k][i]++;
-//                    }
-//                }
-//            }
-//        }
-//
-//        System.out.println("Vertical");
-//        for(int i=0; i<verLon.length; i++) {
-//            for(int j=0; j<verLon[i].length; j++) {
-//                System.out.print(verLon[i][j]);
-//            }
-//            System.out.println();
-//        }
-//        System.out.println("Horizon");
-//        for(int i=0; i<horLon.length; i++) {
-//            for(int j=0; j<horLon[i].length; j++) {
-//                System.out.print(horLon[i][j]);
-//            }
-//            System.out.println();
-//        }
-//        System.out.println();
-//
-//        //System.out.println(verLon);
-//        //System.out.println(horLon);
-//        //Arrays.sort(verLon);
-//        //Arrays.sort(horLon);
-//
-//        //return  result;
-//    }
 
     public int detectBack() {
         int backNum = 0;

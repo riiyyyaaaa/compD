@@ -90,6 +90,10 @@ public class Classification {
         }
 
         List<Double> result = iB.calAve(materials);
+        System.out.println("Cluster");
+        System.out.println(clusterList);
+        System.out.println("平均");
+        System.out.println(result);
 
         return result;
     }
