@@ -146,7 +146,7 @@ public class IntegrateBlock {
                     resultBlock.add(blocks);
                     int clNum = numOfBlock*numOfBlock-2-j;
                     System.out.println(blocks);
-                    calSLPos(blocks, clNum);
+                    cl.calSLPos(blocks, clNum);
                 }
 
             }
@@ -859,50 +859,67 @@ public class IntegrateBlock {
 
         return outputPaintedBlock;
     }
-    public void calSLPos(List<List<Integer>> blocks, int clNum) {
-        List<List<Integer>> result = new ArrayList<>();
-        int[][] verLon = new int[clNum][numOfBlock];
-        int[][] horLon = new int[clNum][numOfBlock];
-        //Arrays.fill(verLon, 0);
 
-        for(int i=0; i<numOfBlock; i++) {
-            for(int j=0; j<numOfBlock; j++) {
-                for(int k=0; k<clNum; k++) {
-                    if(k == blocks.get(j).get(i) && j>0 && blocks.get(j).get(i) == blocks.get(j-1).get(i)) {
-                        verLon[k][i]++;
-                    }
-                    if(k == blocks.get(i).get(j) && j>0 && blocks.get(i).get(j) == blocks.get(i).get(j-1)) {
-                        horLon[k][i]++;
-                    }
-                }
-            }
-        }
+//    /**
+//     * 縦と横それぞれに連続したブロックが何個あるかを数える。
+//     * @param blocks
+//     * @param clNum
+//     */
+//    public void calSLPos(List<List<Integer>> blocks, int clNum) {
+//        List<List<Integer>> result = new ArrayList<>();
+//        int[][] verLon = new int[clNum][numOfBlock];
+//        int[][] horLon = new int[clNum][numOfBlock];
+//        //Arrays.fill(verLon, 0);
+//
+//        for(int i=0; i<numOfBlock; i++) {
+//            for(int j=0; j<numOfBlock; j++) {
+//                for(int k=0; k<clNum; k++) {
+//                    if(k == blocks.get(j).get(i) && j>0 && blocks.get(j).get(i) == blocks.get(j-1).get(i)) {
+//                        verLon[k][i]++;
+//                    }
+//                    if(k == blocks.get(i).get(j) && j>0 && blocks.get(i).get(j) == blocks.get(i).get(j-1)) {
+//                        horLon[k][i]++;
+//                    }
+//                }
+//            }
+//        }
+//
+//        System.out.println("Vertical");
+//        for(int i=0; i<verLon.length; i++) {
+//            for(int j=0; j<verLon[i].length; j++) {
+//                System.out.print(verLon[i][j]);
+//            }
+//            System.out.println();
+//        }
+//        System.out.println("Horizon");
+//        for(int i=0; i<horLon.length; i++) {
+//            for(int j=0; j<horLon[i].length; j++) {
+//                System.out.print(horLon[i][j]);
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
+//
+//        //System.out.println(verLon);
+//        //System.out.println(horLon);
+//        //Arrays.sort(verLon);
+//        //Arrays.sort(horLon);
+//
+//        //return  result;
+//    }
 
-        System.out.println("Vertical");
-        for(int i=0; i<verLon.length; i++) {
-            for(int j=0; j<verLon[i].length; j++) {
-                System.out.print(verLon[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println("Horizon");
-        for(int i=0; i<horLon.length; i++) {
-            for(int j=0; j<horLon[i].length; j++) {
-                System.out.print(horLon[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();
-
-        //System.out.println(verLon);
-        //System.out.println(horLon);
-        //Arrays.sort(verLon);
-        //Arrays.sort(horLon);
+    public int detectBack() {
+        int backNum = 0;
+        // 背景の領域を断定するために、最も特徴量の平均が小さいものを探す(ざらざら->主要な物体である可能性が高い)
 
 
-        //return  result;
+        return backNum;
     }
 
+
+    public void judge() {
+
+    }
 
 
 

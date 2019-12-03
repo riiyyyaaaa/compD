@@ -15,6 +15,7 @@ public class Classification {
 
     private static int numOfBlock = Integer.valueOf(propertyUtil.getProperty("numOfBlock"));
     private static int imageSize = Integer.valueOf(PropertyUtil.getProperty("imageSize"));
+    private static String[] featureNumStr = propertyUtil.getProperty("featureNum").split(",");
 
     private static IntegrateBlock iB = new IntegrateBlock();
 
@@ -65,8 +66,32 @@ public class Classification {
         //return  result;
     }
 
-    public static void getTexAve() {
 
+    /**
+     * 与えられたクラスの特徴量の平均を返す。平均の値は次元数ある。
+     * @param featureMat
+     * @param clusterList
+     * @return
+     */
+    public static List<Double> getTexAve(double[][][] featureMat, List<Integer> clusterList) {
+        int[] fNum = new int[featureNumStr.length];
+        for(int i=0; i<featureNumStr.length; i++) {
+            fNum[i] = Integer.valueOf(featureNumStr[i]);
+        }
+
+        List<List<Double>> data = iB.convFeatData2CalData(featureMat, fNum);
+
+        List<List<Double>> materials = new ArrayList<>();
+       // material = makeDataForAve();
+
+        for (Integer cluster : clusterList) {
+            List<List<Double>> material = iB.makeDataForAve(cluster, data);
+            materials.addAll(material);
+        }
+
+        List<Double> result = iB.calAve(materials);
+
+        return result;
     }
 
 }
