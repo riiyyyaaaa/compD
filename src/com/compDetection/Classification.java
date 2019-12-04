@@ -98,4 +98,41 @@ public class Classification {
         return result;
     }
 
+    /**
+     * クラスタごとの平均から背景を決める
+     * @param aveList
+     * @return
+     */
+    public static int judgeBack(List<List<Double>> aveList) {
+        int num = 0;
+        int[] flag = new int[aveList.size()];
+        double temp = 0;
+
+        for(int i=0; i<aveList.get(0).size(); i++) {
+            for(int j=0; j<aveList.size(); j++) {
+                if(j == 0) {
+                    temp = aveList.get(j).get(i);
+                    num = j;
+                } else {
+                    if(aveList.get(j).get(i) > temp) {
+                        temp = aveList.get(j).get(i);
+                        num = 0;
+                    }
+                }
+                flag[num]++;
+            }
+        }
+
+        int val = 0;
+        int resultNum = 0;
+        for(int i=0; i<flag.length; i++) {
+            if(flag[i] > val) {
+                val = flag[i];
+                resultNum = i;
+            }
+        }
+
+        return resultNum;
+    }
+
 }
