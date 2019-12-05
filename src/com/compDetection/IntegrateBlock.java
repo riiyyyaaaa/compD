@@ -86,7 +86,7 @@ public class IntegrateBlock {
         File dir = new File(cd + "\\src\\input\\");
 
         File[] list = dir.listFiles();
-        for(int i=2; i<3; i++) {
+        for(int i=0; i<list.length; i++) {
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
 
@@ -178,11 +178,21 @@ public class IntegrateBlock {
             }
             int resultClNum = iB.drawRedFrame(gr);
             int resultStage = numOfBlock*numOfBlock-resultClNum;
+            List<List<Double>> aveList = new ArrayList<>();
+
             System.out.println("分割数: " + resultClNum);
             System.out.println("Stage: " + resultStage);
+            int x=0;
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
-                cl.getTexAve(featureMat, cluster);
+                List<Double> texAve = cl.getTexAve(featureMat, cluster);
+                aveList.add(texAve);
+                ((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
+                x++;
             }
+            //　背景の領域がどれかを出力
+            int backNum =  cl.judgeBack(aveList);
+            System.out.println("Background: " + backNum);
+            gr.drawString("background: " + backNum, 50, iB.lengthOfASide+40);
 
 
             gr.dispose();
@@ -871,18 +881,7 @@ public class IntegrateBlock {
     }
 
 
-    public int detectBack() {
-        int backNum = 0;
-        // 背景の領域を断定するために、最も特徴量の平均が小さいものを探す(ざらざら->主要な物体である可能性が高い)
 
-
-        return backNum;
-    }
-
-
-    public void judge() {
-
-    }
 
 
 

@@ -100,7 +100,6 @@ public class Classification {
 
     /**
      * クラスタごとの平均から背景を決める
-     * @param aveList
      * @return
      */
     public static int judgeBack(List<List<Double>> aveList) {
@@ -116,7 +115,7 @@ public class Classification {
                 } else {
                     if(aveList.get(j).get(i) > temp) {
                         temp = aveList.get(j).get(i);
-                        num = 0;
+                        num = j;
                     }
                 }
                 flag[num]++;

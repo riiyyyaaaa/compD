@@ -195,18 +195,19 @@ public class TexGLCM {
         for(int i=0; i<biarr.length; i++) {
             mat[i] = calMat2(biarr[i]);
             for(int rad = 0; rad<4; rad++) {
-                System.out.println("\n---------- num:" + i + ", rad:" + rad + ": Mat ----------");
+                //System.out.println("\n---------- num:" + i + ", rad:" + rad + ": Mat ----------");
+
                 //int[][] matArr = calMat(rad, biarr[i]);
                 //mat[i][rad] = calMat(rad, biarr[i]);
                 int sum = 0;
                 for (int y = 0; y < mat[i][rad].length; y++) {
                     for (int x = 0; x < mat[i][rad].length; x++) {
-                        System.out.printf("%3d", mat[i][rad][y][x]);
+                        //System.out.printf("%3d", mat[i][rad][y][x]);
                         sum += mat[i][rad][y][x];
                     }
-                    System.out.println();
+                    //System.out.println();
                 }
-                System.out.println("\n sum mat = " + sum);
+                //System.out.println("\n sum mat = " + sum);
             }
         }
 
