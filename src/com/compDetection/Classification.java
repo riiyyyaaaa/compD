@@ -27,33 +27,37 @@ public class Classification {
      * 縦と横それぞれに連続したブロックが何個あるかを数える。
      * @param blocks
      * @param clNum
+     * @param direction 0: vertical, 1: horizon
      */
-    public static void calSLPos(List<List<Integer>> blocks, int clNum) {
-        List<List<Integer>> result = new ArrayList<>();
-        int[][] verLon = new int[clNum][numOfBlock];
-        int[][] horLon = new int[clNum][numOfBlock];
-        //Arrays.fill(verLon, 0);
+    public static int[][] calSLPos(List<List<Integer>> blocks, int clNum, int direction) {
+        int[][] result = new int[clNum][numOfBlock];
+        //int[][] horLon = new int[clNum][numOfBlock];
 
         for(int i=0; i<numOfBlock; i++) {
+            List<Integer> ver = new ArrayList<>();
+            List<Integer> hor = new ArrayList<>();
             for(int j=0; j<numOfBlock; j++) {
+
                 for(int k=0; k<clNum; k++) {
-                    if(k == blocks.get(j).get(i) && j>0 && blocks.get(j).get(i) == blocks.get(j-1).get(i)) {
-                        verLon[k][i]++;
+                    if(k == blocks.get(j).get(i) && j>0 && blocks.get(j).get(i) == blocks.get(j-1).get(i) && direction == 0) {
+                        result[k][i]++;
                     }
-                    if(k == blocks.get(i).get(j) && j>0 && blocks.get(i).get(j) == blocks.get(i).get(j-1)) {
-                        horLon[k][i]++;
+                    if(k == blocks.get(i).get(j) && j>0 && blocks.get(i).get(j) == blocks.get(i).get(j-1) && direction == 1) {
+                        result[k][i]++;
                     }
                 }
             }
+
         }
 
         System.out.println("Vertical");
-        for(int i=0; i<verLon.length; i++) {
-            for(int j=0; j<verLon[i].length; j++) {
-                System.out.print(verLon[i][j]);
+        for(int i=0; i<result.length; i++) {
+            for(int j=0; j<result[i].length; j++) {
+                System.out.print(result[i][j]);
             }
             System.out.println();
         }
+
 //        System.out.println("Horizon");
 //        for(int i=0; i<horLon.length; i++) {
 //            for(int j=0; j<horLon[i].length; j++) {
@@ -63,7 +67,7 @@ public class Classification {
 //        }
 //        System.out.println();
 
-        //return  result;
+        return  result;
     }
 
 
@@ -105,21 +109,16 @@ public class Classification {
     public static int judgeBack(List<List<Double>> aveList) {
         int num = 0;
         int[] flag = new int[aveList.size()];
-        double temp = 0;
+        double temp = 10000;
 
         for(int i=0; i<aveList.get(0).size(); i++) {
             for(int j=0; j<aveList.size(); j++) {
-                if(j == 0) {
+                if((j == 0) || (aveList.get(j).get(i) < temp)) {
                     temp = aveList.get(j).get(i);
                     num = j;
-                } else {
-                    if(aveList.get(j).get(i) > temp) {
-                        temp = aveList.get(j).get(i);
-                        num = j;
-                    }
                 }
-                flag[num]++;
             }
+            flag[num]++;
         }
 
         int val = 0;
@@ -133,5 +132,18 @@ public class Classification {
 
         return resultNum;
     }
+
+
+    public static int detectComp (List<List<Integer>> blocks, int clNum) {
+        int comp = 0;   // 日の丸: 0, 一点透視: 1, 二点透視: 2, アオリ: 3, 俯瞰: 4, 水平: 5
+        int sh = 0;
+        int lo = 0;
+
+        calSLPos(blocks, clNum, 0);
+
+        return comp;
+    }
+
+
 
 }
