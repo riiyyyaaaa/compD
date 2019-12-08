@@ -149,7 +149,7 @@ public class IntegrateBlock {
 
                     resultBlock.add(blocks);
                     System.out.println(blocks);
-                    cl.calSLPos(blocks, clNum, 0);
+                    cl.calPos(blocks, clNum, 0);
                     clusterList.add(cluster);
                 }
 
