@@ -148,7 +148,7 @@ public class IntegrateBlock {
                     int clNum = numOfBlock*numOfBlock-2-j;
 
                     resultBlock.add(blocks);
-                    System.out.println(blocks);
+                    //System.out.println(blocks);
                     cl.calPos(blocks, clNum, 0);
                     clusterList.add(cluster);
                 }
@@ -186,13 +186,29 @@ public class IntegrateBlock {
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
-                ((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
+                //((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
                 x++;
             }
             //　背景の領域がどれかを出力
             int backNum =  cl.judgeBack(aveList);
             System.out.println("Background: " + backNum);
             gr.drawString("background: " + backNum, 50, iB.lengthOfASide+40);
+
+            int resultNum = numOfBlock-resultClNum;
+            // 構図番号を出力
+            for(int j=0; j<resultClNum; j++) {
+                if(j != backNum) {
+                    int hoge = cl.checkPers(resultBlock.get(resultNum), j);
+                    if(hoge == 0) {
+                        gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    } else if(hoge == 1) {
+                        gr.drawString(j + "二点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    } else {
+                        gr.drawString(j + "無し", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    }
+                }
+            }
+            //cl.checkPers(blocks, reCl);
 
 
             gr.dispose();
@@ -372,13 +388,6 @@ public class IntegrateBlock {
 
         return classes;
     }
-
-
-/**
- *
- * クラスごとの中心点に近いものにクラス分けしていくと
- * 二つのクラスに入っているときに両方に提案できる
- */
 
 
     /**
@@ -695,7 +704,7 @@ public class IntegrateBlock {
 
         System.out.println("max: " + max);
 
-        if ((double)max.get(0) < (double)max.get(2) && (double)max.get(0) < 50.0) {
+        if ((double)max.get(0) < (double)max.get(2) && (double)max.get(0) < 100.0) {
             max.set(1, (double)numOfBlock*numOfBlock-3.0);
             blockNum = 2.0;
         } else {

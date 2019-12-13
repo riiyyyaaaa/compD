@@ -1,5 +1,7 @@
 package com.compDetection;
 
+import org.omg.CORBA.INTERNAL;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -200,6 +202,8 @@ public class Classification {
                 }
             }
         }
+        // TODO 日の丸構図；hor,verの中央が最大になる
+        // TODO 二点透視,一点透視: 単純にブロック数を数えて最長のとこを把握、その最長の位置で分類
 
         return comp;
     }
@@ -207,17 +211,17 @@ public class Classification {
     /**
      * 指定した領域がアオリ、俯瞰、どちらでもないかを決める
      * @param blocks
-     * @param reCl
+     * @param reCl 背景以外で現在参照したいクラスタ番号
      * @param clNum
      * @return
      */
-    public static int checkEyeLevel (List<List<Integer>> blocks, int reCl, int clNum) {
+    public static int checkEyeLevel (List<List<Integer>> blocks, int clNum) {
         int result = 2; // 0: アオリ, 1: 俯瞰, 2: 無し
         int top = 8;
         int bottom = 0;
 
         for(int i=0; i<numOfBlock; i++) {
-            if(blocks.get(i).contains(reCl)) {
+            if(blocks.get(i).contains(clNum)) {
                 if(top > i) {
                     top = i;
                 } else if (bottom < i) {
@@ -232,14 +236,16 @@ public class Classification {
 
             System.out.println("top: " + top + ", bottom: " + bottom);
 
-            int[][] pos = calPos(blocks, clNum, 1);
-            int[] sl = cl.checkSL(pos[reCl]);
+//            int[][] pos = calPos(blocks, clNum, 1);
+//            int[] sl = cl.checkSL(pos[reCl]);
+            int[] array = countBlock(blocks, clNum, 1);
+            int[] slArray = getSL(array);
 
             // 最長の位置, 複数あるかもだからlist
             List<Integer> lPos = new ArrayList<>();
             double posAve = 0;
             for (int i = 0; i < numOfBlock; i++) {
-                if (sl[1] == pos[reCl][i]) {
+                if (slArray[1] == array[i]) {
                     lPos.add(i);
                     posAve += i;
                 }
@@ -254,19 +260,320 @@ public class Classification {
             } else if(hukan<aori && hukan<nashi) {
                 result = 1;
             }
-
-            return result;
         }
-
-
-
-
-
-        //cl.checkSL()
 
         return result;
     }
 
+    /**
+     * 水平かどうか。0: 無し, 1: 水平
+     * @param blocks
+     * @param reCl
+     * @return
+     */
+    public static int checkHorizon(List<List<Integer>> blocks, int reCl) {
+        int result = 0;
+        int[] horizonNum = countBlock(blocks, reCl, 1);
+        boolean flag = false;
+        boolean firstVar = false;
+
+        for(int i=0; i<numOfBlock; i++) {
+            if((horizonNum[i] >= numOfBlock-2) && !firstVar) {
+                flag = true;
+                firstVar = true;
+            }
+            if(flag) {
+                if(!(horizonNum[i] >= numOfBlock-2)) {
+                    flag = false;
+                }
+            }
+        }
+
+        if(flag) {
+            result = 1;
+        } else {
+            result = 0;
+        }
+
+        return result;
+    }
+
+    /**
+     * 日の丸構図かどうかを判断
+     * @param blocks
+     * @param reCl
+     * @return
+     */
+    public static int checkCenter(List<List<Integer>> blocks, int reCl) {
+        // 縦の最長と横の最長が同じくらいであれば日の丸構図
+        int result = 0;
+
+        int[] horLen  = new int[numOfBlock];
+
+        for (int i = 0; i < numOfBlock; i++) {
+            boolean fl = false;
+            for (int j = 0; j < numOfBlock; j++) {
+                if (blocks.get(j).get(i) == reCl) {
+                    fl = true;
+                }
+            }
+            if (fl) {
+                horLen[i] = 1;
+            } else {
+                horLen[i] = 0;
+            }
+        }
+
+        int first1 = 0; // 最初に値が出た位置(横方向の)
+        int last1 = 0;  // 最後に値が出値値(横方向)
+        boolean fl1 = false;
+        for (int i = 0; i < numOfBlock; i++) {
+            if (!fl1 && horLen[i] == 1) {
+                first1 = i;
+                fl1 = true;
+            } else if (fl1 && horLen[i] == 1) {
+                last1 = i;
+            }
+        }
+
+        int top = 8;
+        int bottom = 0;
+
+        for(int i=0; i<numOfBlock; i++) {
+            if(blocks.get(i).contains(reCl)) {
+                if(top > i) {
+                    top = i;
+                } else if (bottom < i) {
+                    bottom = i;
+                }
+            }
+        }
+
+        double percentage;
+        if((last1-first1) >=  (bottom-top)) {
+            percentage = (last1-first1) / (bottom-top);
+        } else {
+            percentage = (bottom-top) / (last1-first1);
+        }
+
+        if(percentage<2.0) {
+            result = 1;
+        }
+
+        return result;
+    }
+
+    /**
+     *　一点透視、二点透視かどうかを判断
+     * @param blocks
+     * @param reCl: 現在みている領域の番号
+     * @return
+     */
+    public static int checkPers(List<List<Integer>> blocks, int reCl) {
+        int result = 0; // 0: 一点透視, 1: 二点透視, 2: 無し
+
+        int left = 8;
+        int right = 0;
+        int[] horLen  = new int[numOfBlock];    // i列にreClが含まれていれば1, そうでなければ0
+
+        int[] block = countBlock(blocks, reCl, 0);
+        int[] sl = getSL(block);
+
+        // 最大と最小の差が2未満であれば2にする
+        if(!(Math.abs(sl[0]-sl[1])<2)) {
+
+            for (int i = 0; i < numOfBlock; i++) {
+                boolean fl = false;
+                for (int j = 0; j < numOfBlock; j++) {
+                    if (blocks.get(j).get(i) == reCl) {
+                        fl = true;
+                    }
+                }
+                if (fl) {
+                    horLen[i] = 1;
+                } else {
+                    horLen[i] = 0;
+                }
+            }
+
+            int first1 = 0; // 最初に値が出た位置(横方向の)
+            int last1 = 0;  // 最後に値が出値値(横方向)
+            boolean fl1 = false;
+            for (int i = 0; i < numOfBlock; i++) {
+                if (!fl1 && horLen[i] == 1) {
+                    first1 = i;
+                    fl1 = true;
+                } else if (fl1 && horLen[i] == 1) {
+                    last1 = i;
+                }
+            }
+            double middle = (double) (last1 - first1) / 2 + (double) first1;
+
+
+            int firstNum = block[first1];   // 最初に出現する値
+
+            List<Integer> kugiri = new ArrayList<>();
+            boolean cont = true;
+            int count = first1;
+
+            System.out.println("block中身");
+            for (int i = first1; i < last1+1; i++) {
+                System.out.println(block[i]);
+                if (block[i] == sl[0] || block[i] == sl[1]) {
+                    kugiri.add(i);
+                }
+            }
+
+            System.out.println("sl中身\n" + sl[0] + ", " + sl[1]);
+            System.out.println("first: " + first1);
+            System.out.println("last: " + last1);
+
+            // 最初の値が最大と最小どちらに近いか
+            int diffS = Math.abs(kugiri.get(0) - sl[0]);
+            int diffL = Math.abs(kugiri.get(0) - sl[1]);
+
+
+            //最大値が中央に近い、または最小値が恥：二点透視
+            //最小値が中央に近い、またわ最大値が恥：一点透視、
+            List<Integer> sPos = getPos(sl[0], block);
+            List<Integer> lPos = getPos(sl[1], block);
+            boolean flag2 = false;
+            if(diffS<diffL && lPos.get(0) != 7) {
+                //左端が最小値に近い時,最大値の向こうに値が存在すれば二点透視
+                for(int i=lPos.get(0)+1; i<numOfBlock; i++) {
+                    if(block[i] != 0) {
+                        flag2 = true;
+                    }
+                }
+            }
+            if(flag2) {
+                result = 1;
+            } else {
+                result = 0;
+            }
+
+
+//        int[][] pos = calPos(blocks, clNum, 0);
+//        int[] sl = cl.checkSL(pos[reCl]);
+//
+//
+//        boolean flag = true;
+//
+//        int[] horLen = new int[numOfBlock];
+
+            // 連続と連続の間を埋める
+//        for(int i=0; i<numOfBlock; i++) {
+//            int tempLen = 0;
+//            int firstNum = 0;
+//            boolean cont = false;
+//            for(int j=0; j<numOfBlock; j++) {
+//                if(blocks.get(j).get(i) == reCl && flag == true) {
+//                    tempLen++;
+//                    flag = false;
+//                    firstNum = j;
+//                } else if(blocks.get(j).get(i) == reCl && blocks.get(j-1).get(i) == reCl && !cont && !flag) {
+//                    tempLen++;
+//                    cont = true;
+//                } else if(blocks.get(j).get(i) == reCl && blocks.get(j-1).get(i) == reCl && cont && !flag) {
+//                    tempLen = j-firstNum;
+//                }
+//            }
+//            horLen[i] = tempLen;
+//        }
+
+//        int result = 0;
+//
+//        int[] slLen = getSL(horLen);
+//        int recLen = 0;
+//        int dec = 0;
+//        int inc = 0;
+//
+//        int rate = 0;
+//        int kugiri = 0;
+//
+//        recLen = horLen[0];
+//        for(int i=1; i<numOfBlock; i++) {
+//            rate += recLen-horLen[i];
+//            if(horLen[i] == slLen[0] || horLen[i] == slLen[1]) {
+//
+//                kugiri = i;
+//            }
+//
+//        }
+
+        }
+        return result;
+
+    }
+
+    /**
+     * 与えられた配列内に指定した値の位置、インデックス番号を返却する。
+     * @param var
+     * @param array
+     * @return
+     */
+    public static List<Integer> getPos(int var, int[] array) {
+        List<Integer> pos = new ArrayList<>();
+        for(int i=0; i<array.length; i++) {
+            if(array[i] == var) {
+                pos.add(i);
+            }
+        }
+        return pos;
+    }
+
+    /**
+     * 最小の値と、最大の値を返す。位置ではない。
+     * @param array
+     * @return
+     */
+    public static int[] getSL(int[] array) {
+        int s = 8;
+        int l = 0;
+        int[] result = new int[2];
+
+        for(int i=0; i<numOfBlock; i++) {
+            if(array[i]<s) {
+                s = array[i];
+            }
+            if(array[i]>l) {
+                l = array[i];
+            }
+        }
+        result[0] = s;
+        result[1] = l;
+
+        return result;
+    }
+
+    /**
+     * 縦, 横にブロックが何個あるかを数える。
+     * @param blocks
+     * @param reCl: 数えたいクラスタ番号
+     * @param direction: 方向、縦か横
+     * @return
+     */
+    public static int[] countBlock(List<List<Integer>> blocks, int reCl, int direction) {
+        int[] result = new int[numOfBlock];
+
+        for(int i=0; i<numOfBlock; i++) {
+            int count = 0;
+            for(int j=0; j<numOfBlock; j++) {
+                if(direction == 0) {
+                    if (blocks.get(j).get(i) == reCl) {
+                        count++;
+                    }
+                } else {
+                    if (blocks.get(i).get(j) == reCl) {
+                        count++;
+                    }
+                }
+            }
+            result[i] = count;
+        }
+
+        return result;
+    }
 
 
 }
