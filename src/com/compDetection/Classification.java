@@ -208,10 +208,12 @@ public class Classification {
         return comp;
     }
 
+    // TODO 最大値から左右の消失点があるようにする
+    // TODO 消失点がない側で最大値からの落ちていく速度が、収束するさきが400px内に収まるなら二点透視、それ以外が一点透視
+
     /**
      * 指定した領域がアオリ、俯瞰、どちらでもないかを決める
      * @param blocks
-     * @param reCl 背景以外で現在参照したいクラスタ番号
      * @param clNum
      * @return
      */
@@ -276,7 +278,9 @@ public class Classification {
         int[] horizonNum = countBlock(blocks, reCl, 1);
         boolean flag = false;
         boolean firstVar = false;
+        int varCount = 0;
 
+        // 横線が一本だけか、境界と同じ長さが連続する時
         for(int i=0; i<numOfBlock; i++) {
             if((horizonNum[i] >= numOfBlock-2) && !firstVar) {
                 flag = true;
@@ -285,6 +289,10 @@ public class Classification {
             if(flag) {
                 if(!(horizonNum[i] >= numOfBlock-2)) {
                     flag = false;
+                } else if(horizonNum[i] == 0) {
+
+                } else {
+
                 }
             }
         }
@@ -379,8 +387,10 @@ public class Classification {
         int[] block = countBlock(blocks, reCl, 0);
         int[] sl = getSL(block);
 
+        double percentage = (double)sl[1]/(double)sl[0];
+        if(percentage>1.5) {
         // 最大と最小の差が2未満であれば2にする
-        if(!(Math.abs(sl[0]-sl[1])<2)) {
+        //if(!(Math.abs(sl[0]-sl[1])<2)) {
 
             for (int i = 0; i < numOfBlock; i++) {
                 boolean fl = false;
@@ -429,26 +439,42 @@ public class Classification {
             System.out.println("last: " + last1);
 
             // 最初の値が最大と最小どちらに近いか
-            int diffS = Math.abs(kugiri.get(0) - sl[0]);
-            int diffL = Math.abs(kugiri.get(0) - sl[1]);
+            //int diffS = Math.abs(kugiri.get(0) - sl[0]);
+            //int diffL = Math.abs(kugiri.get(0) - sl[1]);
+
+            // 最大値と中間の差
+            double LPos = getPos(sl[1], block).get(0);
+            double SPos = getPos(sl[0], block).get(0);
+            double diffLM = Math.abs(LPos-middle);
+            double diffLS = Math.abs(LPos-first1);
+            double diffLL = Math.abs(LPos-last1);
+            double diffSM = Math.abs(SPos-middle);
+            double diffSS = Math.abs(SPos-first1);
+            double diffSL = Math.abs(SPos-last1);
 
 
-            //最大値が中央に近い、または最小値が恥：二点透視
-            //最小値が中央に近い、またわ最大値が恥：一点透視、
+            //最大値が中央に近い、または最小値がはじ：二点透視
+            //最小値が中央に近い、またわ最大値がはじ：一点透視、
             List<Integer> sPos = getPos(sl[0], block);
             List<Integer> lPos = getPos(sl[1], block);
             boolean flag2 = false;
-            if(diffS<diffL && lPos.get(0) != 7) {
+            boolean flag1 = false;
+            if(diffLM <diffLS && diffLM<diffLL) {
                 //左端が最小値に近い時,最大値の向こうに値が存在すれば二点透視
-                for(int i=lPos.get(0)+1; i<numOfBlock; i++) {
-                    if(block[i] != 0) {
-                        flag2 = true;
-                    }
-                }
+//                for(int i=lPos.get(0)+1; i<numOfBlock; i++) {
+//                    if(block[i] != 0) {
+//                        flag2 = true;
+//                    }
+//                }
+                flag2 = true;
+            } else if(diffSS < diffSM || diffSL <diffSM) {
+                flag1 = true;
             }
+
+
             if(flag2) {
                 result = 1;
-            } else {
+            } else if(flag1) {
                 result = 0;
             }
 

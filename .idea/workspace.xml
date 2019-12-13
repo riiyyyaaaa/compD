@@ -2,50 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="170fa885-035c-42ee-bd20-bd609dd51a80" name="Default" comment="add calDistanceMat">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/META-INF/compDetection2.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/IntegrateBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/IntegrateBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/TexGLCM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/TexGLCM.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/Classification.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/com/compDetection/Classification.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result0.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result0.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result10.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result11.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result12.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result13.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result13.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result14.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result14.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result15.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result15.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result16.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result16.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result17.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result17.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result18.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result18.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result19.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result19.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result20.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result20.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result21.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result21.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result22.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result22.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result23.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result23.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result24.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result24.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result25.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result25.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result26.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result26.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result27.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result27.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result28.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result28.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result29.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result29.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result30.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result30.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result31.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result31.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result32.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result32.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result33.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result33.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result34.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result34.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result35.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result35.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result36.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result36.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result5.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result7.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result8.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compDetection2/output/IntegrateOutput/result9.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/compDetection/Classification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/Classification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/compDetection/IntegrateBlock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -410,7 +382,7 @@
       <workItem from="1574899183489" duration="84048000" />
       <workItem from="1576054170827" duration="315000" />
       <workItem from="1576055016918" duration="1675000" />
-      <workItem from="1576060615349" duration="20808000" />
+      <workItem from="1576060615349" duration="25588000" />
     </task>
     <task id="LOCAL-00001" summary="change method of Matrix's calculation">
       <created>1539078035130</created>
@@ -513,22 +485,22 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="640" y="252" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1576060557802" />
-    <state width="1123" height="252" key="GridCell.Tab.0.bottom" timestamp="1576157506124">
+    <state width="1123" height="252" key="GridCell.Tab.0.bottom" timestamp="1576204338135">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1123" height="252" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1576157506124" />
-    <state width="1123" height="252" key="GridCell.Tab.0.center" timestamp="1576157506123">
+    <state width="1123" height="252" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1576204338135" />
+    <state width="1123" height="252" key="GridCell.Tab.0.center" timestamp="1576204338135">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1123" height="252" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1576157506123" />
-    <state width="1123" height="252" key="GridCell.Tab.0.left" timestamp="1576157506122">
+    <state width="1123" height="252" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1576204338135" />
+    <state width="1123" height="252" key="GridCell.Tab.0.left" timestamp="1576204338135">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1123" height="252" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1576157506122" />
-    <state width="1123" height="252" key="GridCell.Tab.0.right" timestamp="1576157506123">
+    <state width="1123" height="252" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1576204338135" />
+    <state width="1123" height="252" key="GridCell.Tab.0.right" timestamp="1576204338135">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1123" height="252" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1576157506123" />
+    <state width="1123" height="252" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1576204338135" />
     <state x="656" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1576060618217">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
