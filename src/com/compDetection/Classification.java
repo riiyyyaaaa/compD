@@ -99,10 +99,10 @@ public class Classification {
         }
 
         List<Double> result = iB.calAve(materials);
-        System.out.println("Cluster");
-        System.out.println(clusterList);
-        System.out.println("平均");
-        System.out.println(result);
+//        System.out.println("Cluster");
+//        System.out.println(clusterList);
+//        System.out.println("平均");
+//        System.out.println(result);
 
         return result;
     }
@@ -378,7 +378,7 @@ public class Classification {
      * @return
      */
     public static int checkPers(List<List<Integer>> blocks, int reCl) {
-        int result = 0; // 0: 一点透視, 1: 二点透視, 2: 無し
+        int result = 2; // 0: 一点透視, 1: 二点透視, 2: 無し
 
         int left = 8;
         int right = 0;
@@ -388,7 +388,7 @@ public class Classification {
         int[] sl = getSL(block);
 
         double percentage = (double)sl[1]/(double)sl[0];
-        if(percentage>1.5) {
+        //if(percentage>1.5) {
         // 最大と最小の差が2未満であれば2にする
         //if(!(Math.abs(sl[0]-sl[1])<2)) {
 
@@ -426,17 +426,17 @@ public class Classification {
             boolean cont = true;
             int count = first1;
 
-            System.out.println("block中身");
+            //System.out.println("block中身");
             for (int i = first1; i < last1+1; i++) {
-                System.out.println(block[i]);
+               // System.out.println(block[i]);
                 if (block[i] == sl[0] || block[i] == sl[1]) {
                     kugiri.add(i);
                 }
             }
-
-            System.out.println("sl中身\n" + sl[0] + ", " + sl[1]);
-            System.out.println("first: " + first1);
-            System.out.println("last: " + last1);
+//
+//            System.out.println("sl中身\n" + sl[0] + ", " + sl[1]);
+//            System.out.println("first: " + first1);
+//            System.out.println("last: " + last1);
 
             // 最初の値が最大と最小どちらに近いか
             //int diffS = Math.abs(kugiri.get(0) - sl[0]);
@@ -459,15 +459,44 @@ public class Classification {
             List<Integer> lPos = getPos(sl[1], block);
             boolean flag2 = false;
             boolean flag1 = false;
-            if(diffLM <diffLS && diffLM<diffLL) {
-                //左端が最小値に近い時,最大値の向こうに値が存在すれば二点透視
-//                for(int i=lPos.get(0)+1; i<numOfBlock; i++) {
-//                    if(block[i] != 0) {
-//                        flag2 = true;
-//                    }
-//                }
-                flag2 = true;
-            } else if(diffSS < diffSM || diffSL <diffSM) {
+
+            System.out.println("block中身");
+            for (int i = 0; i <numOfBlock; i++) {
+                System.out.println(block[i]);
+            }
+            //左端が最小値に近い時,最大値の向こうに値が存在すれば二点透視
+            if(lPos.get(0)<numOfBlock) {
+                for (int i = lPos.get(0) + 1; i < numOfBlock; i++) {
+                    if (block[i] != 0) {
+                        flag2 = true;
+                        System.out.println("true");
+                    }
+                }
+            }
+
+            if(lPos.get(0)!=0) {
+                for (int i = lPos.get(0) - 1; i>0; i--) {
+                    if (block[i] != 0) {
+                        flag2 = true;
+                        System.out.println("true");
+                    }
+                }
+            }
+
+
+
+//            if(diffLM <diffLS && diffLM<diffLL) {
+//                //左端が最小値に近い時,最大値の向こうに値が存在すれば二点透視
+////                for(int i=lPos.get(0)+1; i<numOfBlock; i++) {
+////                    if(block[i] != 0) {
+////                        flag2 = true;
+////                    }
+////                }
+//                flag2 = true;
+//            } else if(diffSS < diffSM || diffSL <diffSM) {
+//                flag1 = true;
+//            }
+            if(diffSS < diffSM || diffSL <diffSM) {
                 flag1 = true;
             }
 
@@ -477,57 +506,7 @@ public class Classification {
             } else if(flag1) {
                 result = 0;
             }
-
-
-//        int[][] pos = calPos(blocks, clNum, 0);
-//        int[] sl = cl.checkSL(pos[reCl]);
-//
-//
-//        boolean flag = true;
-//
-//        int[] horLen = new int[numOfBlock];
-
-            // 連続と連続の間を埋める
-//        for(int i=0; i<numOfBlock; i++) {
-//            int tempLen = 0;
-//            int firstNum = 0;
-//            boolean cont = false;
-//            for(int j=0; j<numOfBlock; j++) {
-//                if(blocks.get(j).get(i) == reCl && flag == true) {
-//                    tempLen++;
-//                    flag = false;
-//                    firstNum = j;
-//                } else if(blocks.get(j).get(i) == reCl && blocks.get(j-1).get(i) == reCl && !cont && !flag) {
-//                    tempLen++;
-//                    cont = true;
-//                } else if(blocks.get(j).get(i) == reCl && blocks.get(j-1).get(i) == reCl && cont && !flag) {
-//                    tempLen = j-firstNum;
-//                }
-//            }
-//            horLen[i] = tempLen;
-//        }
-
-//        int result = 0;
-//
-//        int[] slLen = getSL(horLen);
-//        int recLen = 0;
-//        int dec = 0;
-//        int inc = 0;
-//
-//        int rate = 0;
-//        int kugiri = 0;
-//
-//        recLen = horLen[0];
-//        for(int i=1; i<numOfBlock; i++) {
-//            rate += recLen-horLen[i];
-//            if(horLen[i] == slLen[0] || horLen[i] == slLen[1]) {
-//
-//                kugiri = i;
-//            }
-//
-//        }
-
-        }
+        //}
         return result;
 
     }

@@ -197,19 +197,30 @@ public class IntegrateBlock {
             int resultNum = numOfBlock-resultClNum;
             // 構図番号を出力
             for(int j=0; j<resultClNum; j++) {
-                if(j != backNum) {
-                    int hoge = cl.checkPers(resultBlock.get(resultNum), j);
-                    if(hoge == 0) {
+                if (j != backNum) {
+                    System.out.println("Check Perspective") ;
+                    int pers = cl.checkPers(resultBlock.get(resultNum), j);
+
+                    if (pers == 0) {
                         gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
-                    } else if(hoge == 1) {
+                    } else if (pers == 1) {
                         gr.drawString(j + "二点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
                     } else {
                         gr.drawString(j + "無し", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
                     }
+
+
+                    int eye = cl.checkEyeLevel(resultBlock.get(resultClNum), j);
+                    if (eye == 0) {
+                        gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    } else if (eye == 1) {
+                        gr.drawString(j + "俯瞰", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    } else {
+                        gr.drawString(j + "無し", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    }
+
                 }
             }
-            //cl.checkPers(blocks, reCl);
-
 
             gr.dispose();
             File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
