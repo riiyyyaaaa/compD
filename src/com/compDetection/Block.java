@@ -108,7 +108,7 @@ public class Block {
         BufferedImage[] block = new BufferedImage[numOfBlock * numOfBlock];
         int count = 0;
 
-        System.out.println("w:" + intw + ", h:" + inth);
+        //System.out.println("w:" + intw + ", h:" + inth);
 
         for (int i = 0; i < numOfBlock; i++) {
             for (int j = 0; j < numOfBlock; j++) {
