@@ -199,7 +199,7 @@ public class IntegrateBlock {
             int resultNum = numOfBlock-resultClNum;
             // 構図番号を出力
             for(int j=0; j<resultClNum; j++) {
-                gr.drawString("result Cl Num: " + resultClNum, 50, 1000);
+                //gr.drawString("result Cl Num: " + resultClNum, 50, 1000);
                 if (j != backNum) {
                     int pers = cl.checkPers(resultBlock.get(resultNum-1), j);
                     if (pers == 0) {
