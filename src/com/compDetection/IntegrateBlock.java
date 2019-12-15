@@ -55,11 +55,11 @@ public class IntegrateBlock {
             //Collections.addAll(list, 0);
             group.add(i, list);
             //System.out.println(group);
-
         }
         process.clear();
-
+        clusterList.clear();
     }
+
 
 //    /**
 //     * ブロックの番号と列のインデックス番号が対応
@@ -87,6 +87,7 @@ public class IntegrateBlock {
 
         File[] list = dir.listFiles();
         for(int i=0; i<list.length; i++) {
+            System.out.println("i: " + i);
             System.out.println(list[i]);
             int[][][][] mat_test = TexGLCM.calGLCM(list[i]);
 
@@ -125,7 +126,7 @@ public class IntegrateBlock {
 
 
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock-2; j++) {
-                System.out.println("count: " + j);
+                //System.out.println("count: " + j);
 
                 iB.calDistanceMatRepeat(featureMat);
                 List<List<Integer>> cluster = iB.showIntegration();
@@ -180,13 +181,14 @@ public class IntegrateBlock {
             int resultStage = numOfBlock*numOfBlock-resultClNum;
             List<List<Double>> aveList = new ArrayList<>();
 
-            System.out.println("分割数: " + resultClNum);
-            System.out.println("Stage: " + resultStage);
+//            System.out.println("分割数: " + resultClNum);
+//            System.out.println("Stage: " + resultStage);
             int x=0;
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
                 //((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
+                ((Graphics2D) gr).drawString("cluster " + x + " : s" + cluster, 50, iB.lengthOfASide + 199*x + 100);
                 x++;
             }
             //　背景の領域がどれかを出力
@@ -197,10 +199,9 @@ public class IntegrateBlock {
             int resultNum = numOfBlock-resultClNum;
             // 構図番号を出力
             for(int j=0; j<resultClNum; j++) {
+                gr.drawString("result Cl Num: " + resultClNum, 50, 1000);
                 if (j != backNum) {
-                    System.out.println("Check Perspective") ;
-                    int pers = cl.checkPers(resultBlock.get(resultNum), j);
-
+                    int pers = cl.checkPers(resultBlock.get(resultNum-1), j);
                     if (pers == 0) {
                         gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
                     } else if (pers == 1) {
@@ -210,7 +211,7 @@ public class IntegrateBlock {
                     }
 
 
-                    int eye = cl.checkEyeLevel(resultBlock.get(resultClNum), j);
+                    int eye = cl.checkEyeLevel(resultBlock.get(resultNum-1), j);
                     if (eye == 0) {
                         gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
                     } else if (eye == 1) {
@@ -228,11 +229,11 @@ public class IntegrateBlock {
 
 
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
-                System.out.println("group(" + j+ "): " + iB.group.get(j));
+                //System.out.println("group(" + j+ "): " + iB.group.get(j));
             }
             System.out.println();
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
-                System.out.println("Integ(" + j + ")" + iB.process.get(j));
+                //System.out.println("Integ(" + j + ")" + iB.process.get(j));
             }
 
             iB.reset();
@@ -391,7 +392,7 @@ public class IntegrateBlock {
         }
 
         //System.out.println(classes);
-        System.out.println(classes + "\n");
+        //System.out.println(classes + "\n");
         refInteg(classes.get(0), classes.get(1));
         List processData = Arrays.asList((double)classes.get(0), (double)classes.get(1), min);
         //System.out.println(processData);
@@ -463,10 +464,11 @@ public class IntegrateBlock {
             }
         }
 
-        System.out.println();
-        System.out.println("group(" + class1 + ")" +this.group.get(class1));
-        System.out.println("group(" + class2 + ")" + this.group.get(class2));
-        System.out.println();
+        //統合したグループ2つの表示
+//        System.out.println();
+//        System.out.println("group(" + class1 + ")" +this.group.get(class1));
+//        System.out.println("group(" + class2 + ")" + this.group.get(class2));
+//        System.out.println();
 
         return group;
     }
@@ -762,6 +764,7 @@ public class IntegrateBlock {
             }
             System.out.println();
         }
+        System.out.println();
 
         return blocks;
     }

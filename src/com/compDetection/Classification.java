@@ -55,13 +55,13 @@ public class Classification {
 
         }
 
-        System.out.println("Vertical");
-        for(int i=0; i<result.length; i++) {
-            for(int j=0; j<result[i].length; j++) {
-                System.out.print(result[i][j]);
-            }
-            System.out.println();
-        }
+//        System.out.println("Vertical");
+//        for(int i=0; i<result.length; i++) {
+//            for(int j=0; j<result[i].length; j++) {
+//                System.out.print(result[i][j]);
+//            }
+//            System.out.println();
+//        }
 
 //        System.out.println("Horizon");
 //        for(int i=0; i<horLon.length; i++) {
@@ -114,11 +114,13 @@ public class Classification {
     public static int judgeBack(List<List<Double>> aveList) {
         int num = 0;
         int[] flag = new int[aveList.size()];
-        double temp = 10000;
+        //double temp = 10000;
+        double temp = 0.0;
 
         for(int i=0; i<aveList.get(0).size(); i++) {
             for(int j=0; j<aveList.size(); j++) {
-                if((j == 0) || (aveList.get(j).get(i) < temp)) {
+                //if((j == 0) || (aveList.get(j).get(i) < temp)) {
+                if((j == 0) || (aveList.get(j).get(i) > temp)) {
                     temp = aveList.get(j).get(i);
                     num = j;
                 }
@@ -222,6 +224,16 @@ public class Classification {
         int top = 8;
         int bottom = 0;
 
+        System.out.println("clNum: " + clNum);
+        System.out.println("block　中身");
+        for(int i=0; i<numOfBlock; i++) {
+            for(int j=0; j<numOfBlock; j++) {
+                System.out.print(" " + blocks.get(i).get(j));
+            }
+            System.out.println();
+        }
+        System.out.println();
+
         for(int i=0; i<numOfBlock; i++) {
             if(blocks.get(i).contains(clNum)) {
                 if(top > i) {
@@ -231,38 +243,55 @@ public class Classification {
                 }
             }
         }
-        int middle = top+bottom/2;
+        double middle = top+bottom/2;
 
         // 領域の高さが3ブロック以下ならば俯瞰でもアオリでもない
-        if(bottom - top > 3) {
+        //if(bottom - top > 3) {
 
-            System.out.println("top: " + top + ", bottom: " + bottom);
+            System.out.println("top!: " + top + ", bottom!: " + bottom);
 
 //            int[][] pos = calPos(blocks, clNum, 1);
 //            int[] sl = cl.checkSL(pos[reCl]);
             int[] array = countBlock(blocks, clNum, 1);
             int[] slArray = getSL(array);
 
+            System.out.println("count Block 結果");
+            for(int i=0; i<numOfBlock; i++) {
+                System.out.print(" " +array[i]);
+            }
+            System.out.println();
+
             // 最長の位置, 複数あるかもだからlist
             List<Integer> lPos = new ArrayList<>();
             double posAve = 0;
+            System.out.println("max length: " + slArray[1]);
             for (int i = 0; i < numOfBlock; i++) {
                 if (slArray[1] == array[i]) {
                     lPos.add(i);
+                    //System.out.println(lPos.get(i));
                     posAve += i;
                 }
             }
             posAve /= lPos.size();
 
+            System.out.println("top: " + top);
+            System.out.println("middle: " + middle);
+            System.out.println("bottom: " + bottom);
+            System.out.println("average: " + posAve);
             double aori = Math.abs(posAve-bottom);
             double hukan = Math.abs(posAve-top);
             double nashi = Math.abs(posAve-middle);
+
             if(aori<hukan && aori<nashi) {
                 result = 0;
+                System.out.println("アオリ");
             } else if(hukan<aori && hukan<nashi) {
                 result = 1;
+                System.out.println("俯瞰");
+            } else {
+                System.out.println("無し");
             }
-        }
+        //}
 
         return result;
     }
@@ -460,25 +489,44 @@ public class Classification {
             boolean flag2 = false;
             boolean flag1 = false;
 
-            System.out.println("block中身");
-            for (int i = 0; i <numOfBlock; i++) {
-                System.out.println(block[i]);
-            }
+//            System.out.println("blocksの中身");
+//            for(int i=0; i<numOfBlock; i++) {
+//                for(int j=0; j<numOfBlock; j++) {
+//                    System.out.print(blocks.get(i).get(j));
+//                }
+//                System.out.println();
+//            }
+//
+//
+//            int[] test = countBlock(blocks, 1, 0);
+//            System.out.println("block中身0: ");
+//            for (int i = 0; i <numOfBlock; i++) {
+//                System.out.print(block[i]);
+//            }
+//            System.out.println();
+//
+//            System.out.println("block中身1: ");
+//            for (int i = 0; i <numOfBlock; i++) {
+//                System.out.print(block[i]);
+//            }
+//            System.out.println();
+
+
             //左端が最小値に近い時,最大値の向こうに値が存在すれば二点透視
             if(lPos.get(0)<numOfBlock) {
                 for (int i = lPos.get(0) + 1; i < numOfBlock; i++) {
-                    if (block[i] != 0) {
+                    if (block[i] != 0 && block[i]<block[lPos.get(0)]) {
                         flag2 = true;
-                        System.out.println("true");
+                        //System.out.println("true");
                     }
                 }
             }
 
             if(lPos.get(0)!=0) {
                 for (int i = lPos.get(0) - 1; i>0; i--) {
-                    if (block[i] != 0) {
+                    if (block[i] != 0 && block[i]<block[lPos.get(0)]) {
                         flag2 = true;
-                        System.out.println("true");
+                        //System.out.println("true");
                     }
                 }
             }
