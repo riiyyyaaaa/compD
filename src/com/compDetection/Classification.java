@@ -238,7 +238,7 @@ public class Classification {
             if(blocks.get(i).contains(clNum)) {
                 if(top > i) {
                     top = i;
-                } else if (bottom < i) {
+                } else if (bottom < i){
                     bottom = i;
                 }
             }
@@ -299,37 +299,51 @@ public class Classification {
     /**
      * 水平かどうか。0: 無し, 1: 水平
      * @param blocks
-     * @param reCl
+     * @param clNum
      * @return
      */
-    public static int checkHorizon(List<List<Integer>> blocks, int reCl) {
+    public static int checkHorizon(List<List<Integer>> blocks, int clNum) {
         int result = 0;
-        int[] horizonNum = countBlock(blocks, reCl, 1);
-        boolean flag = false;
-        boolean firstVar = false;
-        int varCount = 0;
+        int[] horizonNum = countBlock(blocks, clNum, 1);
+        int top = 8;
+        int bottom = 0;
 
-        // 横線が一本だけか、境界と同じ長さが連続する時
         for(int i=0; i<numOfBlock; i++) {
-            if((horizonNum[i] >= numOfBlock-2) && !firstVar) {
-                flag = true;
-                firstVar = true;
-            }
-            if(flag) {
-                if(!(horizonNum[i] >= numOfBlock-2)) {
-                    flag = false;
-                } else if(horizonNum[i] == 0) {
-
-                } else {
-
+            if(blocks.get(i).contains(clNum)) {
+                if(top > i) {
+                    top = i;
+                } else if (bottom < i) {
+                    bottom = i;
                 }
             }
         }
 
-        if(flag) {
-            result = 1;
-        } else {
-            result = 0;
+        boolean firstVar = false;
+        boolean cont = false;
+        int firstHor = 0;
+        int contCount = 0;
+        int finalCount = 0;
+
+        // 境界と同じ長さが連続する時
+        for(int i=top; i<= bottom; i++) {
+//            if((horizonNum[i] != 0) && !firstVar) {
+//                firstHor = horizonNum[i];
+//                firstVar = true;
+//            }
+            if(horizonNum[i] >= numOfBlock-1 && i != 0) {
+                if(horizonNum[i-1] >= numOfBlock) {
+                    cont = true;
+                    contCount ++;
+                } else {
+                    if(contCount > finalCount ) finalCount = contCount;
+                    cont = false;
+                    contCount = 0;
+                }
+            }
+            if(finalCount > numOfBlock/2-1){
+                result = 1;
+            }
+
         }
 
         return result;
@@ -474,20 +488,20 @@ public class Classification {
             // 最大値と中間の差
             double LPos = getPos(sl[1], block).get(0);
             double SPos = getPos(sl[0], block).get(0);
-            double diffLM = Math.abs(LPos-middle);
-            double diffLS = Math.abs(LPos-first1);
-            double diffLL = Math.abs(LPos-last1);
-            double diffSM = Math.abs(SPos-middle);
-            double diffSS = Math.abs(SPos-first1);
-            double diffSL = Math.abs(SPos-last1);
-
-
-            //最大値が中央に近い、または最小値がはじ：二点透視
-            //最小値が中央に近い、またわ最大値がはじ：一点透視、
+//            double diffLM = Math.abs(LPos-middle);
+//            double diffLS = Math.abs(LPos-first1);
+//            double diffLL = Math.abs(LPos-last1);
+//            double diffSM = Math.abs(SPos-middle);
+//            double diffSS = Math.abs(SPos-first1);
+//            double diffSL = Math.abs(SPos-last1);
+//
+//
+//            //最大値が中央に近い、または最小値がはじ：二点透視
+//            //最小値が中央に近い、またわ最大値がはじ：一点透視、
             List<Integer> sPos = getPos(sl[0], block);
             List<Integer> lPos = getPos(sl[1], block);
-            boolean flag2 = false;
-            boolean flag1 = false;
+//            boolean flag2 = false;
+//            boolean flag1 = false;
 
 //            System.out.println("blocksの中身");
 //            for(int i=0; i<numOfBlock; i++) {
@@ -542,19 +556,23 @@ public class Classification {
                     for(int i=1; i<smallTlPos.size(); i++) {
                         changeVarSmall += (block[lPos.get(0)-i]-block[lPos.get(0)-i-1]);
                     }
-                    int vanishingPSmall = smallTlPos.size()/changeVarSmall*block[lPos.get(0)];
-                    // TODO 判定の値については要検討
-                    if(vanishingPSmall < numOfBlock) needCheckSmall = true;
+                    if(changeVarSmall != 0) {
+                        int vanishingPSmall = smallTlPos.size() / changeVarSmall * block[lPos.get(0)];
+                        // TODO 判定の値については要検討
+                        if (vanishingPSmall < numOfBlock) needCheckSmall = true;
+                    }
                 }
 
                 if(!needCheckBig && bigTlPos.size()>0) {
                     int changeVarBig = block[lPos.get(0)]-block[lPos.get(0)+1];
-                    for(int i=1; i<smallTlPos.size(); i++) {
+                    for(int i=1; i<smallTlPos.size()-2; i++) {
                         changeVarBig += (block[lPos.get(0)+i]-block[lPos.get(0)+i+1]);
                     }
-                    int vanishingPBig = smallTlPos.size()/changeVarBig*block[lPos.get(0)];
-                    // TODO 判定の値については要検討
-                    if(vanishingPBig < numOfBlock) needCheckSmall = true;
+                    if(changeVarBig != 0) {
+                        int vanishingPBig = smallTlPos.size() / changeVarBig * block[lPos.get(0)];
+                        // TODO 判定の値については要検討
+                        if (vanishingPBig < numOfBlock) needCheckSmall = true;
+                    }
                 }
                 if(needCheckSmall && needCheckBig) {
                     result = 1;
@@ -562,7 +580,6 @@ public class Classification {
                     result = 0;
                 }
             }
-
 
 
 //            //左端が最小値に近い時,最大値の向こうに値が存在すれば二点透視

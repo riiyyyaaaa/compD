@@ -188,7 +188,7 @@ public class IntegrateBlock {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
                 //((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
-                ((Graphics2D) gr).drawString("cluster " + x + " : s" + cluster, 50, iB.lengthOfASide + 199*x + 100);
+                //((Graphics2D) gr).drawString("cluster " + x + " : s" + cluster, 50, iB.lengthOfASide + 199*x + 100);
                 x++;
             }
             //　背景の領域がどれかを出力
@@ -199,7 +199,6 @@ public class IntegrateBlock {
             int resultNum = numOfBlock-resultClNum;
             // 構図番号を出力
             for(int j=0; j<resultClNum; j++) {
-                //gr.drawString("result Cl Num: " + resultClNum, 50, 1000);
                 if (j != backNum) {
                     int pers = cl.checkPers(resultBlock.get(resultNum-1), j);
                     if (pers == 0) {
@@ -210,7 +209,6 @@ public class IntegrateBlock {
                         gr.drawString(j + "無し", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
                     }
 
-
                     int eye = cl.checkEyeLevel(resultBlock.get(resultNum-1), j);
                     if (eye == 0) {
                         gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
@@ -218,6 +216,13 @@ public class IntegrateBlock {
                         gr.drawString(j + "俯瞰", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
                     } else {
                         gr.drawString(j + "無し", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    }
+
+                    int horizon = cl.checkHorizon(resultBlock.get(resultNum-1), j);
+                    if(horizon == 0) {
+                        gr.drawString(j + "無し", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    } else {
+                        gr.drawString(j + "水平", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
                     }
 
                 }
