@@ -197,10 +197,15 @@ public class IntegrateBlock {
             gr.drawString("background: " + backNum, 50, iB.lengthOfASide+40);
 
             int resultNum = numOfBlock-resultClNum;
+            gr.drawString("一点、二点", 50, iB.lengthOfASide + 50 * (0 + 1) + 200);
+            gr.drawString("アオリ、俯瞰", 400, iB.lengthOfASide + 50 * (0 + 1) + 200);
+            gr.drawString("水平", 750, iB.lengthOfASide + 50 * (0 + 1) + 200);
+            gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (0 + 1) + 200);
             // 構図番号を出力
             for(int j=0; j<resultClNum; j++) {
                 if (j != backNum) {
                     int pers = cl.checkPers(resultBlock.get(resultNum-1), j);
+
                     if (pers == 0) {
                         gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
                     } else if (pers == 1) {
@@ -210,6 +215,7 @@ public class IntegrateBlock {
                     }
 
                     int eye = cl.checkEyeLevel(resultBlock.get(resultNum-1), j);
+
                     if (eye == 0) {
                         gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
                     } else if (eye == 1) {
@@ -219,10 +225,19 @@ public class IntegrateBlock {
                     }
 
                     int horizon = cl.checkHorizon(resultBlock.get(resultNum-1), j);
+
                     if(horizon == 0) {
                         gr.drawString(j + "無し", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
                     } else {
                         gr.drawString(j + "水平", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    }
+
+                    int center = cl.checkCenter(resultBlock.get(resultNum-1), j);
+
+                    if(center == 0) {
+                        gr.drawString(j + "無し", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    } else {
+                        gr.drawString(j + "日の丸", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
                     }
 
                 }

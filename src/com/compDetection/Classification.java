@@ -314,8 +314,8 @@ public class Classification {
                 }
             }
         }
-        System.out.println("horizon top: " + top);
-        System.out.println("horizon bottom: " + bottom);
+//        System.out.println("horizon top: " + top);
+//        System.out.println("horizon bottom: " + bottom);
 
         boolean once = false;
         int firstHor = 0;
@@ -374,6 +374,7 @@ public class Classification {
      */
     public static int checkCenter(List<List<Integer>> blocks, int reCl) {
         // 縦の最長と横の最長が同じくらいであれば日の丸構図
+
         int result = 0;
 
         int[] horLen  = new int[numOfBlock];
@@ -404,29 +405,40 @@ public class Classification {
             }
         }
 
-        int top = 8;
+        int top = 7;
         int bottom = 0;
 
         for(int i=0; i<numOfBlock; i++) {
             if(blocks.get(i).contains(reCl)) {
-                if(top > i) {
+                if(top >= i) {
                     top = i;
-                } else if (bottom < i) {
+                } else if (bottom <= i) {
                     bottom = i;
                 }
             }
         }
+        double middleHor = (first1+last1)/2.0 +  first1;
+        double middleVer = (top+bottom)/2.0 + top;
 
-        double percentage;
-        if((last1-first1) >=  (bottom-top)) {
-            percentage = (last1-first1) / (bottom-top);
-        } else {
-            percentage = (bottom-top) / (last1-first1);
-        }
-
-        if(percentage<2.0) {
+        if(middleHor>=3.0 && middleHor<=5.0 && middleVer>=3.0 && middleVer<=5.0) {
             result = 1;
         }
+
+        double percentage;
+//        System.out.println("Check Center");
+        //System.out.println("last-first: " + (last1-first1));
+//        System.out.println("first1: " + first1);
+        //System.out.println("bottom-top: " + (bottom-top));
+//        System.out.println("bottom: "  + bottom);
+//        if((last1-first1) >=  (bottom-top)) {
+//            percentage = (last1-first1) / (bottom-top);
+//        } else {
+//            percentage = (bottom-top) / (last1-first1);
+//        }
+//
+//        if(percentage<2.0) {
+//            result = 1;
+//        }
 
         return result;
     }
