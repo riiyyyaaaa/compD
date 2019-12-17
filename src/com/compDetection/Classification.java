@@ -109,6 +109,7 @@ public class Classification {
 
     /**
      * クラスタごとの平均から背景を決める
+     * TODO 特徴量の特性から決める、要検討
      * @return
      */
     public static int judgeBack(List<List<Double>> aveList) {
@@ -245,53 +246,49 @@ public class Classification {
         }
         double middle = top+bottom/2;
 
-        // 領域の高さが3ブロック以下ならば俯瞰でもアオリでもない
-        //if(bottom - top > 3) {
-
-            System.out.println("top!: " + top + ", bottom!: " + bottom);
+        System.out.println("top!: " + top + ", bottom!: " + bottom);
 
 //            int[][] pos = calPos(blocks, clNum, 1);
 //            int[] sl = cl.checkSL(pos[reCl]);
-            int[] array = countBlock(blocks, clNum, 1);
-            int[] slArray = getSL(array);
+        int[] array = countBlock(blocks, clNum, 1);
+        int[] slArray = getSL(array);
 
-            System.out.println("count Block 結果");
-            for(int i=0; i<numOfBlock; i++) {
-                System.out.print(" " +array[i]);
+        System.out.println("count Block 結果");
+        for(int i=0; i<numOfBlock; i++) {
+            System.out.print(" " +array[i]);
+        }
+        System.out.println();
+
+        // 最長の位置, 複数あるかもだからlist
+        List<Integer> lPos = new ArrayList<>();
+        double posAve = 0;
+        System.out.println("max length: " + slArray[1]);
+        for (int i = 0; i < numOfBlock; i++) {
+            if (slArray[1] == array[i]) {
+                lPos.add(i);
+                //System.out.println(lPos.get(i));
+                posAve += i;
             }
-            System.out.println();
+        }
+        posAve /= lPos.size();
 
-            // 最長の位置, 複数あるかもだからlist
-            List<Integer> lPos = new ArrayList<>();
-            double posAve = 0;
-            System.out.println("max length: " + slArray[1]);
-            for (int i = 0; i < numOfBlock; i++) {
-                if (slArray[1] == array[i]) {
-                    lPos.add(i);
-                    //System.out.println(lPos.get(i));
-                    posAve += i;
-                }
-            }
-            posAve /= lPos.size();
+        System.out.println("top: " + top);
+        System.out.println("middle: " + middle);
+        System.out.println("bottom: " + bottom);
+        System.out.println("average: " + posAve);
+        double aori = Math.abs(posAve-bottom);
+        double hukan = Math.abs(posAve-top);
+        double nashi = Math.abs(posAve-middle);
 
-            System.out.println("top: " + top);
-            System.out.println("middle: " + middle);
-            System.out.println("bottom: " + bottom);
-            System.out.println("average: " + posAve);
-            double aori = Math.abs(posAve-bottom);
-            double hukan = Math.abs(posAve-top);
-            double nashi = Math.abs(posAve-middle);
-
-            if(aori<hukan && aori<nashi) {
-                result = 0;
-                System.out.println("アオリ");
-            } else if(hukan<aori && hukan<nashi) {
-                result = 1;
-                System.out.println("俯瞰");
-            } else {
-                System.out.println("無し");
-            }
-        //}
+        if(aori<hukan && aori<nashi) {
+            result = 0;
+            //System.out.println("アオリ");
+        } else if(hukan<aori && hukan<nashi) {
+            result = 1;
+            //System.out.println("俯瞰");
+        } else {
+            //System.out.println("無し");
+        }
 
         return result;
     }
@@ -305,45 +302,65 @@ public class Classification {
     public static int checkHorizon(List<List<Integer>> blocks, int clNum) {
         int result = 0;
         int[] horizonNum = countBlock(blocks, clNum, 1);
-        int top = 8;
+        int top = 7;
         int bottom = 0;
 
         for(int i=0; i<numOfBlock; i++) {
             if(blocks.get(i).contains(clNum)) {
-                if(top > i) {
+                if(top >= i) {
                     top = i;
-                } else if (bottom < i) {
+                } else if (bottom <= i) {
                     bottom = i;
                 }
             }
         }
+        System.out.println("horizon top: " + top);
+        System.out.println("horizon bottom: " + bottom);
 
-        boolean firstVar = false;
-        boolean cont = false;
+        boolean once = false;
         int firstHor = 0;
         int contCount = 0;
-        int finalCount = 0;
+        int allCount = 0;
+        boolean start = false;
+        List<Integer> countList = new ArrayList<>();
 
         // 境界と同じ長さが連続する時
-        for(int i=top; i<= bottom; i++) {
-//            if((horizonNum[i] != 0) && !firstVar) {
-//                firstHor = horizonNum[i];
-//                firstVar = true;
-//            }
-            if(horizonNum[i] >= numOfBlock-1 && i != 0) {
-                if(horizonNum[i-1] >= numOfBlock) {
-                    cont = true;
-                    contCount ++;
-                } else {
-                    if(contCount > finalCount ) finalCount = contCount;
-                    cont = false;
-                    contCount = 0;
-                }
-            }
-            if(finalCount > numOfBlock/2-1){
-                result = 1;
+        for(int i=bottom; i<= top; i++) {
+            if(i == top && horizonNum[i] >= numOfBlock-1) {
+                start = true;
+                allCount++;
             }
 
+            if(start) {
+                if(horizonNum[i] >= numOfBlock-1) {
+                    contCount++;
+                } else {
+                    start = false;
+                }
+            } else if(i != top && horizonNum[i] >= numOfBlock-1) {
+                start = true;
+                contCount = 0;
+                allCount++;
+            }
+
+            if(contCount >= 3) {
+                System.out.println("allCOunt" + allCount);
+                result = 1;
+            }
+//            if(horizonNum[i] >= numOfBlock-1 && i != 0) {
+//                if(horizonNum[i-1] >= numOfBlock) {
+//                    contCount ++;
+//                } else {
+//                    if(contCount > finalCount ) finalCount = contCount;
+//                    contCount = 0;
+//                }
+//            }
+//            if(finalCount > numOfBlock/2-1){
+//                result = 1;
+//            }
+        }
+        if(allCount == 1) {
+            result = 1;
         }
 
         return result;
