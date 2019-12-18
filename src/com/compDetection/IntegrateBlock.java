@@ -29,6 +29,8 @@ public class IntegrateBlock {
     private List<List<Double>> process = new ArrayList<>(); // 25回分の統合したクラスと距離
     private int rest = 3;
     private List<List<List<Integer>>> clusterList = new ArrayList<>();  // 後ろからnumOfBlock個のクラスタリング状況
+    private List<Double> hinomaruList = new ArrayList<>();
+    private List<Double> hakkiriList = new ArrayList<>();
 
     double blockNum = 0.0;   // 最終的な分割数
     //List<List<List<Integer>>> blocks = new ArrayList<>();     // numOfBlock*numObBlockの配列を0~(blockNum-1)でラベリングした配列,rest個
@@ -187,7 +189,7 @@ public class IntegrateBlock {
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
-                //((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
+                ((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
                 //((Graphics2D) gr).drawString("cluster " + x + " : s" + cluster, 50, iB.lengthOfASide + 199*x + 100);
                 x++;
             }
@@ -260,6 +262,57 @@ public class IntegrateBlock {
 
         }
 
+    }
+
+    /**
+     * 日の丸構図とそれ以外のテクスチャ特徴を比べる。
+     * @throws IOException
+     */
+    public void first_test() throws IOException {
+        String cd = new File(".").getAbsoluteFile().getParent();
+        File dir_normal = new File(cd + "\\src\\input_normal\\");
+        File dir_hinomaru = new File(cd + "\\src\\input_hinomaru\\");
+
+        File[] list_normal = dir_normal.listFiles();
+        File[] list_hinomaru = dir_hinomaru.listFiles();
+
+        BufferedImage output_normal = new BufferedImage(lengthOfASide*numOfBlock, lengthOfASide*numOfBlock, BufferedImage.TYPE_INT_RGB);
+        BufferedImage output_hinomaru = new BufferedImage(lengthOfASide*numOfBlock, lengthOfASide*numOfBlock, BufferedImage.TYPE_INT_RGB);
+
+        Graphics normalGr = output_normal.createGraphics();
+        Graphics hinomalGr = output_hinomaru.createGraphics();
+
+        for(int i=0; i<list_normal.length; i++) {
+            int[][][][] mat = TexGLCM.calGLCM(list_normal[i]);
+            double[][][] featureMat = TexGLCM.calFeature(mat);
+            BufferedImage read = ImageIO.read(list_normal[i]);
+            BufferedImage output = new BufferedImage(iB.lengthOfASide*iB.numOfBlock, iB.lengthOfASide*iB.numOfBlock, BufferedImage.TYPE_INT_RGB);
+            Graphics graphics = output.createGraphics();
+
+            read = iu.scaleImage(read,iB.imageSize, iB.imageSize);
+            iB.calFirstDistanceMat(featureMat);
+            graphics.drawImage(read, 0, 0, null);
+            List<List<List<Integer>>> resultBlock = new ArrayList();
+
+            for(int j=0; j<numOfBlock*numOfBlock-2; j++) {
+                iB.calDistanceMatRepeat(featureMat);
+                List<List<Integer>> cluster = iB.showIntegration();
+
+                if(j >= iB.numOfBlock*(iB.numOfBlock-1)-1) {
+                    List<List<Integer>> blocks = iB.makeBlockArray(cluster);
+                    int clNum = numOfBlock*numOfBlock-2-j;
+                    resultBlock.add(blocks);
+                    clusterList.add(cluster);
+                }
+            }
+            graphics.setColor(Color.WHITE);
+            graphics.setFont(new Font("", Font.PLAIN, 40));
+
+            int resultClNum = iB.drawRedFrame((graphics));
+            List<List<Double>> aveList = new ArrayList<>();
+            int backNum = cl.judgeBack(aveList);
+
+        }
     }
 
     /**
