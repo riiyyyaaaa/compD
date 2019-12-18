@@ -79,7 +79,7 @@ public class IntegrateBlock {
 //        System.out.println(group);
 //    }
     public static void main(String[] args) throws IOException {
-        iB.first();
+        iB.first_test();
 
     }
 
@@ -249,14 +249,13 @@ public class IntegrateBlock {
             File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
             ImageIO.write(output, "jpg",resultFile);
 
-
-            for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
-                //System.out.println("group(" + j+ "): " + iB.group.get(j));
-            }
-            System.out.println();
-            for(int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
-                //System.out.println("Integ(" + j + ")" + iB.process.get(j));
-            }
+//            for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
+//                System.out.println("group(" + j+ "): " + iB.group.get(j));
+//            }
+//            System.out.println();
+//            for(int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
+//                System.out.println("Integ(" + j + ")" + iB.process.get(j));
+//            }
 
             iB.reset();
 
@@ -310,9 +309,19 @@ public class IntegrateBlock {
 
             int resultClNum = iB.drawRedFrame((graphics));
             List<List<Double>> aveList = new ArrayList<>();
-            int backNum = cl.judgeBack(aveList);
 
+            for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
+                List<Double> texAve = cl.getTexAve(featureMat, cluster);
+                aveList.add(texAve);
+            }
+            int backNum = cl.judgeBack(aveList);
+            normalGr.drawString("" + aveList.get(backNum), 10, i*50);
+
+            iB.reset();
         }
+        normalGr.dispose();
+        File normalFile = new File(cd + "\\src\\output\\output_hinomaru\\normal.jpg");
+        ImageIO.write(output_normal, "jpg", normalFile);
     }
 
     /**
