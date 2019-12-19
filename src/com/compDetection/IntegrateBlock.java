@@ -281,6 +281,9 @@ public class IntegrateBlock {
         Graphics normalGr = output_normal.createGraphics();
         Graphics hinomalGr = output_hinomaru.createGraphics();
 
+        double[] hinomaruAve = new double[featureNumStr.length*4];
+        double[] normalAve = new double[featureNumStr.length*4];
+
         for(int i=0; i<list_normal.length; i++) {
             int[][][][] mat = TexGLCM.calGLCM(list_normal[i]);
             double[][][] featureMat = TexGLCM.calFeature(mat);
@@ -317,7 +320,19 @@ public class IntegrateBlock {
             int backNum = cl.judgeBack(aveList);
             normalGr.drawString("" + aveList.get(backNum), 10, i*50);
 
+            for(int j=0; j<featureNumStr.length*4; j++) {
+                normalAve[j] += aveList.get(backNum).get(j);
+            }
+
             iB.reset();
+        }
+        for(int j=0; j<featureNumStr.length*4; j++) {
+            normalAve[j] /= list_normal.length;
+        }
+        for(int i=0; i<featureNumStr.length; i++) {
+            for(int j=0; j<4; j++) {
+                normalGr.drawString(" " + normalAve[(i+1)*j], 1500 + j*100, 100+i*100);
+            }
         }
         normalGr.dispose();
         File normalFile = new File(cd + "\\src\\output\\output_hinomaru\\normal.jpg");
