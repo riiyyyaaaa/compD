@@ -225,15 +225,15 @@ public class Classification {
         int top = 8;
         int bottom = 0;
 
-        System.out.println("clNum: " + clNum);
-        System.out.println("block　中身");
-        for(int i=0; i<numOfBlock; i++) {
-            for(int j=0; j<numOfBlock; j++) {
-                System.out.print(" " + blocks.get(i).get(j));
-            }
-            System.out.println();
-        }
-        System.out.println();
+//        System.out.println("clNum: " + clNum);
+//        System.out.println("block　中身");
+//        for(int i=0; i<numOfBlock; i++) {
+//            for(int j=0; j<numOfBlock; j++) {
+//                System.out.print(" " + blocks.get(i).get(j));
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
 
         for(int i=0; i<numOfBlock; i++) {
             if(blocks.get(i).contains(clNum)) {
@@ -374,6 +374,8 @@ public class Classification {
      */
     public static int checkCenter(List<List<Integer>> blocks, int reCl) {
         // 縦の最長と横の最長が同じくらいであれば日の丸構図
+        // ブロック数が集中しいているところの上下、左右の中心座標？
+        // TODO 背景となる領域のテクスチャ特徴が日の丸構図以外の値と明らかに違うかどうか、違えばそれで判定する
 
         int result = 0;
 
@@ -494,66 +496,8 @@ public class Classification {
 
             int firstNum = block[first1];   // 最初に出現する値
 
-//            List<Integer> kugiri = new ArrayList<>();
-//            boolean cont = true;
-//            int count = first1;
-
-            //System.out.println("block中身");
-//            for (int i = first1; i < last1+1; i++) {
-//               // System.out.println(block[i]);
-//                if (block[i] == sl[0] || block[i] == sl[1]) {
-//                    kugiri.add(i);
-//                }
-//            }
-
-//            System.out.println("sl中身\n" + sl[0] + ", " + sl[1]);
-//            System.out.println("first: " + first1);
-//            System.out.println("last: " + last1);
-
-            // 最初の値が最大と最小どちらに近いか
-            //int diffS = Math.abs(kugiri.get(0) - sl[0]);
-            //int diffL = Math.abs(kugiri.get(0) - sl[1]);
-
-            // 最大値と中間の差
-            double LPos = getPos(sl[1], block).get(0);
-            double SPos = getPos(sl[0], block).get(0);
-//            double diffLM = Math.abs(LPos-middle);
-//            double diffLS = Math.abs(LPos-first1);
-//            double diffLL = Math.abs(LPos-last1);
-//            double diffSM = Math.abs(SPos-middle);
-//            double diffSS = Math.abs(SPos-first1);
-//            double diffSL = Math.abs(SPos-last1);
-//
-//
-//            //最大値が中央に近い、または最小値がはじ：二点透視
-//            //最小値が中央に近い、またわ最大値がはじ：一点透視、
             List<Integer> sPos = getPos(sl[0], block);
             List<Integer> lPos = getPos(sl[1], block);
-//            boolean flag2 = false;
-//            boolean flag1 = false;
-
-//            System.out.println("blocksの中身");
-//            for(int i=0; i<numOfBlock; i++) {
-//                for(int j=0; j<numOfBlock; j++) {
-//                    System.out.print(blocks.get(i).get(j));
-//                }
-//                System.out.println();
-//            }
-//
-//
-//            int[] test = countBlock(blocks, 1, 0);
-//            System.out.println("block中身0: ");
-//            for (int i = 0; i <numOfBlock; i++) {
-//                System.out.print(block[i]);
-//            }
-//            System.out.println();
-//
-//            System.out.println("block中身1: ");
-//            for (int i = 0; i <numOfBlock; i++) {
-//                System.out.print(block[i]);
-//            }
-//            System.out.println();
-
 
             // lPosの外側の一座標を集める
             List<Integer> smallTlPos = new ArrayList<>();
@@ -594,7 +538,7 @@ public class Classification {
 
                 if(!needCheckBig && bigTlPos.size()>0) {
                     int changeVarBig = block[lPos.get(0)]-block[lPos.get(0)+1];
-                    for(int i=1; i<smallTlPos.size()-2; i++) {
+                    for(int i=1; i<bigTlPos.size()-1; i++) {
                         changeVarBig += (block[lPos.get(0)+i]-block[lPos.get(0)+i+1]);
                     }
                     if(changeVarBig != 0) {
