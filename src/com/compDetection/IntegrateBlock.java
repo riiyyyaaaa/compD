@@ -80,12 +80,17 @@ public class IntegrateBlock {
 //    }
     public static void main(String[] args) throws IOException {
         iB.first_test();
-
+        iB.first();
     }
 
     public void first() throws IOException {
+        boolean testMode = false;
         String cd = new File(".").getAbsoluteFile().getParent();
         File dir = new File(cd + "\\src\\input\\");
+        if(testMode)
+        {
+            dir = new File(cd + "\\src\\input_hinomaru\\");
+        }
 
         File[] list = dir.listFiles();
         for(int i=0; i<list.length; i++) {
@@ -189,7 +194,7 @@ public class IntegrateBlock {
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
-                ((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
+                //((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
                 //((Graphics2D) gr).drawString("cluster " + x + " : s" + cluster, 50, iB.lengthOfASide + 199*x + 100);
                 x++;
             }
@@ -234,19 +239,23 @@ public class IntegrateBlock {
                         gr.drawString(j + "水平", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
                     }
 
-                    int center = cl.checkCenter(resultBlock.get(resultNum-1), j);
-
-                    if(center == 0) {
-                        gr.drawString(j + "無し", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
-                    } else {
-                        gr.drawString(j + "日の丸", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
-                    }
+                    //int center = cl.checkCenter(resultBlock.get(resultNum-1), j);
+                    //int center = cl.checkHinomaru(aveList);
+//
+//                    if(center == 0) {
+//                        gr.drawString(j + "無し", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
+//                    } else {
+//                        gr.drawString(j + "日の丸", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
+//                    }
 
                 }
             }
 
             gr.dispose();
             File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
+            if(testMode) {
+                resultFile = new File(cd + "\\src\\output\\output_hinomaru\\result" + i + ".jpg");
+            }
             ImageIO.write(output, "jpg",resultFile);
 
 //            for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
@@ -313,12 +322,14 @@ public class IntegrateBlock {
             int resultClNum = iB.drawRedFrame((graphics));
             List<List<Double>> aveList = new ArrayList<>();
 
+            System.out.println("texture");
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
             }
+            System.out.println(aveList);
             int backNum = cl.judgeBack(aveList);
-            normalGr.drawString("" + aveList.get(backNum), 10, i*50);
+            normalGr.drawString( i + ": " + aveList.get(backNum), 10, i*50);
 
             for(int j=0; j<featureNumStr.length*4; j++) {
                 normalAve[j] += aveList.get(backNum).get(j);
@@ -331,12 +342,66 @@ public class IntegrateBlock {
         }
         for(int i=0; i<featureNumStr.length; i++) {
             for(int j=0; j<4; j++) {
-                normalGr.drawString(" " + normalAve[(i+1)*j], 1500 + j*100, 100+i*100);
+                normalGr.drawString(" " + normalAve[(i+1)*j], 1800 + j*200, 100+i*100);
             }
         }
         normalGr.dispose();
         File normalFile = new File(cd + "\\src\\output\\output_hinomaru\\normal.jpg");
         ImageIO.write(output_normal, "jpg", normalFile);
+
+        for(int i=0; i<list_hinomaru.length; i++) {
+            int[][][][] mat = TexGLCM.calGLCM(list_hinomaru[i]);
+            double[][][] featureMat = TexGLCM.calFeature(mat);
+            BufferedImage read = ImageIO.read(list_hinomaru[i]);
+            BufferedImage output = new BufferedImage(iB.lengthOfASide*iB.numOfBlock, iB.lengthOfASide*iB.numOfBlock, BufferedImage.TYPE_INT_RGB);
+            Graphics graphics = output.createGraphics();
+
+            read = iu.scaleImage(read,iB.imageSize, iB.imageSize);
+            iB.calFirstDistanceMat(featureMat);
+            graphics.drawImage(read, 0, 0, null);
+            List<List<List<Integer>>> resultBlock = new ArrayList();
+
+            for(int j=0; j<numOfBlock*numOfBlock-2; j++) {
+                iB.calDistanceMatRepeat(featureMat);
+                List<List<Integer>> cluster = iB.showIntegration();
+
+                if(j >= iB.numOfBlock*(iB.numOfBlock-1)-1) {
+                    List<List<Integer>> blocks = iB.makeBlockArray(cluster);
+                    int clNum = numOfBlock*numOfBlock-2-j;
+                    resultBlock.add(blocks);
+                    clusterList.add(cluster);
+                }
+            }
+            graphics.setColor(Color.WHITE);
+            graphics.setFont(new Font("", Font.PLAIN, 40));
+
+            int resultClNum = iB.drawRedFrame((graphics));
+            List<List<Double>> aveHinomaruList = new ArrayList<>();
+
+            for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
+                List<Double> texAve = cl.getTexAve(featureMat, cluster);
+                aveHinomaruList.add(texAve);
+            }
+            int backNum = cl.judgeBack(aveHinomaruList);
+            hinomalGr.drawString(i + ": " + aveHinomaruList.get(backNum), 10, i*50);
+
+            for(int j=0; j<featureNumStr.length*4; j++) {
+                hinomaruAve[j] += aveHinomaruList.get(backNum).get(j);
+            }
+
+            iB.reset();
+        }
+        for(int j=0; j<featureNumStr.length*4; j++) {
+            hinomaruAve[j] /= list_hinomaru.length;
+        }
+        for(int i=0; i<featureNumStr.length; i++) {
+            for(int j=0; j<4; j++) {
+                hinomalGr.drawString(" " + hinomaruAve[(i+1)*j], 1800 + j*200, 500+i*100);
+            }
+        }
+        hinomalGr.dispose();
+        File hinomaruFile = new File(cd + "\\src\\output\\output_hinomaru\\hinomaru.jpg");
+        ImageIO.write(output_hinomaru, "jpg", hinomaruFile);
     }
 
     /**
@@ -635,19 +700,11 @@ public class IntegrateBlock {
             double sum = 0;
             for (int j = 0; j < numOfData; j++) {
                 sum += data.get(j).get(i);
-
-                //ave.add(i, sum);
-
             }
-
-
             double valueAve = 0.0;
             if(numOfData != 0.0) {
                 valueAve = Math.abs(sum) / numOfData;
             }
-//            if(Double.isNaN(valueAve)) {
-//                System.out.println(data.get(i));
-//            }
 
             ave.add(i, valueAve);
 
@@ -814,7 +871,7 @@ public class IntegrateBlock {
 
         System.out.println("max: " + max);
 
-        if ((double)max.get(0) < (double)max.get(2) && (double)max.get(0) < 100.0) {
+        if ((double)max.get(0) < (double)max.get(2) && (double)max.get(0) < 300.0) {
             max.set(1, (double)numOfBlock*numOfBlock-3.0);
             blockNum = 2.0;
         } else {

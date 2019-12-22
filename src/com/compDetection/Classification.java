@@ -3,9 +3,7 @@ package com.compDetection;
 import org.omg.CORBA.INTERNAL;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.compDetection.TexGLCM.checkVal;
 import static com.compDetection.TexGLCM.propertyUtil;
@@ -116,12 +114,30 @@ public class Classification {
         int num = 0;
         int[] flag = new int[aveList.size()];
         //double temp = 10000;
-        double temp = 0.0;
+        double temp;
+        Map<Integer, Integer> convNum = new HashMap();
+        int[] fNumArray = new int[featureNumStr.length];
+
+        for(int i=0; i<featureNumStr.length; i++) {
+            fNumArray[i] = Integer.valueOf(featureNumStr[i]);
+        }
+        for(int i=0; i<fNumArray.length; i++) {
+            convNum.put(i, fNumArray[i]);
+        }
 
         for(int i=0; i<aveList.get(0).size(); i++) {
-            for(int j=0; j<aveList.size(); j++) {
-                //if((j == 0) || (aveList.get(j).get(i) < temp)) {
-                if((j == 0) || (aveList.get(j).get(i) > temp)) {
+            temp = aveList.get(0).get(i);
+            for(int j=1; j<aveList.size(); j++) {
+                if((convNum.get(i/4) == 0 && aveList.get(j).get(i) > temp)) {
+                    temp = aveList.get(j).get(i);
+                    num = j;
+                } else if((convNum.get(i/4) == 1 && aveList.get(j).get(i) < temp)) {
+                    temp = aveList.get(j).get(i);
+                    num = j;
+                } else if( (convNum.get(i/4) == 2 && aveList.get(j).get(i) > temp)) {
+                    temp = aveList.get(j).get(i);
+                    num = j;
+                } else if((convNum.get(i/4) == 3 && aveList.get(j).get(i) > temp)) {
                     temp = aveList.get(j).get(i);
                     num = j;
                 }
@@ -253,16 +269,16 @@ public class Classification {
         int[] array = countBlock(blocks, clNum, 1);
         int[] slArray = getSL(array);
 
-        System.out.println("count Block 結果");
-        for(int i=0; i<numOfBlock; i++) {
-            System.out.print(" " +array[i]);
-        }
-        System.out.println();
+//        System.out.println("count Block 結果");
+//        for(int i=0; i<numOfBlock; i++) {
+//            System.out.print(" " +array[i]);
+//        }
+//        System.out.println();
 
         // 最長の位置, 複数あるかもだからlist
         List<Integer> lPos = new ArrayList<>();
         double posAve = 0;
-        System.out.println("max length: " + slArray[1]);
+//        System.out.println("max length: " + slArray[1]);
         for (int i = 0; i < numOfBlock; i++) {
             if (slArray[1] == array[i]) {
                 lPos.add(i);
@@ -272,10 +288,10 @@ public class Classification {
         }
         posAve /= lPos.size();
 
-        System.out.println("top: " + top);
-        System.out.println("middle: " + middle);
-        System.out.println("bottom: " + bottom);
-        System.out.println("average: " + posAve);
+//        System.out.println("top: " + top);
+//        System.out.println("middle: " + middle);
+//        System.out.println("bottom: " + bottom);
+//        System.out.println("average: " + posAve);
         double aori = Math.abs(posAve-bottom);
         double hukan = Math.abs(posAve-top);
         double nashi = Math.abs(posAve-middle);
@@ -362,6 +378,38 @@ public class Classification {
         if(allCount == 1) {
             result = 1;
         }
+
+        return result;
+    }
+
+    /**
+     * 背景のテクスチャ特徴から日の丸構図かどうかを判別する。
+     * @param aveTexList
+     * @return
+     */
+    public static int checkHinomaru( List<List<Double>> aveTexList) {
+        int result = 0;
+        int[] fNumArray = new int[featureNumStr.length];
+        Map<Integer, Integer> convNum = new HashMap();
+
+        for(int i=0; i<featureNumStr.length; i++) {
+            fNumArray[i] = Integer.valueOf(featureNumStr[i]);
+        }
+        for(int i=0; i<fNumArray.length; i++) {
+            convNum.put(i, fNumArray[i]);
+        }
+        System.out.println("conv" + convNum);
+        System.out.println("aveTex" + aveTexList);
+
+        // 特徴量に慣性を用いる時10未満であれば一点透視
+        for(int i=0; i<aveTexList.size(); i++) {
+            for(int j=0; j<aveTexList.get(i).size(); j++) {
+                if(convNum.get(i) == 1) {
+                    if(aveTexList.get(i).get(j) > 10.0 ) result = 1;
+                }
+            }
+        }
+
 
         return result;
     }
