@@ -85,7 +85,7 @@ public class TexGLCM {
 
                         // エントロピー
                         if(mat[i][rad][y][x] != 0) {
-                            feature[i][rad][2] += (double)mat[i][rad][y][x]/sumMat * (Math.log(mat[i][rad][y][x])) / Math.log(2);
+                            feature[i][rad][2] -= (double)mat[i][rad][y][x]/sumMat * (Math.log(mat[i][rad][y][x]/sumMat));
                         }
                         // 相関
                         if (sumMat > 0.0) {

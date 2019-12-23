@@ -79,7 +79,7 @@ public class IntegrateBlock {
 //        System.out.println(group);
 //    }
     public static void main(String[] args) throws IOException {
-        //iB.first_test();
+        iB.first_test();
         iB.first();
     }
 
@@ -194,6 +194,7 @@ public class IntegrateBlock {
 
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
+                //分割数だけtexAveがある
                 aveList.add(texAve);
                 //((Graphics2D) gr).drawString("Ave: " + texAve, 50, iB.lengthOfASide + 199*x + 100);
                 //((Graphics2D) gr).drawString("cluster " + x + " : s" + cluster, 50, iB.lengthOfASide + 199*x + 100);
@@ -209,7 +210,16 @@ public class IntegrateBlock {
             gr.drawString("アオリ、俯瞰", 400, iB.lengthOfASide + 50 * (0 + 1) + 200);
             gr.drawString("水平", 750, iB.lengthOfASide + 50 * (0 + 1) + 200);
             gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (0 + 1) + 200);
+
             // 構図番号を出力
+            //int center = cl.checkCenter(resultBlock.get(resultNum-1), j);
+            int center = cl.checkHinomaru(featureMat, clusterList.get(numOfBlock-1-resultClNum).get(backNum));
+
+            if(center == 0) {
+                gr.drawString("無し", 1100, iB.lengthOfASide + 50 * (1) + 400);
+            } else {
+                gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (1) + 400);
+            }
             for(int j=0; j<resultClNum; j++) {
                 if (j != backNum) {
                     int pers = cl.checkPers(resultBlock.get(resultNum-1), j);
@@ -238,15 +248,6 @@ public class IntegrateBlock {
                         gr.drawString(j + "無し", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
                     } else {
                         gr.drawString(j + "水平", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
-                    }
-
-                    //int center = cl.checkCenter(resultBlock.get(resultNum-1), j);
-                    int center = cl.checkHinomaru(featureMat, clusterList.get(numOfBlock-1-resultClNum).get(backNum));
-
-                    if(center == 0) {
-                        gr.drawString(j + "無し", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
-                    } else {
-                        gr.drawString(j + "日の丸", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
                     }
 
                 }
@@ -673,6 +674,24 @@ public class IntegrateBlock {
         }
         return calDatas;
     }
+
+    public List<List<Double>> convData2AveTex(double[][][] featureData, int[] featureNum) {
+        int fLen = featureNum.length;
+        int dataNum = numOfBlock*numOfBlock;
+        List<List<Double>> calDatas = new ArrayList<>();
+
+        for(int num = 0; num<dataNum; num++) {
+            List<Double> calData = new ArrayList<>();
+            for (int i = 0; i < fLen; i++) {
+                for (int j = 0; j < 4; j++) {
+                    calData.add(featureData[num][j][featureNum[i]]);
+                }
+            }
+            calDatas.add(calData);
+        }
+        return calDatas;
+    }
+
 
     public List<List<Double>> makeData4Ave(int class1, int class2, List<List<Double>> data) {
         List<List<Double>> material = new ArrayList<>();

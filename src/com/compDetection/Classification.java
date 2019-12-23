@@ -86,7 +86,7 @@ public class Classification {
             fNum[i] = Integer.valueOf(featureNumStr[i]);
         }
 
-        List<List<Double>> data = iB.convFeatData2CalData(featureMat, fNum);
+        List<List<Double>> data = iB.convData2AveTex(featureMat, fNum);
 
         List<List<Double>> materials = new ArrayList<>();
 
