@@ -80,7 +80,7 @@ public class IntegrateBlock {
 //    }
     public static void main(String[] args) throws IOException {
         iB.first_test();
-        iB.first();
+        //iB.first();
     }
 
     public void first() throws IOException {
@@ -191,6 +191,7 @@ public class IntegrateBlock {
 //            System.out.println("分割数: " + resultClNum);
 //            System.out.println("Stage: " + resultStage);
             int x=0;
+
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
@@ -322,12 +323,15 @@ public class IntegrateBlock {
             int resultClNum = iB.drawRedFrame((graphics));
             List<List<Double>> aveList = new ArrayList<>();
 
-            System.out.println("texture");
+            //System.out.println("texture");
+            // 一枚の画像内の特徴量、方向ごとの平均
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
             }
-            System.out.println(aveList);
+            //System.out.println(aveList + "\n\n");
+
+
             int backNum = cl.judgeBack(aveList);
             normalGr.drawString( i + ": " + aveList.get(backNum), 10, i*50);
 
@@ -342,9 +346,10 @@ public class IntegrateBlock {
         }
         for(int i=0; i<featureNumStr.length; i++) {
             for(int j=0; j<4; j++) {
-                normalGr.drawString(" " + normalAve[(i+1)*j], 1800 + j*200, 100+i*100);
+                normalGr.drawString(" " + normalAve[i*4+j], 1800+j*200, 100+i*100);
             }
         }
+
         normalGr.dispose();
         File normalFile = new File(cd + "\\src\\output\\output_hinomaru\\normal.jpg");
         ImageIO.write(output_normal, "jpg", normalFile);
@@ -396,12 +401,21 @@ public class IntegrateBlock {
         }
         for(int i=0; i<featureNumStr.length; i++) {
             for(int j=0; j<4; j++) {
-                hinomalGr.drawString(" " + hinomaruAve[(i+1)*j], 1800 + j*200, 500+i*100);
+                hinomalGr.drawString(" " + hinomaruAve[i*4+j], 1800 + j*200, 500+i*100);
             }
         }
         hinomalGr.dispose();
         File hinomaruFile = new File(cd + "\\src\\output\\output_hinomaru\\hinomaru.jpg");
         ImageIO.write(output_hinomaru, "jpg", hinomaruFile);
+
+        for(int i=0; i<normalAve.length; i++) {
+            System.out.println("normal Average " + i + ": " + normalAve[i]);
+
+        }
+        for(int i=0; i<normalAve.length; i++) {
+            System.out.println("hinomaru Average: " + i + ": " + hinomaruAve[i]);
+        }
+
     }
 
     /**
@@ -692,7 +706,7 @@ public class IntegrateBlock {
      * @param data
      * @return ave
      */
-    public List<Double> calAve(List<List<Double>> data) { ;
+    public List<Double> calAve(List<List<Double>> data) {
         int numOfData = data.size();
         int dimension = data.get(0).size();
         List<Double> ave = new ArrayList<>();
@@ -709,9 +723,26 @@ public class IntegrateBlock {
             ave.add(i, valueAve);
 
         }
-
-
         return ave;
+    }
+
+    public List<List<Double>> calTexAve (List<List<Double>> data) {
+        int featureLen = featureNumStr.length;
+        List<Double> ave = new ArrayList<>();
+        List<List<Double>> aveList = new ArrayList<>();
+
+        for(int i=0; i<featureLen*4; i++) {
+            double sum = 0;
+            for(int j=0; j<data.size(); j++) {
+                sum += data.get(j).get(i);
+            }
+            ave.add(sum/4.0);
+            if(i%4==3) {
+                aveList.add(ave);
+                ave.clear();
+            }
+        }
+        return aveList;
     }
 
     /**
@@ -821,25 +852,25 @@ public class IntegrateBlock {
         return(cluster);
     }
 
-    /**
-     *
-     * @param cluster
-     * @return
-     */
-    public List<Double> getAveTex(List<List<Integer>> cluster) {
-        List<Double> result = new ArrayList<>();
-
-        for(int i=0; i<cluster.size(); i++) {
-            int len = cluster.get(i).size();
-            double ave = 0;
-            for(int j=0; j<len; j++) {
-                ave += cluster.get(i).get(j);
-            }
-            result.add(ave);
-        }
-
-        return result;
-    }
+//    /**
+//     *
+//     * @param cluster
+//     * @return
+//     */
+//    public List<Double> getAveTex(List<List<Integer>> cluster) {
+//        List<Double> result = new ArrayList<>();
+//
+//        for(int i=0; i<cluster.size(); i++) {
+//            int len = cluster.get(i).size();
+//            double ave = 0;
+//            for(int j=0; j<len; j++) {
+//                ave += cluster.get(i).get(j);
+//            }
+//            result.add(ave);
+//        }
+//
+//        return result;
+//    }
 
 
 
