@@ -89,14 +89,17 @@ public class Classification {
         List<List<Double>> data = iB.convFeatData2CalData(featureMat, fNum);
 
         List<List<Double>> materials = new ArrayList<>();
-       // material = makeDataForAve();
 
+        //System.out.println("clusterList: " + clusterList);
         for (Integer cluster : clusterList) {
-            List<List<Double>> material = iB.makeDataForAve(cluster, data);
-            materials.addAll(material);
+            //List<List<Double>> material = iB.makeDataForAve(cluster, data);
+            //materials.addAll(material);
+            List<Double> material = data.get(cluster);
+            materials.add(material);
         }
 
         List<Double> result = iB.calAve(materials);
+
 //        System.out.println("Cluster");
 //        System.out.println(clusterList);
 //        System.out.println("平均");
@@ -104,6 +107,7 @@ public class Classification {
 
         return result;
     }
+
 
     /**
      * クラスタごとの平均から背景を決める
@@ -382,37 +386,56 @@ public class Classification {
         return result;
     }
 
-    /**
-     * 背景のテクスチャ特徴から日の丸構図かどうかを判別する。
-     * @param aveTexList
-     * @return
-     */
-    public static int checkHinomaru( List<List<Double>> aveTexList) {
-        int result = 0;
-        int[] fNumArray = new int[featureNumStr.length];
-        Map<Integer, Integer> convNum = new HashMap();
+    public static int checkHinomaru(double[][][] featureMat, List<Integer> backCluster) {
+        int result = 1;
+        int[] fNum = {1};   //慣性だけを使って判別する
+        List<List<Double>> data = iB.convFeatData2CalData(featureMat, fNum);
+        List<List<Double>> materials = new ArrayList<>();
 
-        for(int i=0; i<featureNumStr.length; i++) {
-            fNumArray[i] = Integer.valueOf(featureNumStr[i]);
+        for(Integer cluster : backCluster) {
+            List<Double> material =  data.get(cluster);
+            materials.add(material);
         }
-        for(int i=0; i<fNumArray.length; i++) {
-            convNum.put(i, fNumArray[i]);
-        }
-        System.out.println("conv" + convNum);
-        System.out.println("aveTex" + aveTexList);
-
-        // 特徴量に慣性を用いる時10未満であれば一点透視
-        for(int i=0; i<aveTexList.size(); i++) {
-            for(int j=0; j<aveTexList.get(i).size(); j++) {
-                if(convNum.get(i) == 1) {
-                    if(aveTexList.get(i).get(j) > 10.0 ) result = 1;
-                }
+        List<Double> kanseiList = iB.calAve(materials);
+        for(Double kansei : kanseiList) {
+            if(kansei > 10.0) {
+                result = 0;
             }
         }
 
-
         return result;
     }
+//    /**
+//     * 背景のテクスチャ特徴から日の丸構図かどうかを判別する。
+//     * @param aveTexList
+//     * @return
+//     */
+//    public static int checkHinomaru( List<List<Double>> aveTexList) {
+//        int result = 0;
+//        int[] fNumArray = new int[featureNumStr.length];
+//        Map<Integer, Integer> convNum = new HashMap();
+//
+//        for(int i=0; i<featureNumStr.length; i++) {
+//            fNumArray[i] = Integer.valueOf(featureNumStr[i]);
+//        }
+//        for(int i=0; i<fNumArray.length; i++) {
+//            convNum.put(i, fNumArray[i]);
+//        }
+//        System.out.println("conv" + convNum);
+//        System.out.println("aveTex" + aveTexList);
+//
+//        // 特徴量に慣性を用いる時10未満であれば一点透視
+//        for(int i=0; i<aveTexList.size(); i++) {
+//            for(int j=0; j<aveTexList.get(i).size(); j++) {
+//                if(convNum.get(i) == 1) {
+//                    if(aveTexList.get(i).get(j) > 10.0 ) result = 1;
+//                }
+//            }
+//        }
+//
+//
+//        return result;
+//    }
 
     /**
      * 日の丸構図かどうかを判断

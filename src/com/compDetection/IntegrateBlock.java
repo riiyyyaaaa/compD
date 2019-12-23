@@ -79,8 +79,8 @@ public class IntegrateBlock {
 //        System.out.println(group);
 //    }
     public static void main(String[] args) throws IOException {
-        iB.first_test();
-        //iB.first();
+        //iB.first_test();
+        iB.first();
     }
 
     public void first() throws IOException {
@@ -241,13 +241,13 @@ public class IntegrateBlock {
                     }
 
                     //int center = cl.checkCenter(resultBlock.get(resultNum-1), j);
-                    //int center = cl.checkHinomaru(aveList);
-//
-//                    if(center == 0) {
-//                        gr.drawString(j + "無し", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
-//                    } else {
-//                        gr.drawString(j + "日の丸", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
-//                    }
+                    int center = cl.checkHinomaru(featureMat, clusterList.get(numOfBlock-1-resultClNum).get(backNum));
+
+                    if(center == 0) {
+                        gr.drawString(j + "無し", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    } else {
+                        gr.drawString(j + "日の丸", 1100, iB.lengthOfASide + 50 * (j + 1) + 400);
+                    }
 
                 }
             }
@@ -324,7 +324,7 @@ public class IntegrateBlock {
             List<List<Double>> aveList = new ArrayList<>();
 
             //System.out.println("texture");
-            // 一枚の画像内の特徴量、方向ごとの平均
+            // クラスタの特徴量、方向ごとの平均
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 aveList.add(texAve);
@@ -692,6 +692,7 @@ public class IntegrateBlock {
         List<List<Double>> material = new ArrayList<>();
         material.add(rowData.get(classNum));
 
+        // classNum
         for(int i=1; i<numOfBlock*numOfBlock; i++) {
             if(group.get(classNum).get(i) == 1) {
                 material.add(rowData.get(i));
