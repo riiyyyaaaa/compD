@@ -266,7 +266,7 @@ public class Classification {
         }
         double middle = top+bottom/2;
 
-        System.out.println("top!: " + top + ", bottom!: " + bottom);
+        //System.out.println("top!: " + top + ", bottom!: " + bottom);
 
 //            int[][] pos = calPos(blocks, clNum, 1);
 //            int[] sl = cl.checkSL(pos[reCl]);
@@ -364,7 +364,7 @@ public class Classification {
             }
 
             if(contCount >= 3) {
-                System.out.println("allCOunt" + allCount);
+                //System.out.println("allCOunt" + allCount);
                 result = 1;
             }
 //            if(horizonNum[i] >= numOfBlock-1 && i != 0) {
@@ -387,20 +387,41 @@ public class Classification {
     }
 
     public static int checkHinomaru(double[][][] featureMat, List<Integer> backCluster) {
-        int result = 1;
+        int result = 0;
+        boolean kanseiJudge = true;
         int[] fNum = {1};   //慣性だけを使って判別する
-        List<List<Double>> data = iB.convFeatData2CalData(featureMat, fNum);
+        List<List<Double>> kanseiData = iB.convFeatData2CalData(featureMat, fNum);
         List<List<Double>> materials = new ArrayList<>();
 
         for(Integer cluster : backCluster) {
-            List<Double> material =  data.get(cluster);
+            List<Double> material =  kanseiData.get(cluster);
             materials.add(material);
         }
         List<Double> kanseiList = iB.calAve(materials);
         for(Double kansei : kanseiList) {
             if(kansei > 10.0) {
-                result = 0;
+                kanseiJudge = false;
             }
+        }
+
+        int[] fNumE = {0};   //エネルギーだけを使って判別する
+        boolean energyJudge = true;
+        List<List<Double>> energyData = iB.convFeatData2CalData(featureMat, fNumE);
+        List<List<Double>> materialsE = new ArrayList<>();
+
+        for(Integer cluster : backCluster) {
+            List<Double> material =  energyData.get(cluster);
+            materialsE.add(material);
+        }
+        List<Double> energyList = iB.calAve(materialsE);
+        for(Double energy : energyList) {
+            if(energy > 0.10) {
+                energyJudge = false;
+            }
+        }
+
+        if(kanseiJudge && energyJudge) {
+            result = 1;
         }
 
         return result;

@@ -79,7 +79,7 @@ public class IntegrateBlock {
 //        System.out.println(group);
 //    }
     public static void main(String[] args) throws IOException {
-        iB.first_test();
+        //iB.first_test();
         iB.first();
     }
 
@@ -334,7 +334,7 @@ public class IntegrateBlock {
 
 
             int backNum = cl.judgeBack(aveList);
-            normalGr.drawString( i + ": " + aveList.get(backNum), 10, i*50);
+            normalGr.drawString( i + ": " + aveList.get(backNum), 10, (i+1)*50);
 
             for(int j=0; j<featureNumStr.length*4; j++) {
                 normalAve[j] += aveList.get(backNum).get(j);
@@ -347,7 +347,7 @@ public class IntegrateBlock {
         }
         for(int i=0; i<featureNumStr.length; i++) {
             for(int j=0; j<4; j++) {
-                normalGr.drawString(" " + normalAve[i*4+j], 1800+j*200, 100+i*100);
+                normalGr.drawString(" " + normalAve[i*4+j], 2500+j*200, 100+i*100);
             }
         }
 
@@ -389,7 +389,7 @@ public class IntegrateBlock {
                 aveHinomaruList.add(texAve);
             }
             int backNum = cl.judgeBack(aveHinomaruList);
-            hinomalGr.drawString(i + ": " + aveHinomaruList.get(backNum), 10, i*50);
+            hinomalGr.drawString(i + ": " + aveHinomaruList.get(backNum), 10, (i+1)*50);
 
             for(int j=0; j<featureNumStr.length*4; j++) {
                 hinomaruAve[j] += aveHinomaruList.get(backNum).get(j);
@@ -402,7 +402,7 @@ public class IntegrateBlock {
         }
         for(int i=0; i<featureNumStr.length; i++) {
             for(int j=0; j<4; j++) {
-                hinomalGr.drawString(" " + hinomaruAve[i*4+j], 1800 + j*200, 500+i*100);
+                hinomalGr.drawString(" " + hinomaruAve[i*4+j], 2500 + j*200, 500+i*100);
             }
         }
         hinomalGr.dispose();
@@ -473,12 +473,13 @@ public class IntegrateBlock {
 
         //System.out.println("column: " + disMat.size() + ", line: " + disMat.get(0).size() + ", data size: " + disMat.get(0).size());
 
-        for(int i=0; i<disMat.size(); i++) {
-            for(int j=0; j<disMat.get(i).size(); j++) {
-                System.out.print(disMat.get(i).get(j) + " ");
-            }
-            System.out.println();
-        }
+        //距離行列の表示
+//        for(int i=0; i<disMat.size(); i++) {
+//            for(int j=0; j<disMat.get(i).size(); j++) {
+//                System.out.print(disMat.get(i).get(j) + " ");
+//            }
+//            System.out.println();
+//        }
 
         calMinClass(disMat);
 
