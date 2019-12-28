@@ -29,8 +29,9 @@ public class IntegrateBlock {
     private List<List<Double>> process = new ArrayList<>(); // 25回分の統合したクラスと距離
     private int rest = 3;
     private List<List<List<Integer>>> clusterList = new ArrayList<>();  // 後ろからnumOfBlock個のクラスタリング状況
-    private List<Double> hinomaruList = new ArrayList<>();
-    private List<Double> hakkiriList = new ArrayList<>();
+
+    private List<List<File>> searchList = new ArrayList<>(); // クラスタリング結果をリスト化、検索用
+    private File[][] searchArray = new File[6][30];
 
     double blockNum = 0.0;   // 最終的な分割数
     //List<List<List<Integer>>> blocks = new ArrayList<>();     // numOfBlock*numObBlockの配列を0~(blockNum-1)でラベリングした配列,rest個
@@ -87,10 +88,7 @@ public class IntegrateBlock {
         boolean testMode = false;
         String cd = new File(".").getAbsoluteFile().getParent();
         File dir = new File(cd + "\\src\\input\\");
-        if(testMode)
-        {
-            dir = new File(cd + "\\src\\input_hinomaru\\");
-        }
+        if(testMode) dir = new File(cd + "\\src\\input_hinomaru\\");
 
         File[] list = dir.listFiles();
         for(int i=0; i<list.length; i++) {
@@ -124,11 +122,15 @@ public class IntegrateBlock {
 //            }
             BufferedImage read = ImageIO.read(list[i]);
             BufferedImage output = new BufferedImage(iB.lengthOfASide*iB.numOfBlock, iB.lengthOfASide*iB.numOfBlock, BufferedImage.TYPE_INT_RGB);
-            Graphics gr = output.createGraphics();
+            BufferedImage resultOutput = new BufferedImage(lengthOfASide*2, lengthOfASide*4/3, BufferedImage.TYPE_INT_RGB);
+            Graphics gr = output.createGraphics(); // クラスタリング状況を出力
+            Graphics outputGr = resultOutput.createGraphics(); // 最終的な結果の出力
+
 
             read = iu.scaleImage(read, iB.imageSize, iB.imageSize);
             iB.calFirstDistanceMat(featureMat);
             gr.drawImage(read, 0, 0, null);
+            outputGr.drawImage(read, 0, 0, null);
             List<List<List<Integer>>> resultBlock = new ArrayList();
 
 
@@ -166,32 +168,22 @@ public class IntegrateBlock {
             gr.setColor(Color.WHITE);
             gr.setFont(new Font("", Font.PLAIN, 40));
 
-            // 10超えたら赤枠
-            int redFlag = 0;
             for (int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
                 // 最下段の距離出力、全部出力の時は外す
                 if(j >= iB.numOfBlock*(iB.numOfBlock-1)-1) {
                     gr.drawString("" + iB.process.get(j).get(0).intValue() + ", " + iB.process.get(j).get(1).intValue() + ": " + iB.process.get(j).get(2).intValue(), (j%(iB.numOfBlock)+1)*(iB.lengthOfASide) + 100, iB.lengthOfASide + 50);
                 }
-
-//                if(iB.process.get(j).get(2).intValue()>=10 && redFlag == 0) {
-//                    redFlag = 1;
-//                    gr.setColor(Color.RED);
-//                    BasicStroke bs = new BasicStroke(5);
-//                    ((Graphics2D) gr).setStroke(bs);
-//                    gr.drawRect((j%(iB.numOfBlock+1))*iB.lengthOfASide, (j/(iB.numOfBlock+1))*iB.lengthOfASide, iB.lengthOfASide, iB.lengthOfASide);
-//                    //gr.drawLine(((j)%6)*iB.lengthOfASide,((j)/6)*iB.lengthOfASide,((j)%6)*iB.lengthOfASide+iB.lengthOfASide,((j)/6)*iB.lengthOfASide+iB.lengthOfASide);
-//                    gr.setColor(Color.WHITE);
-//                }
             }
+
             int resultClNum = iB.drawRedFrame(gr);
             int resultStage = numOfBlock*numOfBlock-resultClNum;
+            BufferedImage pieceImage = iB.showIntegrationBlock(clusterList.get(numOfBlock-1-resultClNum), read);
+            outputGr.drawImage(pieceImage, lengthOfASide, 0, null);
             List<List<Double>> aveList = new ArrayList<>();
 
 //            System.out.println("分割数: " + resultClNum);
 //            System.out.println("Stage: " + resultStage);
             int x=0;
-
             for (List<Integer> cluster : clusterList.get(numOfBlock-1-resultClNum)) {
                 List<Double> texAve = cl.getTexAve(featureMat, cluster);
                 //分割数だけtexAveがある
@@ -206,14 +198,12 @@ public class IntegrateBlock {
             gr.drawString("background: " + backNum, 50, iB.lengthOfASide+40);
 
             int resultNum = numOfBlock-resultClNum;
-//            gr.drawString("一点、二点", 50, iB.lengthOfASide + 50 * (0 + 1) + 200);
-//            gr.drawString("アオリ、俯瞰", 400, iB.lengthOfASide + 50 * (0 + 1) + 200);
-//            gr.drawString("水平", 750, iB.lengthOfASide + 50 * (0 + 1) + 200);
-//            gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (0 + 1) + 200);
+            gr.drawString("一点、二点", 50, iB.lengthOfASide + 50 * (0 + 1) + 200);
+            gr.drawString("アオリ、俯瞰", 400, iB.lengthOfASide + 50 * (0 + 1) + 200);
+            gr.drawString("水平", 750, iB.lengthOfASide + 50 * (0 + 1) + 200);
+            gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (0 + 1) + 200);
 
             //結果出力
-            int result[] = new int[6];
-            Arrays.fill(result, 0);
             Map<String, Integer> compResult = new HashMap<>();
 
             // 構図番号を出力
@@ -221,10 +211,10 @@ public class IntegrateBlock {
             int center = cl.checkHinomaru(featureMat, clusterList.get(numOfBlock-1-resultClNum).get(backNum));
 
             if(center == 0) {
-                //gr.drawString("無し", 1100, iB.lengthOfASide + 50 * (1) + 400);
+                gr.drawString("無し", 1100, iB.lengthOfASide + 50 * (1) + 400);
                 compResult.put("日の丸", 0);
             } else {
-                //gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (1) + 400);
+                gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (1) + 400);
                 compResult.put("日の丸", 1);
             }
             for(int j=0; j<resultClNum; j++) {
@@ -232,13 +222,13 @@ public class IntegrateBlock {
                     int pers = cl.checkPers(resultBlock.get(resultNum-1), j);
 
                     if (pers == 0) {
-                        //gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
                         compResult.put("一点透視", 1);
                     } else if (pers == 1) {
-                        //gr.drawString(j + "二点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        gr.drawString(j + "二点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
                         compResult.put("二点透視", 1);
                     } else {
-                        //gr.drawString(j + "無し", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        gr.drawString(j + "無し", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
                         compResult.put("一点透視", 0);
                         compResult.put("二点透視", 0);
                     }
@@ -246,13 +236,13 @@ public class IntegrateBlock {
                     int eye = cl.checkEyeLevel(resultBlock.get(resultNum-1), j);
 
                     if (eye == 0) {
-                        //gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
                         compResult.put("アオリ", 1);
                     } else if (eye == 1) {
-                        //gr.drawString(j + "俯瞰", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        gr.drawString(j + "俯瞰", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
                         compResult.put("俯瞰", 1);
                     } else {
-                        //gr.drawString(j + "無し", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        gr.drawString(j + "無し", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
                         compResult.put("アオリ", 0);
                         compResult.put("俯瞰", 0);
                     }
@@ -260,30 +250,72 @@ public class IntegrateBlock {
                     int horizon = cl.checkSuihei(resultBlock.get(resultNum-1), j);
 
                     if(horizon == 0) {
-                        //gr.drawString(j + "無し", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
-                        compResult.put("水平", 1);
+                        gr.drawString(j + "無し", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("水平", 0);
                     } else {
-                        //gr.drawString(j + "水平", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        gr.drawString(j + "水平", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
                         compResult.put("水平", 1);
                     }
                 }
             }
 
-            gr.drawString("Result; ", 50, 550);
+            gr.setFont(new Font("", Font.PLAIN, 80));
+            outputGr.drawString("Result ", 50, lengthOfASide+50);
             String resultStr = "";
+
+            Map<String, Integer> compMap = new HashMap<String, Integer>() {
+                {put("日の丸", 0);}
+                {put("一点透視", 1);}
+                {put("二点透視", 2);}
+                {put("アオリ", 3);}
+                {put("俯瞰", 4);}
+                {put("水平", 5);}
+            };
+
+            ArrayList<File> hinoList = new ArrayList<>();
+            ArrayList<File> ittenList = new ArrayList<>();
+            ArrayList<File> nitenList = new ArrayList<>();
+            ArrayList<File> aoriList = new ArrayList<>();
+            ArrayList<File> hukanList = new ArrayList<>();
+            ArrayList<File> suiheiList = new ArrayList<>();
+
             for (String resultKey : compResult.keySet()) {
                 if (compResult.get(resultKey) == 1) {
-                    resultStr += resultKey + "   ";
+                    resultStr += resultKey + "     ";
+                    int compNum = compMap.get(resultKey);
+                    if(compNum == 0) {
+                        hinoList.add(list[i]);
+                    } else if(compNum == 1) {
+                        ittenList.add(list[i]);
+                    } else if(compNum == 2) {
+                        nitenList.add(list[i]);
+                    } else if(compNum == 3) {
+                        aoriList.add(list[i]);
+                    } else if(compNum == 4) {
+                        hukanList.add(list[i]);
+                    } else {
+                        suiheiList.add(list[i]);
+                    }
                 }
             }
-            gr.drawString(resultStr, 50, 600);
+            searchList.add(hinoList);
+            searchList.add(ittenList);
+            searchList.add(nitenList);
+            searchList.add(aoriList);
+            searchList.add(hukanList);
+            searchList.add(suiheiList);
+
+            outputGr.drawString(resultStr, 50, lengthOfASide+80);
 
             gr.dispose();
+            outputGr.dispose();
             File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
+            File finalResultFile = new File(cd + "\\src\\output\\IntegrateOutput\\finalResult" + i +".jpg");
             if(testMode) {
                 resultFile = new File(cd + "\\src\\output\\output_hinomaru\\result" + i + ".jpg");
             }
-            ImageIO.write(output, "jpg",resultFile);
+            ImageIO.write(output, "jpg", resultFile);
+            ImageIO.write(resultOutput, "jpg", finalResultFile);
 
 //            for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
 //                System.out.println("group(" + j+ "): " + iB.group.get(j));
@@ -296,7 +328,18 @@ public class IntegrateBlock {
             iB.reset();
 
         }
-
+        System.out.println(searchList);
+        for(int i=0; i<searchList.size(); i++) {
+            BufferedImage searchOutput = new BufferedImage(lengthOfASide*searchList.get(i).size(), lengthOfASide, BufferedImage.TYPE_INT_RGB);
+            Graphics searchGr = searchOutput.createGraphics();
+            for (int j=0; j<searchList.get(i).size(); j++) {
+                BufferedImage read = ImageIO.read(searchList.get(i).get(j));
+                searchGr.drawImage(read, lengthOfASide*(j+1), lengthOfASide, null);
+            }
+            searchGr.dispose();
+            File searchFile = new File(cd + "\\src\\output\\IntegrateOutput\\comp" + i + ".jpg");
+            ImageIO.write(searchOutput, "jpg", searchFile);
+        }
     }
 
     /**
@@ -443,6 +486,7 @@ public class IntegrateBlock {
         }
 
     }
+
 
     /**
      * 初期の距離行列を計算
