@@ -313,6 +313,45 @@ public class Classification {
         return result;
     }
 
+    public static int checkSuihei (List<List<Integer>> blocks, int clNum) {
+        int result = 0;
+        int[] horizonNum = countBlock(blocks, clNum,1);
+        int top = 7;
+        int bottom = 0;
+
+        for(int i=0; i<numOfBlock; i++) {
+            if(blocks.get(i).contains(clNum)) {
+                if(top >= i) {
+                    top = i;
+                } else if (bottom <= i) {
+                    bottom = i;
+                }
+            }
+        }
+
+        // 横幅が連続したら
+        int contCount = 0;
+        boolean diff = false;
+        boolean continuous = true;
+
+        if(horizonNum[top] == numOfBlock) {
+            diff = true;
+        }
+        for(int i=top; i<numOfBlock; i++) {
+            if(continuous && horizonNum[i] == numOfBlock) {
+                contCount ++;
+            } else if(continuous && horizonNum[i] != numOfBlock) {
+                continuous = false;
+            }
+        }
+
+        if(diff && contCount>=numOfBlock/2) {
+            result = 1;
+        }
+
+        return result;
+    }
+
     /**
      * 水平かどうか。0: 無し, 1: 水平
      * @param blocks

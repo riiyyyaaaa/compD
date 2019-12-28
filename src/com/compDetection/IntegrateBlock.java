@@ -206,52 +206,77 @@ public class IntegrateBlock {
             gr.drawString("background: " + backNum, 50, iB.lengthOfASide+40);
 
             int resultNum = numOfBlock-resultClNum;
-            gr.drawString("一点、二点", 50, iB.lengthOfASide + 50 * (0 + 1) + 200);
-            gr.drawString("アオリ、俯瞰", 400, iB.lengthOfASide + 50 * (0 + 1) + 200);
-            gr.drawString("水平", 750, iB.lengthOfASide + 50 * (0 + 1) + 200);
-            gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (0 + 1) + 200);
+//            gr.drawString("一点、二点", 50, iB.lengthOfASide + 50 * (0 + 1) + 200);
+//            gr.drawString("アオリ、俯瞰", 400, iB.lengthOfASide + 50 * (0 + 1) + 200);
+//            gr.drawString("水平", 750, iB.lengthOfASide + 50 * (0 + 1) + 200);
+//            gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (0 + 1) + 200);
+
+            //結果出力
+            int result[] = new int[6];
+            Arrays.fill(result, 0);
+            Map<String, Integer> compResult = new HashMap<>();
 
             // 構図番号を出力
             //int center = cl.checkCenter(resultBlock.get(resultNum-1), j);
             int center = cl.checkHinomaru(featureMat, clusterList.get(numOfBlock-1-resultClNum).get(backNum));
 
             if(center == 0) {
-                gr.drawString("無し", 1100, iB.lengthOfASide + 50 * (1) + 400);
+                //gr.drawString("無し", 1100, iB.lengthOfASide + 50 * (1) + 400);
+                compResult.put("日の丸", 0);
             } else {
-                gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (1) + 400);
+                //gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (1) + 400);
+                compResult.put("日の丸", 1);
             }
             for(int j=0; j<resultClNum; j++) {
                 if (j != backNum) {
                     int pers = cl.checkPers(resultBlock.get(resultNum-1), j);
 
                     if (pers == 0) {
-                        gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        //gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("一点透視", 1);
                     } else if (pers == 1) {
-                        gr.drawString(j + "二点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        //gr.drawString(j + "二点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("二点透視", 1);
                     } else {
-                        gr.drawString(j + "無し", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        //gr.drawString(j + "無し", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("一点透視", 0);
+                        compResult.put("二点透視", 0);
                     }
 
                     int eye = cl.checkEyeLevel(resultBlock.get(resultNum-1), j);
 
                     if (eye == 0) {
-                        gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        //gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("アオリ", 1);
                     } else if (eye == 1) {
-                        gr.drawString(j + "俯瞰", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        //gr.drawString(j + "俯瞰", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("俯瞰", 1);
                     } else {
-                        gr.drawString(j + "無し", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        //gr.drawString(j + "無し", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("アオリ", 0);
+                        compResult.put("俯瞰", 0);
                     }
 
-                    int horizon = cl.checkHorizon(resultBlock.get(resultNum-1), j);
+                    int horizon = cl.checkSuihei(resultBlock.get(resultNum-1), j);
 
                     if(horizon == 0) {
-                        gr.drawString(j + "無し", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        //gr.drawString(j + "無し", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("水平", 1);
                     } else {
-                        gr.drawString(j + "水平", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        //gr.drawString(j + "水平", 750, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("水平", 1);
                     }
-
                 }
             }
+
+            gr.drawString("Result; ", 50, 550);
+            String resultStr = "";
+            for (String resultKey : compResult.keySet()) {
+                if (compResult.get(resultKey) == 1) {
+                    resultStr += resultKey + "   ";
+                }
+            }
+            gr.drawString(resultStr, 50, 600);
 
             gr.dispose();
             File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
