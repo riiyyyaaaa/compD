@@ -90,6 +90,13 @@ public class IntegrateBlock {
         File dir = new File(cd + "\\src\\input\\");
         if(testMode) dir = new File(cd + "\\src\\input_hinomaru\\");
 
+        ArrayList<File> hinoList = new ArrayList<>();
+        ArrayList<File> ittenList = new ArrayList<>();
+        ArrayList<File> nitenList = new ArrayList<>();
+        ArrayList<File> aoriList = new ArrayList<>();
+        ArrayList<File> hukanList = new ArrayList<>();
+        ArrayList<File> suiheiList = new ArrayList<>();
+
         File[] list = dir.listFiles();
         for(int i=0; i<list.length; i++) {
             System.out.println("i: " + i);
@@ -272,13 +279,6 @@ public class IntegrateBlock {
                 {put("水平", 5);}
             };
 
-            ArrayList<File> hinoList = new ArrayList<>();
-            ArrayList<File> ittenList = new ArrayList<>();
-            ArrayList<File> nitenList = new ArrayList<>();
-            ArrayList<File> aoriList = new ArrayList<>();
-            ArrayList<File> hukanList = new ArrayList<>();
-            ArrayList<File> suiheiList = new ArrayList<>();
-
             for (String resultKey : compResult.keySet()) {
                 if (compResult.get(resultKey) == 1) {
                     resultStr += resultKey + "     ";
@@ -298,24 +298,18 @@ public class IntegrateBlock {
                     }
                 }
             }
-            searchList.add(hinoList);
-            searchList.add(ittenList);
-            searchList.add(nitenList);
-            searchList.add(aoriList);
-            searchList.add(hukanList);
-            searchList.add(suiheiList);
 
-            outputGr.drawString(resultStr, 50, lengthOfASide+80);
-
-            gr.dispose();
-            outputGr.dispose();
-            File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
-            File finalResultFile = new File(cd + "\\src\\output\\IntegrateOutput\\finalResult" + i +".jpg");
-            if(testMode) {
-                resultFile = new File(cd + "\\src\\output\\output_hinomaru\\result" + i + ".jpg");
-            }
-            ImageIO.write(output, "jpg", resultFile);
-            ImageIO.write(resultOutput, "jpg", finalResultFile);
+//            outputGr.drawString(resultStr, 50, lengthOfASide+80);
+//
+//            gr.dispose();
+//            outputGr.dispose();
+//            File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
+//            File finalResultFile = new File(cd + "\\src\\output\\IntegrateOutput\\finalResult" + i +".jpg");
+//            if(testMode) {
+//                resultFile = new File(cd + "\\src\\output\\output_hinomaru\\result" + i + ".jpg");
+//            }
+//            ImageIO.write(output, "jpg", resultFile);
+//            ImageIO.write(resultOutput, "jpg", finalResultFile);
 
 //            for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
 //                System.out.println("group(" + j+ "): " + iB.group.get(j));
@@ -328,17 +322,38 @@ public class IntegrateBlock {
             iB.reset();
 
         }
+
+        // 検索結果の出力、 TODO 後で書き直す
+        searchList.add(hinoList);
+        searchList.add(ittenList);
+        searchList.add(nitenList);
+        searchList.add(aoriList);
+        searchList.add(hukanList);
+        searchList.add(suiheiList);
+
         System.out.println(searchList);
         for(int i=0; i<searchList.size(); i++) {
-            BufferedImage searchOutput = new BufferedImage(lengthOfASide*searchList.get(i).size(), lengthOfASide, BufferedImage.TYPE_INT_RGB);
-            Graphics searchGr = searchOutput.createGraphics();
-            for (int j=0; j<searchList.get(i).size(); j++) {
-                BufferedImage read = ImageIO.read(searchList.get(i).get(j));
-                searchGr.drawImage(read, lengthOfASide*(j+1), lengthOfASide, null);
+            if(searchList.get(i).size() != 0) {
+                BufferedImage searchOutput = new BufferedImage(lengthOfASide * searchList.get(i).size(), lengthOfASide, BufferedImage.TYPE_INT_RGB);
+                Graphics searchGr = searchOutput.createGraphics();
+                for (int j = 0; j < searchList.get(i).size(); j++) {
+                    BufferedImage read = ImageIO.read(searchList.get(i).get(j));
+                    read = iu.scaleImage(read, iB.imageSize, iB.imageSize);
+                    searchGr.drawImage(read, lengthOfASide * (j), 0, null);
+                }
+                searchGr.dispose();
+
+//                BufferedImage bf = new BufferedImage(lengthOfASide, lengthOfASide, BufferedImage.TYPE_INT_RGB);
+//                Graphics hoge = bf.createGraphics();
+//                BufferedImage read = ImageIO.read(searchList.get(0).get(0));
+//                hoge.drawImage(read, 0,0,null);
+//                hoge.dispose();
+//                File hogehoge = new File(cd + "\\src\\outpu\\IntegrateOutput\\hogehoge.jpg");
+//                ImageIO.write(bf, "jpg", hogehoge);
+//
+                File searchFile = new File(cd + "\\src\\output\\IntegrateOutput\\comp" + i + ".jpg");
+                ImageIO.write(searchOutput, "jpg", searchFile);
             }
-            searchGr.dispose();
-            File searchFile = new File(cd + "\\src\\output\\IntegrateOutput\\comp" + i + ".jpg");
-            ImageIO.write(searchOutput, "jpg", searchFile);
         }
     }
 
