@@ -231,9 +231,6 @@ public class Classification {
         return comp;
     }
 
-    // TODO 最大値から左右の消失点があるようにする
-    // TODO 消失点がない側で最大値からの落ちていく速度が、収束するさきが400px内に収まるなら二点透視、それ以外が一点透視
-
     /**
      * 指定した領域がアオリ、俯瞰、どちらでもないかを決める
      * @param blocks
@@ -334,7 +331,7 @@ public class Classification {
         boolean diff = false;
         boolean continuous = true;
 
-        if(horizonNum[top] == numOfBlock) {
+        if(horizonNum[top] < numOfBlock/3 || horizonNum[top] > numOfBlock*2/3) {
             diff = true;
         }
         for(int i=top; i<numOfBlock; i++) {
@@ -582,7 +579,7 @@ public class Classification {
      * @param reCl: 現在みている領域の番号
      * @return
      */
-    public static int checkPers(List<List<Integer>> blocks, int reCl) {
+    public static int checkPers(List<List<Integer>> blocks, int reCl, int hinomaru) {
         int result = 2; // 0: 一点透視, 1: 二点透視, 2: 無し
 
         int left = 8;
@@ -597,6 +594,7 @@ public class Classification {
         // 最大と最小の差が2未満であれば2にする
         //if(!(Math.abs(sl[0]-sl[1])<2)) {
 
+        if(hinomaru != 1) {
             for (int i = 0; i < numOfBlock; i++) {
                 boolean fl = false;
                 for (int j = 0; j < numOfBlock; j++) {
@@ -633,55 +631,81 @@ public class Classification {
             // lPosの外側の一座標を集める
             List<Integer> smallTlPos = new ArrayList<>();
             List<Integer> bigTlPos = new ArrayList<>();
+            // 二点透視のチェック必要か
             boolean needCheckSmall = false;
             boolean needCheckBig = false;
 
-            for(int i=0; i<numOfBlock; i++) {
-                if(i<lPos.get(0) && block[i] != 0) {
+            for (int i=0; i<numOfBlock; i++) {
+                if (i < lPos.get(0) && block[i] != 0) {
                     smallTlPos.add(i);
                     // 画面内に収まっていなければ
-                    if(i == 0 && block[i] > 1) {
+                    if (i == 0 && block[i] > 1) {
                         needCheckSmall = true;
                     }
-                } else if(i>lPos.get(lPos.size()-1) && block[i] != 0) {
+                } else if (i > lPos.get(lPos.size() - 1) && block[i] != 0) {
                     bigTlPos.add(i);
                     // 画面内に収まっていなければ
-                    if(i == numOfBlock-1 && block[i] > 1) {
+                    if (i == numOfBlock - 1 && block[i] > 1) {
                         needCheckBig = true;
                     }
                 }
             }
 
-            if(needCheckSmall && needCheckBig) {
+            List<Integer> L1pos = new ArrayList<>();
+            List<Integer> R1pos = new ArrayList<>();
+
+            for(int i=0 ; i<numOfBlock; i++) {
+                if(i < sPos.get(0)) {
+                    L1pos.add(i);
+                } else if(i > sPos.get(sPos.size()-1)) {
+                    R1pos.add(i);
+                }
+            }
+
+            if (needCheckSmall && needCheckBig) {
                 result = 1;
             } else {
-                if(!needCheckSmall && smallTlPos.size()>0) {
-                    int changeVarSmall = block[lPos.get(0)]-block[lPos.get(0)-1];
-                    for(int i=1; i<smallTlPos.size(); i++) {
-                        changeVarSmall += (block[lPos.get(0)-i]-block[lPos.get(0)-i-1]);
+                if (!needCheckSmall && smallTlPos.size() > 0) {
+                    int changeVarSmall = block[lPos.get(0)] - block[lPos.get(0) - 1];
+                    for (int i = 1; i < smallTlPos.size(); i++) {
+                        changeVarSmall += (block[lPos.get(0) - i] - block[lPos.get(0) - i - 1]);
                     }
-                    if(changeVarSmall != 0) {
+                    if (changeVarSmall != 0) {
                         int vanishingPSmall = smallTlPos.size() / changeVarSmall * block[lPos.get(0)];
                         // TODO 判定の値については要検討
                         if (vanishingPSmall < numOfBlock) needCheckSmall = true;
                     }
                 }
 
-                if(!needCheckBig && bigTlPos.size()>0) {
-                    int changeVarBig = block[lPos.get(0)]-block[lPos.get(0)+1];
-                    for(int i=1; i<bigTlPos.size()-1; i++) {
-                        changeVarBig += (block[lPos.get(0)+i]-block[lPos.get(0)+i+1]);
+                if (!needCheckBig && bigTlPos.size() > 0) {
+                    int changeVarBig = block[lPos.get(lPos.size()-1)] - block[lPos.get(0) + 1];
+                    for (int i = lPos.get(lPos.size()-1); i < bigTlPos.size() - 1; i++) {
+                        changeVarBig += (block[lPos.get(0) + i] - block[lPos.get(0) + i + 1]);
                     }
-                    if(changeVarBig != 0) {
+                    if (changeVarBig != 0) {
                         int vanishingPBig = smallTlPos.size() / changeVarBig * block[lPos.get(0)];
                         // TODO 判定の値については要検討
                         if (vanishingPBig < numOfBlock) needCheckSmall = true;
                     }
                 }
-                if(needCheckSmall && needCheckBig) {
+                if (needCheckSmall && needCheckBig) {
                     result = 1;
-                } else if(needCheckSmall || needCheckBig) {
+                } else if (needCheckSmall || needCheckBig) {
                     result = 0;
+                } else if (L1pos.size() != 0 && R1pos.size() != 0) {
+                    int changeVarL = block[L1pos.get(0)+1] - block[L1pos.get(0)];
+                    for(int i=L1pos.get(0)+1; i<sPos.get(0); i++) {
+                        changeVarL += block[i] - block[i+1];
+                    }
+                    double vanishingLenL = L1pos.size()*block[L1pos.get(0)]/changeVarL;
+                    int changeVarR = block[sPos.get(0)] - block[sPos.get(0)+1];
+                    for(int i=sPos.get(0)+1; i<R1pos.size(); i++) {
+                        changeVarR += block[i+1] - block[i];
+                    }
+                    double vanishingLenR = R1pos.size()*block[R1pos.get(R1pos.size()-1)]/changeVarR;
+                    if(vanishingLenL <= numOfBlock && vanishingLenR <= numOfBlock) {
+                        result = 0;
+                    }
                 }
             }
 
@@ -706,7 +730,6 @@ public class Classification {
 //            }
 
 
-
 //            if(diffLM <diffLS && diffLM<diffLL) {
 //                //左端が最小値に近い時,最大値の向こうに値が存在すれば二点透視
 ////                for(int i=lPos.get(0)+1; i<numOfBlock; i++) {
@@ -728,7 +751,8 @@ public class Classification {
 //            } else if(flag1) {
 //                result = 0;
 //            }
-        //}
+            //}
+        }
         return result;
 
     }

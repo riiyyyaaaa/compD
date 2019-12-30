@@ -1,5 +1,7 @@
 package com.compDetection;
 
+import com.sun.scenario.animation.shared.ClipEnvelope;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -82,6 +84,25 @@ public class IntegrateBlock {
     public static void main(String[] args) throws IOException {
         //iB.first_test();
         iB.first();
+
+        // tset
+//        String cd = new File(".").getAbsoluteFile().getParent();
+//        File dir = new File(cd + "\\src\\input\\example\\");
+//        File[] list = dir.listFiles();
+//
+//        for(int i=0; i<list.length; i++) {
+//            BufferedImage read = ImageIO.read(list[i]);
+//            read = iu.scaleImage(read, iB.imageSize, iB.imageSize);
+//
+//            BufferedImage bf = new BufferedImage(iB.lengthOfASide, iB.lengthOfASide, BufferedImage.TYPE_INT_RGB);
+//            Graphics gr = bf.createGraphics();
+//            gr.drawImage(read, 0,0, null);
+//            gr.dispose();
+//
+//            File file = new File(cd + "\\src\\output\\IntegrateOutput\\example" + i + ".jpg");
+//            ImageIO.write(bf, "jpg", file);
+//        }
+
     }
 
     public void first() throws IOException {
@@ -226,7 +247,7 @@ public class IntegrateBlock {
             }
             for(int j=0; j<resultClNum; j++) {
                 if (j != backNum) {
-                    int pers = cl.checkPers(resultBlock.get(resultNum-1), j);
+                    int pers = cl.checkPers(resultBlock.get(resultNum-1), j, center);
 
                     if (pers == 0) {
                         gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
@@ -299,25 +320,25 @@ public class IntegrateBlock {
                 }
             }
 
-//            outputGr.drawString(resultStr, 50, lengthOfASide+80);
-//
-//            gr.dispose();
-//            outputGr.dispose();
-//            File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
-//            File finalResultFile = new File(cd + "\\src\\output\\IntegrateOutput\\finalResult" + i +".jpg");
-//            if(testMode) {
-//                resultFile = new File(cd + "\\src\\output\\output_hinomaru\\result" + i + ".jpg");
-//            }
-//            ImageIO.write(output, "jpg", resultFile);
-//            ImageIO.write(resultOutput, "jpg", finalResultFile);
+            outputGr.drawString(resultStr, 50, lengthOfASide+80);
 
-//            for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
-//                System.out.println("group(" + j+ "): " + iB.group.get(j));
-//            }
-//            System.out.println();
-//            for(int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
-//                System.out.println("Integ(" + j + ")" + iB.process.get(j));
-//            }
+            gr.dispose();
+            outputGr.dispose();
+            File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
+            File finalResultFile = new File(cd + "\\src\\output\\IntegrateOutput\\finalResult" + i +".jpg");
+            if(testMode) {
+                resultFile = new File(cd + "\\src\\output\\output_hinomaru\\result" + i + ".jpg");
+            }
+            ImageIO.write(output, "jpg", resultFile);
+            ImageIO.write(resultOutput, "jpg", finalResultFile);
+
+            for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
+                System.out.println("group(" + j+ "): " + iB.group.get(j));
+            }
+            System.out.println();
+            for(int j=0; j<iB.numOfBlock*iB.numOfBlock-1; j++) {
+                System.out.println("Integ(" + j + ")" + iB.process.get(j));
+            }
 
             iB.reset();
 
@@ -343,14 +364,6 @@ public class IntegrateBlock {
                 }
                 searchGr.dispose();
 
-//                BufferedImage bf = new BufferedImage(lengthOfASide, lengthOfASide, BufferedImage.TYPE_INT_RGB);
-//                Graphics hoge = bf.createGraphics();
-//                BufferedImage read = ImageIO.read(searchList.get(0).get(0));
-//                hoge.drawImage(read, 0,0,null);
-//                hoge.dispose();
-//                File hogehoge = new File(cd + "\\src\\outpu\\IntegrateOutput\\hogehoge.jpg");
-//                ImageIO.write(bf, "jpg", hogehoge);
-//
                 File searchFile = new File(cd + "\\src\\output\\IntegrateOutput\\comp" + i + ".jpg");
                 ImageIO.write(searchOutput, "jpg", searchFile);
             }
