@@ -693,16 +693,32 @@ public class Classification {
                 } else if (needCheckSmall || needCheckBig) {
                     result = 0;
                 } else if (L1pos.size() != 0 && R1pos.size() != 0) {
-                    int changeVarL = block[L1pos.get(0)+1] - block[L1pos.get(0)];
+                    System.out.println("L1pos: " + L1pos);
+                    System.out.println("R1pos: " + R1pos);
+                    int changeVarL = block[L1pos.get(0)] - block[L1pos.get(0)+1];
                     for(int i=L1pos.get(0)+1; i<sPos.get(0); i++) {
                         changeVarL += block[i] - block[i+1];
                     }
-                    double vanishingLenL = L1pos.size()*block[L1pos.get(0)]/changeVarL;
-                    int changeVarR = block[sPos.get(0)] - block[sPos.get(0)+1];
-                    for(int i=sPos.get(0)+1; i<R1pos.size(); i++) {
+                    double vanishingLenL = 0;
+                    if(changeVarL > 0) {
+                        vanishingLenL = L1pos.size() * block[L1pos.get(0)] / changeVarL;
+                    } else {
+                        vanishingLenL = numOfBlock + 1;
+                    }
+
+                    int changeVarR = block[sPos.get(0)+1] - block[sPos.get(0)];
+                    for(int i=sPos.get(sPos.size()-1)+1; i<sPos.get(sPos.size()-1)+R1pos.size(); i++) {
                         changeVarR += block[i+1] - block[i];
                     }
-                    double vanishingLenR = R1pos.size()*block[R1pos.get(R1pos.size()-1)]/changeVarR;
+                    double vanishingLenR = 8;
+                    if(changeVarR > 0) {
+                        vanishingLenR = R1pos.size() * block[R1pos.get(R1pos.size() - 1)] / changeVarR;
+                    } else {
+                        vanishingLenR = numOfBlock + 1;
+                    }
+
+                    System.out.println("vpL: " + vanishingLenL + "changeL: " + changeVarL);
+                    System.out.println("vpR: " + vanishingLenR + "changeR: " + changeVarR);
                     if(vanishingLenL <= numOfBlock && vanishingLenR <= numOfBlock) {
                         result = 0;
                     }
