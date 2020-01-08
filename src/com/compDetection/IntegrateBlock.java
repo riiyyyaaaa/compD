@@ -107,9 +107,11 @@ public class IntegrateBlock {
 
     public void first() throws IOException {
         boolean testMode = false;
+        boolean testHukan = false;
         String cd = new File(".").getAbsoluteFile().getParent();
         File dir = new File(cd + "\\src\\input\\");
         if(testMode) dir = new File(cd + "\\src\\input_hinomaru\\");
+        if(testHukan) dir = new File(cd + "\\src\\input_hukan\\");
 
         ArrayList<File> hinoList = new ArrayList<>();
         ArrayList<File> ittenList = new ArrayList<>();
@@ -149,16 +151,19 @@ public class IntegrateBlock {
 //                }
 //            }
             BufferedImage read = ImageIO.read(list[i]);
-            BufferedImage output = new BufferedImage(iB.lengthOfASide*iB.numOfBlock, iB.lengthOfASide*iB.numOfBlock, BufferedImage.TYPE_INT_RGB);
-            BufferedImage resultOutput = new BufferedImage(lengthOfASide*2, lengthOfASide*4/3, BufferedImage.TYPE_INT_RGB);
+            BufferedImage output = new BufferedImage(iB.lengthOfASide*iB.numOfBlock, iB.lengthOfASide+400, BufferedImage.TYPE_INT_RGB);
+            BufferedImage resultOutput = new BufferedImage(lengthOfASide*2, lengthOfASide*7/6, BufferedImage.TYPE_INT_RGB);
+            BufferedImage simpleOutput = new BufferedImage(lengthOfASide*3/2, lengthOfASide, BufferedImage.TYPE_INT_RGB);
             Graphics gr = output.createGraphics(); // クラスタリング状況を出力
             Graphics outputGr = resultOutput.createGraphics(); // 最終的な結果の出力
+            Graphics simpleGr = simpleOutput.createGraphics(); // 簡易的な結果出力
 
 
             read = iu.scaleImage(read, iB.imageSize, iB.imageSize);
             iB.calFirstDistanceMat(featureMat);
             gr.drawImage(read, 0, 0, null);
             outputGr.drawImage(read, 0, 0, null);
+            simpleGr.drawImage(read, 0, 0, null);
             List<List<List<Integer>>> resultBlock = new ArrayList();
 
 
@@ -240,28 +245,28 @@ public class IntegrateBlock {
 
             if(center == 0) {
                 gr.drawString("無し", 1100, iB.lengthOfASide + 50 * (1) + 400);
-                compResult.put("日の丸", 0);
+                compResult.put("日の丸構図", 0);
             } else {
-                gr.drawString("日の丸", 1100, iB.lengthOfASide + 50 * (1) + 400);
-                compResult.put("日の丸", 1);
+                gr.drawString("日の丸構図", 1100, iB.lengthOfASide + 50 * (1) + 400);
+                compResult.put("日の丸構図", 1);
             }
             for(int j=0; j<resultClNum; j++) {
                 if (j != backNum) {
                     int pers = cl.checkPers(resultBlock.get(resultNum-1), j, center);
 
                     if (pers == 0) {
-                        gr.drawString(j + "一点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
-                        compResult.put("一点透視", 1);
+                        gr.drawString(j + "一点透視図法", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("一点透視図法", 1);
                     } else if (pers == 1) {
-                        gr.drawString(j + "二点透視", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
-                        compResult.put("二点透視", 1);
+                        gr.drawString(j + "二点透視図法", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
+                        compResult.put("二点透視図法", 1);
                     } else {
                         gr.drawString(j + "無し", 50, iB.lengthOfASide + 50 * (j + 1) + 400);
-                        compResult.put("一点透視", 0);
-                        compResult.put("二点透視", 0);
+                        compResult.put("一点透視図法", 0);
+                        compResult.put("二点透視図法", 0);
                     }
 
-                    int eye = cl.checkEyeLevel(resultBlock.get(resultNum-1), j);
+                    int eye = cl.checkEyeLevel(resultBlock.get(resultNum-1), j, center);
 
                     if (eye == 0) {
                         gr.drawString(j + "アオリ", 400, iB.lengthOfASide + 50 * (j + 1) + 400);
@@ -287,21 +292,25 @@ public class IntegrateBlock {
                 }
             }
 
-            gr.setFont(new Font("", Font.PLAIN, 80));
-            outputGr.drawString("Result ", 50, lengthOfASide+50);
+            gr.setFont(new Font("", Font.PLAIN, 200));
+            //outputGr.drawString("Result ", 50, lengthOfASide+50);
             String resultStr = "";
 
             Map<String, Integer> compMap = new HashMap<String, Integer>() {
-                {put("日の丸", 0);}
-                {put("一点透視", 1);}
-                {put("二点透視", 2);}
+                {put("日の丸構図", 0);}
+                {put("一点透視図法", 1);}
+                {put("二点透視図法", 2);}
                 {put("アオリ", 3);}
                 {put("俯瞰", 4);}
                 {put("水平", 5);}
             };
 
+            simpleGr.setFont(new Font("", Font.PLAIN, 30));
+            int pos = 0;
             for (String resultKey : compResult.keySet()) {
                 if (compResult.get(resultKey) == 1) {
+                    simpleGr.drawString(resultKey, lengthOfASide+10, 40 + pos*45);
+                    pos++;
                     resultStr += resultKey + "     ";
                     int compNum = compMap.get(resultKey);
                     if(compNum == 0) {
@@ -319,18 +328,21 @@ public class IntegrateBlock {
                     }
                 }
             }
-
-            outputGr.drawString(resultStr, 50, lengthOfASide+80);
+            outputGr.setFont(new Font("", Font.PLAIN, 30));
+            outputGr.drawString(resultStr, 50, lengthOfASide+40);
 
             gr.dispose();
             outputGr.dispose();
+            simpleGr.dispose();
             File resultFile = new File(cd + "\\src\\output\\IntegrateOutput\\result" + i + ".jpg");
             File finalResultFile = new File(cd + "\\src\\output\\IntegrateOutput\\finalResult" + i +".jpg");
             if(testMode) {
                 resultFile = new File(cd + "\\src\\output\\output_hinomaru\\result" + i + ".jpg");
             }
+            File simpleResult = new File(cd + "\\src\\output\\IntegrateOutput\\simpleResult" + i + ".jpg");
             ImageIO.write(output, "jpg", resultFile);
             ImageIO.write(resultOutput, "jpg", finalResultFile);
+            ImageIO.write(simpleOutput, "jpg", simpleResult);
 
             for(int j=0; j<iB.numOfBlock*iB.numOfBlock; j++) {
                 System.out.println("group(" + j+ "): " + iB.group.get(j));

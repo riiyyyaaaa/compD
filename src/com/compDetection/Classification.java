@@ -225,8 +225,6 @@ public class Classification {
                 }
             }
         }
-        // TODO 日の丸構図；hor,verの中央が最大になる
-        // TODO 二点透視,一点透視: 単純にブロック数を数えて最長のとこを把握、その最長の位置で分類
 
         return comp;
     }
@@ -237,7 +235,7 @@ public class Classification {
      * @param clNum
      * @return
      */
-    public static int checkEyeLevel (List<List<Integer>> blocks, int clNum) {
+    public static int checkEyeLevel (List<List<Integer>> blocks, int clNum, int hinomaru) {
         int result = 2; // 0: アオリ, 1: 俯瞰, 2: 無し
         int top = 8;
         int bottom = 0;
@@ -251,24 +249,24 @@ public class Classification {
 //            System.out.println();
 //        }
 //        System.out.println();
-
-        for(int i=0; i<numOfBlock; i++) {
-            if(blocks.get(i).contains(clNum)) {
-                if(top > i) {
-                    top = i;
-                } else if (bottom < i){
-                    bottom = i;
+        if(hinomaru != 1) {
+            for (int i = 0; i < numOfBlock; i++) {
+                if (blocks.get(i).contains(clNum)) {
+                    if (top > i) {
+                        top = i;
+                    } else if (bottom < i) {
+                        bottom = i;
+                    }
                 }
             }
-        }
-        double middle = top+bottom/2;
+            double middle = top + bottom / 2;
 
-        //System.out.println("top!: " + top + ", bottom!: " + bottom);
+            //System.out.println("top!: " + top + ", bottom!: " + bottom);
 
 //            int[][] pos = calPos(blocks, clNum, 1);
 //            int[] sl = cl.checkSL(pos[reCl]);
-        int[] array = countBlock(blocks, clNum, 1);
-        int[] slArray = getSL(array);
+            int[] array = countBlock(blocks, clNum, 1);
+            int[] slArray = getSL(array);
 
 //        System.out.println("count Block 結果");
 //        for(int i=0; i<numOfBlock; i++) {
@@ -276,35 +274,36 @@ public class Classification {
 //        }
 //        System.out.println();
 
-        // 最長の位置, 複数あるかもだからlist
-        List<Integer> lPos = new ArrayList<>();
-        double posAve = 0;
+            // 最長の位置, 複数あるかもだからlist
+            List<Integer> lPos = new ArrayList<>();
+            double posAve = 0;
 //        System.out.println("max length: " + slArray[1]);
-        for (int i = 0; i < numOfBlock; i++) {
-            if (slArray[1] == array[i]) {
-                lPos.add(i);
-                //System.out.println(lPos.get(i));
-                posAve += i;
+            for (int i = 0; i < numOfBlock; i++) {
+                if (slArray[1] == array[i]) {
+                    lPos.add(i);
+                    //System.out.println(lPos.get(i));
+                    posAve += i;
+                }
             }
-        }
-        posAve /= lPos.size();
+            posAve /= lPos.size();
 
 //        System.out.println("top: " + top);
 //        System.out.println("middle: " + middle);
 //        System.out.println("bottom: " + bottom);
 //        System.out.println("average: " + posAve);
-        double aori = Math.abs(posAve-bottom);
-        double hukan = Math.abs(posAve-top);
-        double nashi = Math.abs(posAve-middle);
+            double aori = Math.abs(posAve - bottom);
+            double hukan = Math.abs(posAve - top);
+            double nashi = Math.abs(posAve - middle);
 
-        if(aori<hukan && aori<nashi) {
-            result = 0;
-            //System.out.println("アオリ");
-        } else if(hukan<aori && hukan<nashi) {
-            result = 1;
-            //System.out.println("俯瞰");
-        } else {
-            //System.out.println("無し");
+            if (aori < hukan && aori < nashi) {
+                result = 0;
+                //System.out.println("アオリ");
+            } else if (hukan < aori && hukan < nashi) {
+                result = 1;
+                //System.out.println("俯瞰");
+            } else {
+                //System.out.println("無し");
+            }
         }
 
         return result;
@@ -501,9 +500,7 @@ public class Classification {
      * @return
      */
     public static int checkCenter(List<List<Integer>> blocks, int reCl) {
-        // 縦の最長と横の最長が同じくらいであれば日の丸構図
-        // ブロック数が集中しいているところの上下、左右の中心座標？
-        // TODO 背景となる領域のテクスチャ特徴が日の丸構図以外の値と明らかに違うかどうか、違えばそれで判定する
+        // 背景となる領域のテクスチャ特徴が日の丸構図以外の値と明らかに違うかどうか、違えばそれで判定する
 
         int result = 0;
 
